@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rumah Masa Depan — RCUS 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FFD93D; --orange: #FF8C42; --blue: #2E5BFF; --green: #00C853;
+    --pink: #FF6B9D; --red: #FF4848; --purple: #9B59B6; --cyan: #00BCD4;
+    --brown: #795548; --teal: #4CAF50;
+    --ink: #0A0A0A; --paper: #F5F0E8; --off: #FAF7F2;
+    --border: 2.5px solid var(--ink);
+    --shadow: 4px 4px 0 var(--ink);
+    --shadow-lg: 6px 6px 0 var(--ink);
+    --r: 12px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── TYPOGRAPHY ─────────────────────────────────────── */
+  .display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; line-height: 0.95; }
+  .label-xs { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .label-sm { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ── BACKGROUNDS ────────────────────────────────────── */
+  .bg-dots {
+    background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+  }
+  .bg-lines {
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(0,0,0,0.06) 19px, rgba(0,0,0,0.06) 20px);
+  }
+
+  /* ── SCREENS ────────────────────────────────────────── */
+  .screen { display: none; min-height: 100vh; }
+  .screen.active { display: flex; flex-direction: column; }
+
+  /* ── PROGRESS BAR ───────────────────────────────────── */
+  #progress-bar-wrap {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 6px; background: rgba(0,0,0,0.1);
+  }
+  #progress-bar-fill {
+    height: 100%; background: var(--blue);
+    transition: width 0.4s cubic-bezier(.4,0,.2,1);
+    width: 0%;
+  }
+
+  /* ── TOP NAV ────────────────────────────────────────── */
+  .top-nav {
+    position: fixed; top: 6px; left: 0; right: 0; z-index: 99;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px;
+    background: var(--paper);
+    border-bottom: var(--border);
+  }
+  .nav-brand { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.05em; }
+  .nav-info { font-size: 11px; font-weight: 700; color: rgba(0,0,0,0.45); letter-spacing: 0.06em; text-transform: uppercase; }
+  .nav-section-pill {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 99px;
+    border: 2px solid var(--ink); background: var(--yellow);
+  }
+
+  /* ── CARDS ──────────────────────────────────────────── */
+  .card-pop {
+    background: white;
+    border: var(--border);
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+  }
+  .card-pop-lg {
+    background: white;
+    border: var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ── BUTTONS ────────────────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 28px; border-radius: 10px;
+    border: var(--border); font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+    cursor: pointer; transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: var(--shadow); background: var(--ink); color: white;
+    text-decoration: none;
+  }
+  .btn:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 var(--ink); }
+  .btn:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--ink); }
+  .btn-yellow { background: var(--yellow); color: var(--ink); }
+  .btn-blue { background: var(--blue); color: white; }
+  .btn-white { background: white; color: var(--ink); }
+  .btn-lg { padding: 18px 36px; font-size: 16px; border-radius: 12px; }
+  .btn-full { width: 100%; }
+
+  /* ── START SCREEN ───────────────────────────────────── */
+  #screen-start {
+    align-items: center; justify-content: center;
+    padding: 60px 20px 40px;
+    background: var(--paper);
+  }
+  #screen-start .hero-wrap {
+    max-width: 520px; width: 100%; text-align: center;
+  }
+  .start-badge {
+    display: inline-block;
+    border: var(--border); border-radius: 99px;
+    padding: 6px 16px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--cyan); margin-bottom: 24px;
+  }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 15vw, 96px); line-height: 0.9; margin-bottom: 12px; }
+  .hero-sub { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px, 5vw, 32px); color: rgba(0,0,0,0.4); margin-bottom: 20px; }
+  .hero-desc { font-size: 14px; line-height: 1.7; color: rgba(0,0,0,0.6); margin-bottom: 32px; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .flow-pills { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+  .flow-pill {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 99px; border: 2px solid var(--ink);
+  }
+  .start-boxes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 32px; text-align: left; }
+  .start-box { padding: 14px; border: var(--border); border-radius: 10px; background: white; box-shadow: 3px 3px 0 var(--ink); }
+  .start-box-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; }
+  .start-box-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(0,0,0,0.4); margin-top: 2px; }
+
+  /* ── SECTION SCREENS ────────────────────────────────── */
+  .section-screen {
+    flex: 1; padding-top: 64px;
+    display: flex; flex-direction: column;
+  }
+  .section-header {
+    padding: 20px 20px 0;
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .section-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1;
+    color: rgba(0,0,0,0.08); flex-shrink: 0;
+  }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1.1; }
+  .section-desc { font-size: 12px; color: rgba(0,0,0,0.5); font-weight: 500; margin-top: 2px; }
+
+  /* ── QUESTION CONTAINER ─────────────────────────────── */
+  .q-container {
+    flex: 1; padding: 20px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .q-header {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .q-num-badge {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    border: 2px solid var(--ink); background: var(--ink);
+    color: white; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800;
+  }
+  .q-text { font-size: 16px; font-weight: 700; line-height: 1.4; flex: 1; }
+  .q-type-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; border: 1.5px solid; }
+
+  /* ── FORCED CHOICE ──────────────────────────────────── */
+  .fc-wrap {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px;
+    align-items: stretch;
+  }
+  .fc-card {
+    border: var(--border); border-radius: 14px; padding: 18px 16px;
+    cursor: pointer; transition: all 0.15s; background: white;
+    box-shadow: var(--shadow); position: relative; overflow: hidden;
+    display: flex; flex-direction: column; gap: 10px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .fc-card:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+  .fc-card:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--ink); }
+  .fc-card.selected-a { background: var(--blue); color: white; box-shadow: var(--shadow); }
+  .fc-card.selected-b { background: var(--orange); color: white; box-shadow: var(--shadow); }
+  .fc-card.selected-a .fc-cat, .fc-card.selected-b .fc-cat { opacity: 0.7; }
+  .fc-card-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.4; }
+  .fc-text { font-size: 14px; font-weight: 700; line-height: 1.4; flex: 1; }
+  .fc-cat { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 99px; border: 2px solid rgba(0,0,0,0.15); display: inline-block; }
+  .fc-vs {
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+    color: rgba(0,0,0,0.25); flex-shrink: 0; width: 32px;
+  }
+  .trade-off-box {
+    border: 1.5px solid rgba(0,0,0,0.12); border-radius: 8px;
+    padding: 10px 14px; background: rgba(0,0,0,0.02);
+    font-size: 11px; color: rgba(0,0,0,0.45); font-weight: 500;
+  }
+  .trade-off-box strong { color: rgba(0,0,0,0.7); }
+
+  /* ── DEMOGRAFI / AFFORDABILITAS ──────────────────────── */
+  .d-question { display: flex; flex-direction: column; gap: 12px; }
+  .pill-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill-opt {
+    padding: 10px 16px; border-radius: 99px; border: 2px solid var(--ink);
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    background: white; transition: all 0.12s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pill-opt:hover { background: var(--ink); color: white; }
+  .pill-opt.selected { background: var(--ink); color: white; }
+  .select-styled {
+    width: 100%; padding: 12px 16px; border-radius: 10px;
+    border: 2px solid var(--ink); font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; font-weight: 600; background: white;
+    appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230A0A0A' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center;
+    padding-right: 40px;
+  }
+  .number-input {
+    width: 100%; padding: 12px 16px; border-radius: 10px;
+    border: 2px solid var(--ink); font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; font-weight: 600; background: white; outline: none;
+  }
+  .number-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(46,91,255,0.15); }
+
+  /* ── SKIP NOTICE ────────────────────────────────────── */
+  .skip-notice {
+    display: none; align-items: center; gap: 10px;
+    padding: 14px 16px; border-radius: 10px;
+    border: 2px dashed rgba(0,0,0,0.2); background: rgba(0,0,0,0.03);
+    font-size: 12px; color: rgba(0,0,0,0.45); font-weight: 600;
+  }
+
+  /* ── FOOTER NAV ─────────────────────────────────────── */
+  .q-footer {
+    padding: 16px 20px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    border-top: var(--border);
+    background: var(--paper);
+  }
+  .q-counter { font-size: 12px; font-weight: 700; color: rgba(0,0,0,0.35); letter-spacing: 0.04em; }
+
+  /* ── RESULT SCREEN ──────────────────────────────────── */
+  #screen-result {
+    padding: 80px 20px 40px; min-height: 100vh;
+    background: var(--paper); position: relative;
+  }
+  .result-inner { max-width: 600px; margin: 0 auto; }
+  .result-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(0,0,0,0.4); margin-bottom: 8px; }
+  .result-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 8vw, 52px); line-height: 1; margin-bottom: 20px; }
+  .result-cards-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .result-card-main {
+    border: var(--border); border-radius: 16px;
+    padding: 20px; position: relative;
+    box-shadow: var(--shadow-lg);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .result-card-main:first-child { transform: rotate(-1deg); }
+  .result-card-main:last-child { transform: rotate(1deg); }
+  .result-card-pct { font-family: 'Bebas Neue', sans-serif; font-size: 56px; line-height: 1; }
+  .result-card-name { font-size: 15px; font-weight: 800; line-height: 1.2; }
+  .result-card-cats { display: flex; gap: 6px; flex-wrap: wrap; }
+  .result-card-cat { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 99px; border: 2px solid rgba(255,255,255,0.5); }
+  .result-card-desc { font-size: 12px; line-height: 1.6; opacity: 0.85; }
+  .result-section-head { font-family: 'Bebas Neue', sans-serif; font-size: 22px; margin-bottom: 12px; }
+  .bar-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .bar-label { font-size: 12px; font-weight: 700; width: 140px; flex-shrink: 0; line-height: 1.3; }
+  .bar-track { flex: 1; height: 20px; background: rgba(0,0,0,0.07); border-radius: 99px; overflow: hidden; border: 1.5px solid rgba(0,0,0,0.1); }
+  .bar-fill { height: 100%; border-radius: 99px; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
+  .bar-pct { font-size: 11px; font-weight: 800; width: 36px; text-align: right; flex-shrink: 0; }
+  .arti-box {
+    border: var(--border); border-radius: 14px; padding: 20px;
+    background: var(--ink); color: white; margin-bottom: 20px;
+  }
+  .arti-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; margin-bottom: 8px; }
+  .arti-text { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.75); }
+  .result-demog { border: var(--border); border-radius: 14px; padding: 16px 20px; background: white; margin-bottom: 20px; }
+  .result-demog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-top: 10px; }
+  .result-demog-item { font-size: 12px; }
+  .result-demog-key { color: rgba(0,0,0,0.4); font-weight: 600; }
+  .result-demog-val { font-weight: 700; }
+
+  /* ── CONFETTI ────────────────────────────────────────── */
+  .confetti-dot {
+    position: fixed; width: 8px; height: 8px; border-radius: 2px;
+    pointer-events: none; z-index: 200;
+    animation: confetti-fall linear forwards;
+  }
+  @keyframes confetti-fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── MOBILE ──────────────────────────────────────────── */
+  @media (max-width: 480px) {
+    .start-boxes { grid-template-columns: 1fr 1fr 1fr; }
+    .fc-text { font-size: 13px; }
+    .result-cards-wrap { grid-template-columns: 1fr; }
+    .result-card-main:first-child, .result-card-main:last-child { transform: none; }
+    .bar-label { width: 110px; font-size: 11px; }
+    .result-demog-grid { grid-template-columns: 1fr; }
+    .top-nav { padding: 10px 14px; }
+  }
+
+  /* ── ANIMATIONS ─────────────────────────────────────── */
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeSlideIn 0.3s ease forwards; }
+
+  @keyframes pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.04); }
+    100% { transform: scale(1); }
+  }
+  .pop { animation: pop 0.2s ease; }
+</style>
+</head>
+<body class="bg-dots">
+
+<!-- Progress bar -->
+<div id="progress-bar-wrap"><div id="progress-bar-fill"></div></div>
+
+<!-- Top nav (hidden on start) -->
+<nav class="top-nav" id="top-nav" style="display:none;">
+  <span class="nav-brand">RMD</span>
+  <span id="nav-section-pill" class="nav-section-pill">Demografi</span>
+  <span class="nav-info" id="nav-counter">1 / 20</span>
+</nav>
+
+<!-- ╔══════════════════════╗ -->
+<!-- ║    SCREEN: START     ║ -->
+<!-- ╚══════════════════════╝ -->
+<div id="screen-start" class="screen active">
+  <div class="hero-wrap">
+    <div class="start-badge">Rujak Center for Urban Studies · 2026</div>
+    <div class="hero-title display">Rumah<br>Masa<br>Depan</div>
+    <div class="hero-sub display">Kamu Seperti Apa?</div>
+    <p class="hero-desc">
+      Jawab 20 pertanyaan trade-off tentang hunian.<br>
+      Temukan tipologi rumah masa depan yang paling sesuai denganmu di Jabodetabekpunjur.
+    </p>
+    <div class="flow-pills">
+      <span class="flow-pill" style="background:var(--cyan);">Demografi</span>
+      <span style="color:rgba(0,0,0,0.3);font-size:14px;">→</span>
+      <span class="flow-pill" style="background:var(--yellow);">20 Pilihan</span>
+      <span style="color:rgba(0,0,0,0.3);font-size:14px;">→</span>
+      <span class="flow-pill" style="background:var(--pink);">Affordabilitas</span>
+      <span style="color:rgba(0,0,0,0.3);font-size:14px;">→</span>
+      <span class="flow-pill" style="background:var(--green);">Hasil</span>
+    </div>
+    <div class="start-boxes">
+      <div class="start-box">
+        <div class="start-box-num display" style="color:var(--blue);">~7</div>
+        <div class="start-box-label">menit</div>
+      </div>
+      <div class="start-box">
+        <div class="start-box-num display" style="color:var(--orange);">36</div>
+        <div class="start-box-label">pertanyaan</div>
+      </div>
+      <div class="start-box">
+        <div class="start-box-num display" style="color:var(--purple);">5</div>
+        <div class="start-box-label">tipologi</div>
+      </div>
+    </div>
+    <button class="btn btn-lg btn-yellow btn-full" onclick="startSurvey()">
+      Mulai Sekarang →
+    </button>
+    <p style="font-size:11px;color:rgba(0,0,0,0.3);margin-top:12px;font-weight:600;">Cakupan: Jabodetabekpunjur (Perpres 60/2020)</p>
+  </div>
+</div>
+
+<!-- ╔══════════════════════╗ -->
+<!-- ║  SCREEN: DEMOGRAFI   ║ -->
+<!-- ╚══════════════════════╝ -->
+<div id="screen-demografi" class="screen">
+  <div class="section-screen">
+    <div class="section-header">
+      <div class="section-num display">01</div>
+      <div>
+        <div class="section-title display">Kenalan yuk!</div>
+        <div class="section-desc">Siapa kamu dan kondisi hunianmu sekarang.</div>
+      </div>
+    </div>
+    <div class="q-container" id="demog-q-container"></div>
+    <div class="q-footer">
+      <span class="q-counter" id="demog-counter">1 / 7</span>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-white" id="demog-prev-btn" onclick="demogPrev()" style="display:none;">← Sebelumnya</button>
+        <button class="btn btn-blue" id="demog-next-btn" onclick="demogNext()">Lanjut →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════╗ -->
+<!-- ║  SCREEN: FORCED CHOICE   ║ -->
+<!-- ╚══════════════════════════╝ -->
+<div id="screen-fc" class="screen">
+  <div class="section-screen">
+    <div class="section-header">
+      <div class="section-num display">02</div>
+      <div>
+        <div class="section-title display">Rumah Hunian</div>
+        <div class="section-desc">Kalau kamu punya kesempatan temukan rumah impian, seperti apakah itu?</div>
+      </div>
+    </div>
+    <div class="q-container">
+      <div class="q-header">
+        <div class="q-num-badge" id="fc-num-badge">1</div>
+        <div class="q-text" id="fc-q-text">—</div>
+      </div>
+      <div class="fc-wrap">
+        <div class="fc-card" id="fc-card-a" onclick="selectFC('A')">
+          <div class="fc-card-label">Opsi A</div>
+          <div class="fc-text" id="fc-a-text">—</div>
+          <div><span class="fc-cat" id="fc-a-cat">—</span></div>
+        </div>
+        <div class="fc-vs">VS</div>
+        <div class="fc-card" id="fc-card-b" onclick="selectFC('B')">
+          <div class="fc-card-label">Opsi B</div>
+          <div class="fc-text" id="fc-b-text">—</div>
+          <div><span class="fc-cat" id="fc-b-cat">—</span></div>
+        </div>
+      </div>
+      <div class="trade-off-box">
+        <strong>Trade-off:</strong> <span id="fc-tradeoff">—</span>
+      </div>
+    </div>
+    <div class="q-footer">
+      <span class="q-counter" id="fc-counter">1 / 20</span>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-white" id="fc-prev-btn" onclick="fcPrev()" style="display:none;">← Sebelumnya</button>
+        <button class="btn btn-blue" id="fc-next-btn" onclick="fcNext()" disabled>Lanjut →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════╗ -->
+<!-- ║  SCREEN: AFFORDABILITAS  ║ -->
+<!-- ╚══════════════════════════╝ -->
+<div id="screen-afford" class="screen">
+  <div class="section-screen">
+    <div class="section-header">
+      <div class="section-num display">03</div>
+      <div>
+        <div class="section-title display">Tentukan kebutuhanmu</div>
+        <div class="section-desc">Seperti apa kemampuan finansial dan spesifikasi rumah impianmu?</div>
+      </div>
+    </div>
+    <div class="q-container" id="afford-q-container"></div>
+    <div class="q-footer">
+      <span class="q-counter" id="afford-counter">1 / 9</span>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-white" id="afford-prev-btn" onclick="affordPrev()" style="display:none;">← Sebelumnya</button>
+        <button class="btn btn-yellow" id="afford-next-btn" onclick="affordNext()">Lihat Hasil →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════╗ -->
+<!-- ║   SCREEN: RESULT     ║ -->
+<!-- ╚══════════════════════╝ -->
+<div id="screen-result" class="screen bg-lines">
+  <div class="result-inner">
+    <div class="result-eyebrow">Rumah Masa Depan Kamu Adalah:</div>
+    <div class="result-headline display" id="result-headline">—</div>
+    <div class="result-cards-wrap" id="result-cards"></div>
+
+    <div class="result-section-head display">Distribusi Tipologi</div>
+    <div id="result-bars" style="margin-bottom:24px;"></div>
+
+    <div class="arti-box">
+      <div class="arti-title display">Apa Artinya?</div>
+      <div class="arti-text" id="result-arti">—</div>
+    </div>
+
+    <div class="result-demog" id="result-demog-box"></div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn btn-yellow btn-lg" onclick="shareResult()">Share Hasil 📤</button>
+      <button class="btn btn-white" onclick="restartSurvey()">Mulai Lagi</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!--  SCRIPT                                               -->
+<!-- ══════════════════════════════════════════════════════ -->
+<script>
+// ── CATEGORY COLORS ─────────────────────────────────────
+const catColors = {
+  keterjangkauan: '#FFD93D', kepastian: '#FF8C42', layanan: '#2E5BFF',
+  kelayakan: '#00C853', inklusi: '#FF6B9D', lokasi: '#FF4848',
+  budaya: '#9B59B6', mobilitas: '#00BCD4', kepemilikan: '#795548', lingkungan: '#4CAF50'
+};
+const catNames = {
+  keterjangkauan: 'Keterjangkauan', kepastian: 'Kepastian bermukim', layanan: 'Akses layanan',
+  kelayakan: 'Kelayakan fisik', inklusi: 'Inklusi', lokasi: 'Lokasi strategis',
+  budaya: 'Budaya & komunitas', mobilitas: 'Mobilitas', kepemilikan: 'Otonomi & kontrol', lingkungan: 'Lingkungan'
+};
+
+// ── TIPOLOGI ─────────────────────────────────────────────
+const tipologi = [
+  {
+    id: 'kampung', name: 'Rumah Kampung Kota',
+    cats: ['budaya','kepastian'], color: '#9B59B6', textColor: '#fff',
+    desc: 'Rumah sebagai jangkar sosial dan identitas. Penataan kampung kota, hunian komunal/koperasi, dan kepastian bermukim untuk warga lama.'
+  },
+  {
+    id: 'terjangkau', name: 'Rumah Terjangkau & Layak',
+    cats: ['keterjangkauan','kelayakan'], color: '#FFD93D', textColor: '#0A0A0A',
+    desc: 'Hunian yang tidak menguras pendapatan, namun tetap memenuhi standar fisik, kesehatan, dan keamanan struktur bangunan.'
+  },
+  {
+    id: 'terhubung', name: 'Rumah Terhubung',
+    cats: ['lokasi','mobilitas'], color: '#2E5BFF', textColor: '#fff',
+    desc: 'Rumah di lokasi strategis dengan akses transit publik, jalur sepeda, dan pejalan kaki, meminimalkan ketergantungan kendaraan pribadi.'
+  },
+  {
+    id: 'inklusif', name: 'Rumah Inklusif & Berlayanan',
+    cats: ['inklusi','layanan'], color: '#FF6B9D', textColor: '#fff',
+    desc: 'Hunian dengan desain universal untuk semua kelompok usia dan kemampuan, dilengkapi infrastruktur dasar yang merata dan andal.'
+  },
+  {
+    id: 'hijau', name: 'Rumah Hijau & Mandiri',
+    cats: ['lingkungan','kepemilikan'], color: '#4CAF50', textColor: '#fff',
+    desc: 'Hunian hemat energi dan tahan iklim, dengan ruang otonomi penghuni untuk mengatur dan memodifikasi rumahnya sendiri.'
+  }
+];
+
+// ── FORCED-CHOICE QUESTIONS ───────────────────────────────
+const fcQuestions = [
+  { id:1, text:'Mana yang lebih penting bagimu?', a:'Rumah subsidi yang murah meski jauh dari pusat kota', catA:'keterjangkauan', b:'Rusun sewa yang lebih kecil tapi dekat stasiun atau halte', catB:'mobilitas', tradeoff:'Harga vs akses transit' },
+  { id:2, text:'Kamu lebih pilih yang mana?', a:'Apartemen kompak dekat tempat kerja dan sekolah', catA:'lokasi', b:'Rumah tapak luas dengan kebebasan memodifikasi sendiri', catB:'kepemilikan', tradeoff:'Kompaktivitas lokasi vs otonomi rumah tapak' },
+  { id:3, text:'Fasilitas sekitar rumah yang mana lebih kamu utamakan?', a:'Akses jalan tol langsung dari kompleks perumahan', catA:'mobilitas', b:'Jalur sepeda lebar dan trotoar nyaman di sekitar rumah', catB:'lingkungan', tradeoff:'Mobilitas kendaraan pribadi vs mobilitas aktif & ekologi' },
+  { id:4, text:'Mana yang lebih bisa kamu terima?', a:'Lokasi dekat kerja meski rumahnya kecil', catA:'lokasi', b:'Rumah lebih besar dan layak meski jauh dari pusat kota', catB:'kelayakan', tradeoff:'Lokasi vs kualitas fisik hunian' },
+  { id:5, text:'Soal kepemilikan rumah, kamu lebih prioritaskan?', a:'Sertifikat hunian atas nama sendiri yang sah secara hukum', catA:'kepastian', b:'Rumah dengan akses dan fasilitas ramah lansia, disabilitas, dan anak', catB:'inklusi', tradeoff:'Legalitas vs aksesibilitas universal' },
+  { id:6, text:'Mana yang lebih sesuai gambaran idealmu?', a:'Cicilan rumah yang bisa dibayar tanpa membebani kebutuhan dasar lain', catA:'keterjangkauan', b:'Penataan kampung kota dengan suasana gotong royong', catB:'budaya', tradeoff:'Cicilan individual vs hunian berbasis komunitas' },
+  { id:7, text:'Soal kualitas fisik rumah, mana yang lebih kamu prioritaskan?', a:'Konstruksi yang tahan gempa, banjir, dan kebakaran', catA:'kelayakan', b:'Jaringan air bersih, listrik, dan internet yang andal', catB:'layanan', tradeoff:'Keandalan struktur vs keandalan layanan dasar' },
+  { id:8, text:'Desain hunian yang mana lebih penting bagimu?', a:'Ramah untuk lansia, ibu hamil, dan pengguna kursi roda', catA:'inklusi', b:'Lokasi strategis dekat sekolah, pasar, dan rumah sakit', catB:'lokasi', tradeoff:'Desain inklusif dalam unit vs lokasi dalam kota' },
+  { id:9, text:'Soal model kepemilikan, kamu condong ke mana?', a:'Hunian komunal atau koperasi yang dikelola bersama warga', catA:'budaya', b:'Rumah pribadi dengan kebebasan penuh untuk merenovasi', catB:'kepemilikan', tradeoff:'Kepemilikan kolektif vs kepemilikan individual' },
+  { id:10, text:'Mana yang lebih kamu butuhkan dari hunianmu?', a:'Jaminan tidak akan tergusur selama bertahun-tahun ke depan', catA:'kepastian', b:'Harga rumah atau sewa yang lebih murah meski status kurang pasti', catB:'keterjangkauan', tradeoff:'Kepastian tenure vs harga' },
+  { id:11, text:'Untuk kampung atau permukiman lama, kamu lebih setuju dengan?', a:'Pelestarian arsitektur dan tata kampung yang sudah ada turun-temurun', catA:'budaya', b:'Modernisasi infrastruktur dasar (drainase, jalan, sanitasi) di kampung', catB:'layanan', tradeoff:'Warisan bentuk vs modernisasi layanan' },
+  { id:12, text:'Soal pengelolaan layanan di perumahan, kamu lebih suka?', a:'Layanan dasar lengkap sudah disiapkan pengembang', catA:'layanan', b:'Hak warga mengelola sendiri layanan dasar di lingkungannya', catB:'kepemilikan', tradeoff:'Layanan top-down vs swakelola warga' },
+  { id:13, text:'Kalau harus pilih satu, kamu lebih utamakan?', a:'Rumah hemat energi dengan panel surya dan material ramah lingkungan', catA:'lingkungan', b:'Cicilan bulanan yang lebih ringan, meski rumahnya standar biasa', catB:'keterjangkauan', tradeoff:'Kualitas ekologis vs beban finansial' },
+  { id:14, text:'Untuk lingkungan sekitar rumah, mana yang lebih kamu harapkan?', a:'Lebih banyak ruang hijau, taman, dan pohon di sekitar rumah', catA:'lingkungan', b:'Fasilitas yang ramah anak, lansia, dan kelompok rentan', catB:'inklusi', tradeoff:'Ekologi lingkungan vs aksesibilitas sosial' },
+  { id:15, text:'Antara dua hal ini, mana yang lebih kamu butuhkan?', a:'Stasiun KRL, MRT, atau halte bus yang dekat dari rumah', catA:'mobilitas', b:'Jaminan tidak akan dipindahkan atau digusur dari tempat tinggal', catB:'kepastian', tradeoff:'Akses transit vs jaminan tidak tergusur' },
+  { id:16, text:'Soal standar bangunan, kamu lebih pilih?', a:'Bangunan dengan standar konstruksi modern dan material baru', catA:'kelayakan', b:'Arsitektur yang mengikuti konteks lokal, iklim, dan tradisi setempat', catB:'budaya', tradeoff:'Standardisasi modern vs kontekstualitas lokal' },
+  { id:17, text:'Prioritas lingkungan sekitar yang mana lebih sesuai denganmu?', a:'Pengelolaan sampah, sanitasi, dan air limbah yang baik', catA:'layanan', b:'Lebih banyak ruang terbuka hijau dan taman', catB:'lingkungan', tradeoff:'Layanan teknis vs ruang hijau' },
+  { id:18, text:'Dari dua hal ini, mana yang lebih kamu harapkan ada di hunianmu?', a:'Rumah yang ramah dan bisa diakses oleh penyandang disabilitas', catA:'inklusi', b:'Rumah dengan koneksi mudah ke transportasi publik berbagai moda', catB:'mobilitas', tradeoff:'Inklusi unit vs konektivitas eksternal' },
+  { id:19, text:'Mana yang lebih kamu prioritaskan untuk hunian?', a:'Sertifikat dan legalitas yang lengkap', catA:'kepastian', b:'Lokasi terbaik untuk akses harian meski legalitas belum lengkap', catB:'lokasi', tradeoff:'Legalitas vs lokasi (dilema khas kampung kota)' },
+  { id:20, text:'Skenario hunian yang mana lebih sesuai denganmu?', a:'Sewa fleksibel jangka pendek dengan kebebasan pindah', catA:'kepemilikan', b:'Rumah milik sendiri yang memenuhi standar layak huni', catB:'kelayakan', tradeoff:'Fleksibilitas sewa vs kepastian rumah milik' }
+];
+
+// ── DEMOGRAFI QUESTIONS ───────────────────────────────────
+const demogQuestions = [
+  { id:'D1', text:'Berapa usiamu?', type:'pill', opts:['13–18','19–24','25–34','35–44','45–54','55+'] },
+  { id:'D2', text:'Pendidikan terakhir?', type:'pill', opts:['Di bawah SMA','SMA/Sederajat','Diploma','S1','S2/S3'] },
+  { id:'D3', text:'Gender?', type:'pill', opts:['Perempuan','Laki-laki','Tidak ingin menyebutkan'] },
+  { id:'D4', text:'Pekerjaan saat ini?', type:'pill', opts:['Pelajar/Mahasiswa','Karyawan','Wiraswasta','PNS/TNI/Polri','Tidak bekerja','Lainnya'] },
+  { id:'D5', text:'Status hunian saat ini?', type:'pill', opts:['Milik sendiri','Sewa/Kontrak','Rumah orang tua','Indekos','Rumah dinas','Lainnya'] },
+  { id:'D6', text:'Tipe hunian saat ini?', type:'pill', opts:['Rumah tapak','Rusun/Apartemen','Rumah kampung','Indekos','Lainnya'] },
+  { id:'D7', text:'Moda komuter utamamu?', type:'pill', opts:['Mobil','Motor','KRL/MRT/LRT','TransJakarta/Bus','Sepeda','Jalan kaki','WFH/Tidak komuter'] }
+];
+
+// ── AFFORDABILITAS QUESTIONS ──────────────────────────────
+const affordQuestions = [
+  { id:'A1', text:'Pendapatan rumah tangga total per bulan?', type:'pill', opts:['<Rp3 juta','Rp3–5 juta','Rp5–8 juta','Rp8–12 juta','Rp12–20 juta','Rp20–35 juta','>Rp35 juta','Tidak ingin menyebutkan'] },
+  { id:'B1', text:'Kemampuan bayar hunian per bulan?', type:'pill', opts:['<Rp500 ribu','Rp500rb–1 juta','Rp1–2 juta','Rp2–3 juta','Rp3–5 juta','Rp5–8 juta','>Rp8 juta','Tidak ingin menyebutkan'] },
+  { id:'B4', text:'Rencana beli atau dapat rumah dalam waktu dekat?', type:'pill', gate: true, opts:['<1 tahun','1–3 tahun','3–5 tahun','Belum jelas','Akan terus sewa','Sudah punya','Belum dipikirkan'] },
+  { id:'B2', text:'Skema pembayaran ideal menurutmu?', type:'pill', skipIf:['Sudah punya','Belum dipikirkan'], gateKey:'B4', opts:['Cash','KPR','Sewa bulanan','Sewa tahunan','Koperasi/Komunal','Belum tahu'] },
+  { id:'C1', text:'Berapa kamar tidur yang kamu butuhkan?', type:'pill', opts:['Studio','1 kamar','2 kamar','3 kamar','4 kamar','5+'] },
+  { id:'C2', text:'Luas bangunan minimal yang nyaman bagimu?', type:'pill', opts:['<21 m²','21–36 m²','36–50 m²','50–70 m²','70–100 m²','>100 m²'] },
+  { id:'C3', text:'Tipe hunian yang kamu inginkan untuk masa depan?', type:'pill', opts:['Rumah tapak','Rumah deret/Cluster','Rusun/Apartemen','Rumah kampung tertata','Hunian campuran (rumah+usaha)','Belum tahu'] },
+  { id:'D1a', text:'Trade-off rumah: kamu lebih milih yang mana?', type:'pill', opts:['Besar tapi jauh','Kecil tapi dekat','Sedang-sedang aja','Sewa di lokasi strategis'] },
+  { id:'E1', text:'Seberapa realistis hunian idealmu?', type:'pill', opts:['Sangat realistis','Cukup realistis','Sulit tapi mungkin','Tidak realistis','Belum dipikirkan'] }
+];
+
+// ── STATE ─────────────────────────────────────────────────
+let demogAnswers = {};
+let fcAnswers = {};  // { 1: 'A', 2: 'B', ... }
+let affordAnswers = {};
+let demogIdx = 0;
+let fcIdx = 0;
+let affordIdx = 0;
+let gateAnswers = {};  // store gate question answers for skip logic
+
+// ── SCORE ─────────────────────────────────────────────────
+let score = {
+  keterjangkauan:0, kepastian:0, layanan:0, kelayakan:0, inklusi:0,
+  lokasi:0, budaya:0, mobilitas:0, kepemilikan:0, lingkungan:0
+};
+
+// ── NAVIGATION ────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function startSurvey() {
+  document.getElementById('top-nav').style.display = 'flex';
+  showScreen('demografi');
+  renderDemogQ();
+  updateProgress();
+}
+
+// ── PROGRESS ──────────────────────────────────────────────
+function updateProgress() {
+  const totalSteps = demogQuestions.length + fcQuestions.length + affordQuestions.length;
+  const doneD = demogIdx;
+  const doneF = Object.keys(fcAnswers).length;
+  const doneA = affordIdx;
+  const done = doneD + doneF + doneA;
+  document.getElementById('progress-bar-fill').style.width = (done / totalSteps * 100) + '%';
+}
+
+// ── DEMOGRAFI ─────────────────────────────────────────────
+function renderDemogQ() {
+  const q = demogQuestions[demogIdx];
+  const container = document.getElementById('demog-q-container');
+  container.innerHTML = '';
+  container.classList.add('fade-in');
+  setTimeout(() => container.classList.remove('fade-in'), 400);
+
+  const div = document.createElement('div');
+  div.className = 'd-question';
+
+  const header = document.createElement('div');
+  header.className = 'q-header';
+  header.innerHTML = `
+    <div class="q-num-badge" style="background:var(--cyan);color:var(--ink);">${demogIdx+1}</div>
+    <div class="q-text">${q.text}</div>`;
+  div.appendChild(header);
+
+  const pillGrid = document.createElement('div');
+  pillGrid.className = 'pill-grid';
+  q.opts.forEach(opt => {
+    const btn = document.createElement('div');
+    btn.className = 'pill-opt' + (demogAnswers[q.id] === opt ? ' selected' : '');
+    btn.textContent = opt;
+    btn.onclick = () => {
+      demogAnswers[q.id] = opt;
+      pillGrid.querySelectorAll('.pill-opt').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      btn.classList.add('pop');
+      setTimeout(() => btn.classList.remove('pop'), 200);
+      document.getElementById('demog-next-btn').disabled = false;
+    };
+    pillGrid.appendChild(btn);
+  });
+  div.appendChild(pillGrid);
+  container.appendChild(div);
+
+  document.getElementById('demog-counter').textContent = `${demogIdx+1} / ${demogQuestions.length}`;
+  document.getElementById('demog-prev-btn').style.display = demogIdx > 0 ? 'inline-flex' : 'none';
+  document.getElementById('demog-next-btn').disabled = !demogAnswers[q.id];
+  document.getElementById('demog-next-btn').textContent = demogIdx === demogQuestions.length-1 ? 'Lanjut ke Pilihan →' : 'Lanjut →';
+  setNavSection('Demografi');
+  document.getElementById('nav-counter').textContent = `${demogIdx+1} / ${demogQuestions.length}`;
+}
+
+function demogNext() {
+  if (!demogAnswers[demogQuestions[demogIdx].id]) return;
+  demogIdx++;
+  updateProgress();
+  if (demogIdx >= demogQuestions.length) {
+    showScreen('fc');
+    renderFC();
+  } else {
+    renderDemogQ();
+  }
+}
+
+function demogPrev() {
+  if (demogIdx > 0) { demogIdx--; renderDemogQ(); }
+}
+
+// ── FORCED CHOICE ─────────────────────────────────────────
+function renderFC() {
+  const q = fcQuestions[fcIdx];
+  document.getElementById('fc-num-badge').textContent = q.id;
+  document.getElementById('fc-num-badge').style.background = 'var(--yellow)';
+  document.getElementById('fc-num-badge').style.color = 'var(--ink)';
+  document.getElementById('fc-q-text').textContent = q.text;
+  document.getElementById('fc-a-text').textContent = q.a;
+  document.getElementById('fc-b-text').textContent = q.b;
+  document.getElementById('fc-tradeoff').textContent = q.tradeoff;
+
+  const catAEl = document.getElementById('fc-a-cat');
+  catAEl.textContent = catNames[q.catA];
+  catAEl.style.background = catColors[q.catA] + '33';
+  catAEl.style.borderColor = catColors[q.catA];
+  catAEl.style.color = q.catA === 'keterjangkauan' ? '#7a6100' : (q.catA === 'layanan' ? '#fff' : 'inherit');
+
+  const catBEl = document.getElementById('fc-b-cat');
+  catBEl.textContent = catNames[q.catB];
+  catBEl.style.background = catColors[q.catB] + '33';
+  catBEl.style.borderColor = catColors[q.catB];
+
+  const cardA = document.getElementById('fc-card-a');
+  const cardB = document.getElementById('fc-card-b');
+  cardA.className = 'fc-card' + (fcAnswers[q.id] === 'A' ? ' selected-a' : '');
+  cardB.className = 'fc-card' + (fcAnswers[q.id] === 'B' ? ' selected-b' : '');
+
+  document.getElementById('fc-counter').textContent = `${q.id} / ${fcQuestions.length}`;
+  document.getElementById('fc-prev-btn').style.display = fcIdx > 0 ? 'inline-flex' : 'none';
+  document.getElementById('fc-next-btn').disabled = !fcAnswers[q.id];
+  document.getElementById('fc-next-btn').textContent = fcIdx === fcQuestions.length-1 ? 'Lanjut ke Affordabilitas →' : 'Lanjut →';
+  setNavSection('20 Pilihan');
+  document.getElementById('nav-counter').textContent = `${q.id} / ${fcQuestions.length}`;
+
+  const container = document.querySelector('#screen-fc .q-container');
+  container.classList.add('fade-in');
+  setTimeout(() => container.classList.remove('fade-in'), 400);
+}
+
+function selectFC(choice) {
+  const q = fcQuestions[fcIdx];
+  fcAnswers[q.id] = choice;
+
+  const cardA = document.getElementById('fc-card-a');
+  const cardB = document.getElementById('fc-card-b');
+  cardA.className = 'fc-card' + (choice === 'A' ? ' selected-a pop' : '');
+  cardB.className = 'fc-card' + (choice === 'B' ? ' selected-b pop' : '');
+  setTimeout(() => {
+    cardA.classList.remove('pop');
+    cardB.classList.remove('pop');
+  }, 200);
+
+  document.getElementById('fc-next-btn').disabled = false;
+  updateProgress();
+
+  // Auto-advance after short delay
+  setTimeout(() => {
+    if (fcAnswers[q.id]) fcNext();
+  }, 350);
+}
+
+function fcNext() {
+  if (!fcAnswers[fcQuestions[fcIdx].id]) return;
+  fcIdx++;
+  updateProgress();
+  if (fcIdx >= fcQuestions.length) {
+    showScreen('afford');
+    renderAffordQ();
+  } else {
+    renderFC();
+  }
+}
+
+function fcPrev() {
+  if (fcIdx > 0) { fcIdx--; renderFC(); }
+  else { showScreen('demografi'); demogIdx = demogQuestions.length-1; renderDemogQ(); }
+}
+
+// ── AFFORDABILITAS ────────────────────────────────────────
+function shouldSkipAfford(q) {
+  if (!q.skipIf || !q.gateKey) return false;
+  const gateVal = affordAnswers[q.gateKey] || gateAnswers[q.gateKey];
+  return q.skipIf.includes(gateVal);
+}
+
+function getActiveAffordQuestions() {
+  return affordQuestions.filter(q => !shouldSkipAfford(q));
+}
+
+function renderAffordQ() {
+  const activeQs = getActiveAffordQuestions();
+  const q = activeQs[affordIdx];
+  if (!q) { computeAndShowResult(); return; }
+
+  const container = document.getElementById('afford-q-container');
+  container.innerHTML = '';
+  container.classList.add('fade-in');
+  setTimeout(() => container.classList.remove('fade-in'), 400);
+
+  const div = document.createElement('div');
+  div.className = 'd-question';
+
+  const header = document.createElement('div');
+  header.className = 'q-header';
+  header.innerHTML = `
+    <div class="q-num-badge" style="background:var(--pink);color:#fff;">${affordIdx+1}</div>
+    <div class="q-text">${q.text}</div>`;
+  div.appendChild(header);
+
+  const pillGrid = document.createElement('div');
+  pillGrid.className = 'pill-grid';
+  q.opts.forEach(opt => {
+    const btn = document.createElement('div');
+    btn.className = 'pill-opt' + (affordAnswers[q.id] === opt ? ' selected' : '');
+    btn.textContent = opt;
+    btn.onclick = () => {
+      affordAnswers[q.id] = opt;
+      if (q.gate) gateAnswers[q.id] = opt;
+      pillGrid.querySelectorAll('.pill-opt').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      btn.classList.add('pop');
+      setTimeout(() => btn.classList.remove('pop'), 200);
+      document.getElementById('afford-next-btn').disabled = false;
+    };
+    pillGrid.appendChild(btn);
+  });
+  div.appendChild(pillGrid);
+  container.appendChild(div);
+
+  const total = activeQs.length;
+  document.getElementById('afford-counter').textContent = `${affordIdx+1} / ${total}`;
+  document.getElementById('afford-prev-btn').style.display = affordIdx > 0 ? 'inline-flex' : 'none';
+  document.getElementById('afford-next-btn').textContent = affordIdx === total-1 ? 'Lihat Hasilku →' : 'Lanjut →';
+  document.getElementById('afford-next-btn').disabled = !affordAnswers[q.id];
+  setNavSection('Affordabilitas');
+  document.getElementById('nav-counter').textContent = `${affordIdx+1} / ${total}`;
+}
+
+function affordNext() {
+  const activeQs = getActiveAffordQuestions();
+  const q = activeQs[affordIdx];
+  if (!affordAnswers[q.id]) return;
+  affordIdx++;
+  updateProgress();
+  if (affordIdx >= activeQs.length) {
+    computeAndShowResult();
+  } else {
+    renderAffordQ();
+  }
+}
+
+function affordPrev() {
+  if (affordIdx > 0) { affordIdx--; renderAffordQ(); }
+  else { showScreen('fc'); fcIdx = fcQuestions.length-1; renderFC(); }
+}
+
+// ── COMPUTE RESULT ────────────────────────────────────────
+function computeAndShowResult() {
+  // Reset score
+  Object.keys(score).forEach(k => score[k] = 0);
+
+  // Tally forced-choice answers
+  fcQuestions.forEach(q => {
+    const ans = fcAnswers[q.id];
+    if (ans === 'A') score[q.catA]++;
+    else if (ans === 'B') score[q.catB]++;
+  });
+
+  // Compute tipologi scores
+  const tipoScores = tipologi.map(t => ({
+    ...t,
+    score: (score[t.cats[0]] || 0) + (score[t.cats[1]] || 0)
+  }));
+  tipoScores.sort((a,b) => b.score - a.score);
+
+  const top1 = tipoScores[0];
+  const top2 = tipoScores[1];
+  const totalScore = tipoScores.reduce((s,t) => s+t.score, 0) || 1;
+
+  // % relatif top 2
+  const rel1Raw = top1.score / (top1.score + top2.score) * 100;
+  const rel1 = Math.round(rel1Raw / 5) * 5;
+  const rel2 = 100 - rel1;
+
+  // Render result
+  renderResult(tipoScores, top1, top2, rel1, rel2, totalScore);
+  showScreen('result');
+  document.getElementById('progress-bar-fill').style.width = '100%';
+  launchConfetti();
+}
+
+function renderResult(tipoScores, top1, top2, rel1, rel2, totalScore) {
+  setNavSection('Hasil');
+  document.getElementById('nav-counter').textContent = '✓ Selesai';
+
+  // Headline
+  const isNearTie = Math.abs(top1.score - top2.score) <= 1;
+  const headline = isNearTie
+    ? `${rel1}% ${top1.name},\n${rel2}% ${top2.name}`
+    : `${rel1}% ${top1.name} & ${rel2}% ${top2.name}`;
+  document.getElementById('result-headline').textContent = `${rel1}% ${top1.name},\n${rel2}% ${top2.name}`;
+
+  // Cards
+  const cardsEl = document.getElementById('result-cards');
+  cardsEl.innerHTML = [top1, top2].map((t, i) => {
+    const pct = i === 0 ? rel1 : rel2;
+    const cats = t.cats.map(c => `<span class="result-card-cat" style="background:rgba(255,255,255,0.15)">${catNames[c]}</span>`).join('');
+    return `
+      <div class="result-card-main" style="background:${t.color};color:${t.textColor};border-color:rgba(0,0,0,0.8);">
+        <div class="result-card-pct">${pct}%</div>
+        <div class="result-card-name">${t.name}</div>
+        <div class="result-card-cats">${cats}</div>
+        <div class="result-card-desc">${t.desc}</div>
+      </div>`;
+  }).join('');
+
+  // Bars
+  const barsEl = document.getElementById('result-bars');
+  barsEl.innerHTML = tipoScores.map(t => {
+    const pct = Math.round(t.score / totalScore * 100);
+    return `
+      <div class="bar-item">
+        <div class="bar-label">${t.name}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%;background:${t.color}" data-w="${pct}"></div></div>
+        <div class="bar-pct">${pct}%</div>
+      </div>`;
+  }).join('');
+  setTimeout(() => {
+    barsEl.querySelectorAll('.bar-fill').forEach(b => {
+      b.style.width = b.dataset.w + '%';
+    });
+  }, 200);
+
+  // Apa artinya
+  const arti = generateArti(top1, top2, rel1, demogAnswers, affordAnswers);
+  document.getElementById('result-arti').innerHTML = arti;
+
+  // Demografi summary
+  const demogBox = document.getElementById('result-demog-box');
+  const demogItems = Object.entries(demogAnswers).map(([k,v]) => {
+    const qLabel = demogQuestions.find(q => q.id === k)?.text || k;
+    return `<div class="result-demog-item"><span class="result-demog-key">${qLabel}</span><br><span class="result-demog-val">${v}</span></div>`;
+  }).join('');
+  const affordItems = Object.entries(affordAnswers).slice(0,3).map(([k,v]) => {
+    const qLabel = affordQuestions.find(q => q.id === k)?.text || k;
+    return `<div class="result-demog-item"><span class="result-demog-key">${qLabel}</span><br><span class="result-demog-val">${v}</span></div>`;
+  }).join('');
+  if (demogItems || affordItems) {
+    demogBox.innerHTML = `
+      <div class="label-sm" style="margin-bottom:10px;">Profil Responden</div>
+      <div class="result-demog-grid">${demogItems}${affordItems}</div>`;
+  } else {
+    demogBox.style.display = 'none';
+  }
+}
+
+function generateArti(top1, top2, rel1, demog, afford) {
+  const dominant = rel1 >= 65 ? 'sangat dominan' : rel1 >= 55 ? 'cukup dominan' : 'seimbang';
+  const artiMap = {
+    kampung: 'Kamu menghargai ikatan komunitas dan hak bermukim yang aman. Rumah bukan sekadar bangunan, bagimu ini tentang identitas kolektif, gotong royong, dan melindungi ruang hidup dari ancaman penggusuran.',
+    terjangkau: 'Kamu realistis dan pragmatis soal hunian. Prioritasmu adalah rumah yang tidak mencekik keuangan, tapi tetap layak ditinggali dengan aman dan nyaman.',
+    terhubung: 'Mobilitas adalah segalanya bagimu. Kamu percaya bahwa lokasi strategis dan akses transit yang baik bisa mengubah kualitas hidup secara fundamental; lebih dari luas atau kemewahan rumah.',
+    inklusif: 'Kamu peduli pada keberagaman penghuni kota. Hunian yang baik adalah yang bisa diakses semua orang: tua, muda, disabilitas, dilengkapi layanan dasar yang merata.',
+    hijau: 'Kamu berpikir jangka panjang soal lingkungan dan otonomi. Rumah ideal bagimu adalah yang hemat energi, tahan iklim, dan memberimu kebebasan untuk mengatur hidupmu sendiri.'
+  };
+  const t1arti = artiMap[top1.id] || '';
+  const t2note = `Tipologi keduamu <strong>${top2.name}</strong> juga cukup kuat, menunjukkan bahwa kamu juga menghargai ${top2.cats.map(c => catNames[c]).join(' dan ')}.`;
+  return `<p>${t1arti}</p><br><p>${t2note}</p>${dominant === 'seimbang' ? '<br><p><em>Kedua tipologimu cukup seimbang, yang artinya kamu memiliki pertimbangan yang kompleks soal hunian — tidak mudah dikategorikan dalam satu dimensi saja.</em></p>' : ''}`;
+}
+
+// ── NAV HELPER ────────────────────────────────────────────
+function setNavSection(name) {
+  document.getElementById('nav-section-pill').textContent = name;
+}
+
+// ── CONFETTI ──────────────────────────────────────────────
+function launchConfetti() {
+  const colors = ['#FFD93D','#FF8C42','#2E5BFF','#FF6B9D','#00BCD4','#4CAF50','#FF4848','#9B59B6'];
+  for (let i = 0; i < 60; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'confetti-dot';
+    dot.style.cssText = `
+      left: ${Math.random()*100}vw;
+      top: ${-Math.random()*20}px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      width: ${4+Math.random()*8}px;
+      height: ${4+Math.random()*8}px;
+      border-radius: ${Math.random()>0.5 ? '50%' : '2px'};
+      animation-duration: ${1.5+Math.random()*2}s;
+      animation-delay: ${Math.random()*0.8}s;
+    `;
+    document.body.appendChild(dot);
+    setTimeout(() => dot.remove(), 4000);
+  }
+}
+
+// ── SHARE ─────────────────────────────────────────────────
+function shareResult() {
+  const txt = document.getElementById('result-headline').textContent;
+  if (navigator.share) {
+    navigator.share({ title: 'Rumah Masa Depan Saya', text: 'Rumah masa depan saya: ' + txt + ' — survei RCUS 2026' });
+  } else {
+    navigator.clipboard.writeText('Rumah masa depan saya: ' + txt + ' — survei RCUS 2026 | rumahmasadepan.rcus.or.id').then(() => {
+      alert('Link berhasil disalin ke clipboard!');
+    });
+  }
+}
+
+function restartSurvey() {
+  demogAnswers = {}; fcAnswers = {}; affordAnswers = {}; gateAnswers = {};
+  Object.keys(score).forEach(k => score[k]=0);
+  demogIdx = 0; fcIdx = 0; affordIdx = 0;
+  document.getElementById('progress-bar-fill').style.width = '0%';
+  document.getElementById('top-nav').style.display = 'none';
+  showScreen('start');
+}
+</script>
+</body>
+</html>
