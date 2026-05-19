@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Interaktif Regenerasi Jabodetabekpunjur — JFF 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        .leaflet-container { background-color: #0f172a; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* Animasi garis komuter */
+        .animated-dash {
+            stroke-dasharray: 10, 10;
+            animation: dash 20s linear infinite;
+        }
+        @keyframes dash { to { stroke-dashoffset: -1000; } }
+
+        /* Radar pulse marker CBD */
+        .radar-pulse {
+            width: 20px; height: 20px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 1);
+            animation: pulse-emerald 2s infinite;
+        }
+        @keyframes pulse-emerald {
+            0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16,185,129,0.7); }
+            70%  { transform: scale(1);    box-shadow: 0 0 0 15px rgba(16,185,129,0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+        }
+
+        /* Leaflet popup dark */
+        .leaflet-popup-content-wrapper {
+            background-color: #1e293b; color: #f8fafc;
+            border-radius: 0.75rem; border: 1px solid #334155;
+        }
+        .leaflet-popup-tip { background-color: #1e293b; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="bg-slate-950 border-b border-slate-800 px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4 z-[2000] shrink-0">
+    <div class="flex items-center gap-3">
+        <div class="bg-emerald-500 text-slate-950 p-2 rounded-lg flex items-center justify-center">
+            <i data-lucide="home" class="w-6 h-6"></i>
+        </div>
+        <div>
+            <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                REGENERASI JABODETABEKPUNJUR
+                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20">JFF 2026</span>
+            </h1>
+            <p class="text-xs text-slate-400">Peta Interaktif Strategi Hunian Berkeadilan & Resiliensi Iklim</p>
+        </div>
+    </div>
+
+    <div class="flex items-center gap-3 w-full md:w-auto flex-wrap justify-end">
+        <!-- Region selector (hanya tampil di mode zona) -->
+        <div id="header-selector" class="relative w-full md:w-72">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                <i data-lucide="search" class="w-4 h-4"></i>
+            </span>
+            <select id="region-selector" class="w-full bg-slate-900 border border-slate-700 rounded-lg pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 appearance-none">
+                <option value="">-- Pilih Wilayah Anda --</option>
+                <optgroup label="Zona 1: Kerentanan & In-Situ">
+                    <option value="tambora">Tambora / Muara Angke (Jakut-Jakbar)</option>
+                    <option value="joharbaru">Johar Baru / Kemayoran (Jakpus)</option>
+                </optgroup>
+                <optgroup label="Zona 2: Sprawl & Komuter">
+                    <option value="depok">Depok (Sawangan, Bojongsari)</option>
+                    <option value="bekasi">Bekasi (Tambun, Cibitung)</option>
+                    <option value="tangsel">Tangerang Selatan (Pamulang, Ciledug)</option>
+                </optgroup>
+                <optgroup label="Zona 3: Transit & CBD">
+                    <option value="sudirman">Sudirman / Dukuh Atas / Kebayoran</option>
+                    <option value="cideng">Cideng / Tomang / Harmoni</option>
+                </optgroup>
+                <optgroup label="Zona 4: Ekologis & Hulu">
+                    <option value="puncak">Bogor / Puncak / Cisarua</option>
+                    <option value="cianjur">Cianjur / Cipanas</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <!-- Toggle Mode -->
+        <div class="flex items-center gap-1 bg-slate-900 border border-slate-700 p-1.5 rounded-xl shrink-0">
+            <button id="btn-zone-mode" onclick="setMode('zona')"
+                class="px-4 py-2 text-sm font-bold rounded-lg transition-all bg-emerald-500 text-slate-950 flex items-center gap-2">
+                <i data-lucide="layers" class="w-4 h-4"></i> Mode Zona
+            </button>
+            <button id="btn-komuter-mode" onclick="setMode('komuter')"
+                class="px-4 py-2 text-sm font-bold rounded-lg transition-all text-slate-400 hover:text-white flex items-center gap-2">
+                <i data-lucide="crosshair" class="w-4 h-4"></i> Radar Komuter
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+
+    <!-- ── SIDEBAR ── -->
+    <div class="w-full lg:w-[400px] bg-slate-950 border-r border-slate-800 p-6 flex flex-col gap-6 overflow-y-auto shrink-0 z-[1000] lg:h-full">
+
+        <!-- ════ SIDEBAR: MODE ZONA ════ -->
+        <div id="panel-zona" class="flex flex-col gap-6">
+
+            <!-- Welcome Card -->
+            <div id="welcome-panel" class="flex flex-col gap-4">
+                <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                    <h3 class="font-bold text-emerald-400 text-lg flex items-center gap-2">
+                        <i data-lucide="info" class="w-5 h-5"></i> Halo Warga Urban!
+                    </h3>
+                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                        Tahukah kamu bahwa Jakarta sebenarnya <strong>tidak padat lantai bangunan</strong>, melainkan tidak merata?
+                        Klik salah satu wilayah administratif di peta atau cari daerahmu di atas untuk membedah tantangan hidupmu.
+                    </p>
+                </div>
+                <div class="border border-slate-800 rounded-xl p-4 bg-slate-900/50">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tujuan Pameran JFF 2026</span>
+                    <ul class="mt-2 space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✔</span> Mengukur minatmu bermukim vertikal di pusat kota.</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✔</span> Menakar trade-off (luas ruang vs efisiensi waktu perjalanan).</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✔</span> Membagikan refleksi pribadi ke media sosial.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Detail Panel -->
+            <div id="detail-panel" class="hidden flex-col gap-5">
+                <div class="flex items-center justify-between">
+                    <span id="zone-badge" class="text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+                    <button id="reset-button" class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
+                        <i data-lucide="refresh-cw" class="w-3 h-3"></i> Reset Peta
+                    </button>
+                </div>
+
+                <div class="border-b border-slate-800 pb-4">
+                    <h2 id="zone-title" class="text-2xl font-black text-white leading-tight"></h2>
+                    <p id="zone-regions" class="text-sm text-slate-400 mt-1"></p>
+                </div>
+
+                <!-- Indikator Kapasitas Mental & Risiko -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-xl">
+                        <span class="text-[10px] uppercase text-slate-400 tracking-wider flex items-center gap-1">
+                            <i data-lucide="brain" class="w-3 h-3 text-cyan-400"></i> Kapasitas Mental
+                        </span>
+                        <p id="indicator-bandwidth" class="font-bold text-white text-sm mt-1"></p>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-xl">
+                        <span class="text-[10px] uppercase text-slate-400 tracking-wider flex items-center gap-1">
+                            <i data-lucide="shield-alert" class="w-3 h-3 text-red-400"></i> Persepsi Risiko
+                        </span>
+                        <p id="indicator-risk" class="font-bold text-white text-sm mt-1"></p>
+                    </div>
+                </div>
+
+                <!-- Solusi Tipologi -->
+                <div id="solution-box" class="p-4 rounded-xl border flex flex-col gap-3">
+                    <div class="flex items-center gap-2">
+                        <span id="sol-code" class="text-xs font-bold px-2 py-0.5 rounded text-white bg-slate-950"></span>
+                        <h4 id="sol-title" class="font-bold text-white"></h4>
+                    </div>
+                    <p id="sol-desc" class="text-xs text-slate-300 leading-relaxed"></p>
+                    <div class="bg-slate-950/40 p-2.5 rounded border border-slate-800 text-[11px] text-slate-400 leading-relaxed">
+                        <strong>Mekanisme Solusi:</strong> <span id="sol-mechanism"></span>
+                    </div>
+                </div>
+
+                <!-- Fakta Lapangan -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider">Fakta Lapangan</h4>
+                    <p id="zone-facts" class="text-sm text-slate-300 leading-relaxed"></p>
+                </div>
+
+                <!-- Refleksi & Share -->
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-col gap-3 mt-2">
+                    <h4 class="text-sm font-bold text-white flex items-center gap-1.5">
+                        <i data-lucide="message-square" class="w-4 h-4 text-emerald-400"></i> Refleksi Kamu
+                    </h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">Bagikan hasil analisis wilayahmu ini sebagai suara publik untuk masa depan kota.</p>
+                    <button id="share-btn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2 rounded-lg text-xs tracking-wider uppercase transition-colors flex items-center justify-center gap-2">
+                        <i data-lucide="share-2" class="w-4 h-4"></i> Copy Hasil & Posting Ke Sosmed
+                    </button>
+                </div>
+            </div>
+        </div><!-- /panel-zona -->
+
+        <!-- ════ SIDEBAR: MODE KOMUTER ════ -->
+        <div id="panel-komuter" class="hidden flex-col gap-4">
+
+            <!-- Step indicator -->
+            <div class="flex items-center gap-2">
+                <div id="step-pip-1" class="w-6 h-6 rounded-full bg-amber-500 text-slate-950 text-[10px] font-black flex items-center justify-center shrink-0 transition-all">1</div>
+                <div class="flex-1 h-px bg-slate-700"></div>
+                <div id="step-pip-2" class="w-6 h-6 rounded-full bg-slate-700 text-slate-400 text-[10px] font-black flex items-center justify-center shrink-0 transition-all">2</div>
+            </div>
+
+            <!-- Step 1: Tentukan titik A -->
+            <div id="step1-card" class="p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl flex flex-col gap-2">
+                <h3 class="font-bold text-amber-400 text-sm flex items-center gap-2">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i> Langkah 1 — Titik Pusat (A)
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Klik di mana saja pada peta untuk menentukan <strong class="text-amber-400">Titik A</strong>. Lima cincin radius (10 · 20 · 30 · 40 · 50 km) akan muncul mengelilinginya.
+                </p>
+            </div>
+
+            <!-- Step 2: Tarik garis (hidden until center set) -->
+            <div id="step2-card" class="hidden p-4 bg-blue-500/10 border border-blue-500/30 rounded-xl flex flex-col gap-2">
+                <h3 class="font-bold text-blue-400 text-sm flex items-center gap-2">
+                    <i data-lucide="crosshair" class="w-4 h-4"></i> Langkah 2 — Titik Ukur (B)
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Titik A sudah ditentukan. Klik lokasi lain (mis. rumahmu) untuk menarik garis dan mengukur jarak komuter ke Titik A.
+                </p>
+                <div class="bg-slate-900 rounded-lg px-3 py-2 flex items-center gap-2 mt-1">
+                    <div class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.8)] shrink-0"></div>
+                    <span class="text-[10px] text-slate-400">Titik A: </span>
+                    <span id="center-coords" class="text-[10px] font-mono text-amber-300"></span>
+                </div>
+                <button id="btn-pindah-pusat" class="mt-1 w-full border border-amber-500/40 text-amber-400 hover:bg-amber-500/10 py-1.5 rounded-lg text-[10px] tracking-wider uppercase transition-colors flex items-center justify-center gap-1.5">
+                    <i data-lucide="move" class="w-3 h-3"></i> Pindah Titik Pusat (A)
+                </button>
+            </div>
+
+            <!-- Hasil Kalkulasi -->
+            <div id="measure-results" class="hidden flex-col gap-3">
+                <div class="border border-slate-800 rounded-xl p-4 bg-slate-900">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Jarak Udara A → B</span>
+                    <div class="text-3xl font-black text-white flex items-baseline gap-1">
+                        <span id="res-distance">0.0</span> <span class="text-sm text-slate-500 font-medium">KM</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="border border-slate-800 rounded-xl p-3 bg-slate-900">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Est. Waktu (1 Arah)</span>
+                        <div class="text-xl font-bold text-amber-400 flex items-baseline gap-1">
+                            <span id="res-time">0</span> <span class="text-xs text-slate-500">Menit</span>
+                        </div>
+                    </div>
+                    <div class="border border-slate-800 rounded-xl p-3 bg-slate-900">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Waktu Terbuang (Bln)</span>
+                        <div class="text-xl font-bold text-red-400 flex items-baseline gap-1">
+                            <span id="res-lost">0</span> <span class="text-xs text-slate-500">Jam</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="komuter-zone-info" class="hidden p-3 rounded-xl border border-slate-700 bg-slate-900 text-xs text-slate-300 leading-relaxed">
+                    <span class="font-bold text-white">Titik B (zona): </span>
+                    <span id="komuter-zone-label"></span>
+                </div>
+                <div class="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        <span class="font-bold text-emerald-400">Kesimpulan:</span>
+                        Semakin jauh kamu tinggal dari pusat, semakin besar "Pajak Sprawl" yang kamu bayar. Apakah kamu rela menukar waktu hidupmu?
+                    </p>
+                </div>
+                <button id="reset-komuter" class="w-full border border-slate-700 text-slate-400 hover:text-white py-2 rounded-lg text-xs tracking-wider uppercase transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="trash-2" class="w-3 h-3"></i> Hapus Garis Ukur
+                </button>
+            </div>
+
+            <!-- Legenda cincin radius -->
+            <div class="border border-slate-800 rounded-xl p-4 bg-slate-900/50 flex flex-col gap-2 mt-auto">
+                <h4 class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Cincin Radius Sprawl</h4>
+                <div class="grid grid-cols-5 gap-1 mb-1">
+                    <div class="flex flex-col items-center gap-1"><div class="w-3 h-3 rounded-full border-2 border-slate-500"></div><span class="text-[9px] text-slate-500">10</span></div>
+                    <div class="flex flex-col items-center gap-1"><div class="w-3 h-3 rounded-full border-2 border-slate-400"></div><span class="text-[9px] text-slate-400">20</span></div>
+                    <div class="flex flex-col items-center gap-1"><div class="w-3 h-3 rounded-full border-2 border-slate-300"></div><span class="text-[9px] text-slate-300">30</span></div>
+                    <div class="flex flex-col items-center gap-1"><div class="w-3 h-3 rounded-full border-2 border-amber-400"></div><span class="text-[9px] text-amber-400">40</span></div>
+                    <div class="flex flex-col items-center gap-1"><div class="w-3 h-3 rounded-full border-2 border-red-400"></div><span class="text-[9px] text-red-400">50</span></div>
+                </div>
+                <p class="text-[9px] text-slate-500 leading-relaxed">Radius dalam km. Makin ke luar = zona sprawl makin ekstrem.</p>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(245,158,11,0.7)] shrink-0"></div>
+                    <span class="text-[10px] text-slate-300">Titik A — Pusat Referensi (dapat dipindah)</span>
+                </div>
+            </div>
+        </div><!-- /panel-komuter -->
+
+    </div><!-- /sidebar -->
+
+    <!-- ── PETA ── -->
+    <div class="flex-1 relative order-1 lg:order-2">
+        <div id="map" class="h-full w-full" style="min-height:400px;"></div>
+
+        <!-- Legenda zona (hanya mode zona, desktop) -->
+        <div id="map-legend" class="absolute bottom-6 left-6 bg-slate-950/90 backdrop-blur-md border border-slate-800 p-4 rounded-xl shadow-2xl z-[1000] hidden md:block max-w-xs">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Legenda Administratif</h4>
+            <div class="space-y-2 text-xs">
+                <div class="flex items-center gap-3"><span class="w-3 h-3 rounded-full bg-red-500 opacity-80 shrink-0"></span><span class="text-slate-300">Zona 1: Kerentanan In-situ (Pesisir & Tambora)</span></div>
+                <div class="flex items-center gap-3"><span class="w-3 h-3 rounded-full bg-amber-500 opacity-80 shrink-0"></span><span class="text-slate-300">Zona 2: Sprawl Komuter (Bodetabek Ring)</span></div>
+                <div class="flex items-center gap-3"><span class="w-3 h-3 rounded-full bg-blue-500 opacity-80 shrink-0"></span><span class="text-slate-300">Zona 3: Transit & CBD (Sudirman–Tomang)</span></div>
+                <div class="flex items-center gap-3"><span class="w-3 h-3 rounded-full bg-emerald-500 opacity-80 shrink-0"></span><span class="text-slate-300">Zona 4: Ekologis & Hulu (Puncak–Cianjur)</span></div>
+            </div>
+        </div>
+
+        <div id="komuter-legend" class="hidden absolute bottom-6 left-6 bg-slate-950/90 backdrop-blur-md border border-slate-800 p-4 rounded-xl shadow-2xl z-[1000] md:block max-w-xs">
+            <h4 class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Cara Pakai Mode Komuter</h4>
+            <p class="text-[10px] text-slate-400 leading-relaxed"><span class="text-amber-400 font-bold">Klik pertama</span> → tentukan Titik A (pusat + 5 cincin radius muncul).<br><span class="text-blue-400 font-bold">Klik berikutnya</span> → tarik garis ukur ke Titik B.</p>
+        </div>
+    </div>
+
+</main>
+
+<!-- Toast notifikasi copy -->
+<div id="toast" class="fixed bottom-6 right-6 bg-emerald-500 text-slate-950 px-4 py-3 rounded-xl font-bold text-sm shadow-2xl z-[5000] transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
+    <i data-lucide="check-circle" class="w-5 h-5"></i>
+    <span>Hasil analisis disalin ke clipboard! Bagikan refleksi Anda.</span>
+</div>
+
+<!-- ══════════════ SCRIPT ══════════════ -->
+<script>
+lucide.createIcons();
+
+/* ─── DATA ZONA (lengkap dari batas-zona.html) ─── */
+const databaseZona = {
+    zona_1: {
+        title: "Zona 1: Kerentanan Ekstrem & In-situ",
+        regions: "Jakarta Utara (Penjaringan, Cilincing), Jakarta Barat (Tambora, Jembatan Lima), Jakarta Pusat (Johar Baru)",
+        badge: "Kerentanan",
+        colorClass: "bg-red-500/10 text-red-400 border border-red-500/20",
+        hexColor: "#ef4444",
+        solutionBorder: "border-red-500/30",
+        bandwidth: "Terbatas (Scarcity)",
+        risk: "Keamanan Bermukim & Banjir",
+        solCode: "T1",
+        solTitle: "Rumah Kampung Kota (Kolektif-Organik)",
+        solDesc: "Konsolidasi tanah vertikal secara in-situ. Mempertahankan ruang sosial komunal (tangga lebar, koridor sirkulasi warga) sehingga masyarakat dapat tetap berdagang dan berjejaring.",
+        solMechanism: "Konsolidasi Tanah Vertikal (KTV), pembangunan tanpa penggusuran paksa, kepemilikan komunal via koperasi.",
+        facts: "Kepadatan penduduk di wilayah seperti Tambora sangat ekstrem (>600 jiwa/ha). Warga memikul 'Additional Cost' yang tinggi akibat perbaikan rumah pasca-banjir rob/kebakaran berkala.",
+        shareMsg: "Wilayah saya tergolong ke dalam Zona 1: Kerentanan Ekstrem. Solusi bermukim vertikal masa depan yang ideal adalah T1 — Rumah Kampung Kota melalui Konsolidasi Tanah Vertikal in-situ."
+    },
+    zona_2: {
+        title: "Zona 2: Sprawl & Komuter Beban Tinggi",
+        regions: "Tangerang Selatan (Pamulang, Ciputat), Depok (Sawangan), Bekasi (Tambun, Cibitung)",
+        badge: "Sprawl & Transportasi",
+        colorClass: "bg-amber-500/10 text-amber-400 border border-amber-500/20",
+        hexColor: "#f59e0b",
+        solutionBorder: "border-amber-500/30",
+        bandwidth: "Mengalami Penyusutan (Commuter Stress)",
+        risk: "Kehilangan Waktu Hidup",
+        solCode: "T2",
+        solTitle: "Rumah Terjangkau (Komersial-Inklusif)",
+        solDesc: "Pengalihan ruko mangkrak di tengah kota atau pembangunan unit kompak hemat lahan guna menekan harga dan mendekatkan pekerja ke tempat kerja mereka.",
+        solMechanism: "Pemanfaatan bangunan mangkrak/ruko tua di pusat kota (Retrofitting) dan skema kepemilikan terjangkau bagi para profesional muda.",
+        facts: "Kawasan 'Sabuk Komuter' tempat kelas menengah urban membeli rumah tapak murah tapi harus membayar 'Pajak Waktu' 3–4 jam perjalanan pulang-pergi kerja di jalan setiap hari.",
+        shareMsg: "Wilayah saya tergolong ke dalam Zona 2: Sprawl & Komuter Beban Tinggi. Solusi ideal adalah T2 — Rumah Terjangkau melalui Retrofitting bangunan mangkrak di pusat kota."
+    },
+    zona_3: {
+        title: "Zona 3: Konektivitas & Transit Inti",
+        regions: "Jakarta Pusat (Sudirman, Thamrin, Cideng, Harmoni), Jakarta Selatan (Kebayoran Baru, Blok M, Lebak Bulus)",
+        badge: "Isolasi & Transit",
+        colorClass: "bg-blue-500/10 text-blue-400 border border-blue-500/20",
+        hexColor: "#3b82f6",
+        solutionBorder: "border-blue-500/30",
+        bandwidth: "Pikiran Lapang (Akses Terintegrasi)",
+        risk: "Ketergantungan Eksternal",
+        solCode: "T3",
+        solTitle: "Rumah Terhubung (Transit-Oriented / TOD)",
+        solDesc: "Hunian mikro vertikal terintegrasi langsung dengan simpul transportasi umum. Meminimalkan kebutuhan kendaraan pribadi dan menyediakan infrastruktur bersama.",
+        solMechanism: "Pembangunan hunian di atas/di dekat stasiun transit dengan insentif Koefisien Lantai Bangunan (KLB) tinggi.",
+        facts: "Kawasan dengan akses transportasi massal terbaik (MRT/LRT/TJ) namun terisolasi secara finansial untuk dihuni kelas menengah karena harga lahan yang dikomodifikasi secara liar.",
+        shareMsg: "Wilayah saya tergolong ke dalam Zona 3: Konektivitas & Transit Inti. Solusi ideal adalah T3 — Rumah Terhubung (TOD) terintegrasi stasiun MRT/LRT/TJ."
+    },
+    zona_4: {
+        title: "Zona 4: Ekologis & Kawasan Penyelamat",
+        regions: "Kabupaten Bogor (Puncak, Cisarua, Megamendung), Kabupaten Cianjur (Cipanas)",
+        badge: "Krisis Ekologis",
+        colorClass: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20",
+        hexColor: "#10b981",
+        solutionBorder: "border-emerald-500/30",
+        bandwidth: "Ketenangan Lingkungan (Peace of Mind)",
+        risk: "Bencana Ekologis & Banjir Bandang",
+        solCode: "T4",
+        solTitle: "Rumah Hijau & Mandiri (Resilience-Focused)",
+        solDesc: "Sistem hunian sirkular mandiri energi (panel surya) dan zero water run-off untuk menjaga kelestarian hulu tanpa mengganggu ekosistem.",
+        solMechanism: "Penerapan sistem manajemen limbah terpadu, pemanenan air hujan (water recycling), dan teknologi ramah lingkungan.",
+        facts: "Daerah tangkapan air vital yang terus mengalami degradasi akibat alih fungsi lahan menjadi perumahan eksklusif horizontal yang memicu banjir bandang di kawasan hilir Jakarta.",
+        shareMsg: "Wilayah saya tergolong ke dalam Zona 4: Ekologis & Kawasan Penyelamat. Solusi ideal adalah T4 — Rumah Hijau & Mandiri dengan sistem sirkular zero run-off."
+    }
+};
+
+/* ─── PETA ─── */
+const map = L.map('map', { zoomControl: false }).setView([-6.25, 106.88], 10);
+L.control.zoom({ position: 'topright' }).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://carto.com/" target="_blank">CARTO</a> © OpenStreetMap',
+    subdomains: 'abcd', maxZoom: 20
+}).addTo(map);
+
+/* ─── POLIGON ZONA ─── */
+const adminPolygons = {
+    "type": "FeatureCollection",
+    "features": [
+        { "type": "Feature", "properties": { "zone_key": "zona_1" }, "geometry": { "type": "Polygon", "coordinates": [[[106.700,-6.080],[106.820,-6.080],[106.980,-6.090],[106.980,-6.130],[106.860,-6.140],[106.780,-6.150],[106.730,-6.150],[106.700,-6.120],[106.700,-6.080]]] } },
+        { "type": "Feature", "properties": { "zone_key": "zona_3" }, "geometry": { "type": "Polygon", "coordinates": [[[106.780,-6.150],[106.860,-6.140],[106.860,-6.220],[106.830,-6.280],[106.780,-6.280],[106.780,-6.150]]] } },
+        { "type": "Feature", "properties": { "zone_key": "zona_2" }, "geometry": { "type": "Polygon", "coordinates": [[[106.580,-6.130],[106.700,-6.130],[106.730,-6.150],[106.780,-6.150],[106.780,-6.280],[106.830,-6.280],[106.860,-6.220],[106.860,-6.140],[106.980,-6.130],[107.150,-6.130],[107.150,-6.420],[106.980,-6.450],[106.750,-6.450],[106.580,-6.350],[106.580,-6.130]]] } },
+        { "type": "Feature", "properties": { "zone_key": "zona_4" }, "geometry": { "type": "Polygon", "coordinates": [[[106.750,-6.450],[106.980,-6.450],[107.150,-6.420],[107.150,-6.820],[106.750,-6.820],[106.750,-6.450]]] } }
+    ]
+};
+
+function getPolyStyle(feature, isSelected = false) {
+    const z = databaseZona[feature.properties.zone_key];
+    return {
+        fillColor: z.hexColor,
+        weight: isSelected ? 4 : 2,
+        opacity: 1,
+        color: isSelected ? '#ffffff' : '#475569',
+        dashArray: isSelected ? '' : '3',
+        fillOpacity: isSelected ? 0.65 : 0.35
+    };
+}
+
+let geojsonLayer;
+geojsonLayer = L.geoJSON(adminPolygons, {
+    style: (f) => getPolyStyle(f, false),
+    onEachFeature: (feature, layer) => {
+        layer.on({
+            mouseover: (e) => {
+                if (currentMode === 'komuter') return;
+                if (!layer.isSelected) {
+                    layer.setStyle({ fillOpacity: 0.55, weight: 3, color: '#94a3b8' });
+                }
+            },
+            mouseout: (e) => {
+                if (!layer.isSelected) geojsonLayer.resetStyle(layer);
+            },
+            click: (e) => {
+                if (currentMode === 'komuter') return;
+                geojsonLayer.eachLayer(l => { l.isSelected = false; geojsonLayer.resetStyle(l); });
+                layer.isSelected = true;
+                selectZone(feature.properties.zone_key);
+                map.fitBounds(layer.getBounds(), { padding: [20, 20] });
+            }
+        });
+    }
+}).addTo(map);
+
+/* ─── RADAR KOMUTER — titik pusat (A) dapat dipindah ─── */
+// Warna cincin: makin luar makin merah
+const ringStyles = [
+    { color: '#64748b', label: '10 km' },
+    { color: '#94a3b8', label: '20 km' },
+    { color: '#cbd5e1', label: '30 km' },
+    { color: '#f59e0b', label: '40 km' },
+    { color: '#ef4444', label: '50 km' },
+];
+const ringRadii = [10000, 20000, 30000, 40000, 50000];
+
+let centerLatLng  = null;   // Titik A
+let centerMarker  = null;
+let radiusGroup   = L.layerGroup();
+let measureLine   = null;
+let homeMarker    = null;
+let komuterStep   = 'set_center'; // 'set_center' | 'measure'
+
+const centerIcon = L.divIcon({
+    className: '',
+    html: '<div class="radar-pulse" style="background:#f59e0b;box-shadow:0 0 0 0 rgba(245,158,11,1);"></div>',
+    iconSize: [20, 20], iconAnchor: [10, 10]
+});
+
+function buildRings(latlng) {
+    radiusGroup.clearLayers();
+    ringRadii.forEach((r, i) => {
+        L.circle(latlng, {
+            radius: r,
+            color: ringStyles[i].color,
+            weight: 1.5,
+            dashArray: '5, 6',
+            fill: false,
+            interactive: false
+        }).addTo(radiusGroup);
+    });
+}
+
+function setCenter(latlng) {
+    // Remove old center
+    if (centerMarker) map.removeLayer(centerMarker);
+    // Clear old measure line & home marker too
+    clearMeasure();
+
+    centerLatLng = latlng;
+    centerMarker = L.marker(latlng, { icon: centerIcon, zIndexOffset: 1000, interactive: true })
+        .bindPopup(`<b style='color:#f59e0b'>Titik Pusat (A)</b><br>${latlng.lat.toFixed(4)}, ${latlng.lng.toFixed(4)}<br><small>Klik peta lain untuk ukur jarak</small>`)
+        .addTo(map);
+
+    buildRings(latlng);
+    radiusGroup.addTo(map);
+
+    // Update sidebar
+    document.getElementById('center-coords').innerText =
+        `${latlng.lat.toFixed(4)}, ${latlng.lng.toFixed(4)}`;
+    document.getElementById('step1-card').classList.add('hidden');
+    document.getElementById('step2-card').classList.remove('hidden');
+    document.getElementById('step2-card').classList.add('flex');
+
+    // Step pip
+    document.getElementById('step-pip-1').className =
+        'w-6 h-6 rounded-full bg-slate-600 text-slate-400 text-[10px] font-black flex items-center justify-center shrink-0 transition-all';
+    document.getElementById('step-pip-2').className =
+        'w-6 h-6 rounded-full bg-blue-500 text-white text-[10px] font-black flex items-center justify-center shrink-0 transition-all';
+
+    komuterStep = 'measure';
+    document.querySelector('.leaflet-container').style.cursor = 'crosshair';
+}
+
+function clearMeasure() {
+    if (measureLine) { map.removeLayer(measureLine); measureLine = null; }
+    if (homeMarker)  { map.removeLayer(homeMarker);  homeMarker  = null; }
+    document.getElementById('measure-results').classList.add('hidden');
+    document.getElementById('measure-results').classList.remove('flex');
+    document.getElementById('komuter-zone-info').classList.add('hidden');
+}
+
+function resetCenter() {
+    if (centerMarker) { map.removeLayer(centerMarker); centerMarker = null; }
+    radiusGroup.clearLayers();
+    clearMeasure();
+    centerLatLng = null;
+    komuterStep  = 'set_center';
+
+    document.getElementById('step2-card').classList.add('hidden');
+    document.getElementById('step2-card').classList.remove('flex');
+    document.getElementById('step1-card').classList.remove('hidden');
+
+    document.getElementById('step-pip-1').className =
+        'w-6 h-6 rounded-full bg-amber-500 text-slate-950 text-[10px] font-black flex items-center justify-center shrink-0 transition-all';
+    document.getElementById('step-pip-2').className =
+        'w-6 h-6 rounded-full bg-slate-700 text-slate-400 text-[10px] font-black flex items-center justify-center shrink-0 transition-all';
+    document.querySelector('.leaflet-container').style.cursor = 'crosshair';
+}
+
+/* ─── MODE SWITCH ─── */
+let currentMode = 'zona';
+
+function setMode(mode) {
+    currentMode = mode;
+    const btnZone    = document.getElementById('btn-zone-mode');
+    const btnKomuter = document.getElementById('btn-komuter-mode');
+    const panelZona  = document.getElementById('panel-zona');
+    const panelKom   = document.getElementById('panel-komuter');
+    const headerSel  = document.getElementById('header-selector');
+    const mapLeg     = document.getElementById('map-legend');
+    const komLeg     = document.getElementById('komuter-legend');
+
+    if (mode === 'zona') {
+        // Buttons
+        btnZone.className    = "px-4 py-2 text-sm font-bold rounded-lg transition-all bg-emerald-500 text-slate-950 flex items-center gap-2";
+        btnKomuter.className = "px-4 py-2 text-sm font-bold rounded-lg transition-all text-slate-400 hover:text-white flex items-center gap-2";
+        // Panels
+        panelZona.classList.remove('hidden'); panelZona.classList.add('flex');
+        panelKom.classList.add('hidden');     panelKom.classList.remove('flex');
+        // Header
+        headerSel.classList.remove('hidden');
+        // Legends
+        mapLeg.classList.remove('hidden');
+        komLeg.classList.add('hidden');
+        // Map state
+        document.querySelector('.leaflet-container').style.cursor = '';
+        geojsonLayer.eachLayer(l => { l.isSelected = false; });
+        geojsonLayer.setStyle((f) => getPolyStyle(f, false));
+        // Remove komuter layers
+        if (centerMarker) { map.removeLayer(centerMarker); centerMarker = null; }
+        radiusGroup.clearLayers(); radiusGroup.removeFrom(map);
+        if (measureLine) { map.removeLayer(measureLine); measureLine = null; }
+        if (homeMarker)  { map.removeLayer(homeMarker);  homeMarker  = null; }
+        centerLatLng = null; komuterStep = 'set_center';
+        map.setView([-6.25, 106.88], 10);
+
+    } else {
+        // Buttons
+        btnKomuter.className = "px-4 py-2 text-sm font-bold rounded-lg transition-all bg-amber-500 text-slate-950 flex items-center gap-2";
+        btnZone.className    = "px-4 py-2 text-sm font-bold rounded-lg transition-all text-slate-400 hover:text-white flex items-center gap-2";
+        // Panels
+        panelKom.classList.remove('hidden'); panelKom.classList.add('flex');
+        panelZona.classList.add('hidden');   panelZona.classList.remove('flex');
+        // Header
+        headerSel.classList.add('hidden');
+        // Legends
+        mapLeg.classList.add('hidden');
+        komLeg.classList.remove('hidden');
+        // Map state
+        document.querySelector('.leaflet-container').style.cursor = 'crosshair';
+        geojsonLayer.setStyle({ fillOpacity: 0.1, weight: 1, color: '#334155', dashArray: '3' });
+        // Reinitialize step state
+        resetCenter();
+    }
+}
+
+/* ─── ZONE SELECT (Mode Zona) ─── */
+function selectZone(zoneKey) {
+    const z = databaseZona[zoneKey];
+    if (!z) return;
+
+    document.getElementById('welcome-panel').classList.add('hidden');
+    const dp = document.getElementById('detail-panel');
+    dp.classList.remove('hidden'); dp.classList.add('flex');
+
+    document.getElementById('zone-badge').className       = `text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider ${z.colorClass}`;
+    document.getElementById('zone-badge').innerText       = z.badge;
+    document.getElementById('zone-title').innerText       = z.title;
+    document.getElementById('zone-regions').innerText     = z.regions;
+    document.getElementById('indicator-bandwidth').innerText = z.bandwidth;
+    document.getElementById('indicator-risk').innerText   = z.risk;
+    document.getElementById('sol-code').innerText         = z.solCode;
+    document.getElementById('sol-title').innerText        = z.solTitle;
+    document.getElementById('sol-desc').innerText         = z.solDesc;
+    document.getElementById('sol-mechanism').innerText    = z.solMechanism;
+    document.getElementById('zone-facts').innerText       = z.facts;
+
+    // Warna border solution box
+    const sb = document.getElementById('solution-box');
+    sb.className = `p-4 rounded-xl border flex flex-col gap-3 ${z.solutionBorder}`;
+
+    // Highlight polygon
+    geojsonLayer.eachLayer(layer => {
+        const isThis = layer.feature.properties.zone_key === zoneKey;
+        layer.isSelected = isThis;
+        layer.setStyle(getPolyStyle(layer.feature, isThis));
+        if (isThis) layer.bringToFront();
+    });
+}
+
+/* ─── MAP CLICK (Mode Komuter — dua langkah) ─── */
+map.on('click', function(e) {
+    if (currentMode !== 'komuter') return;
+
+    if (komuterStep === 'set_center') {
+        // Langkah 1: tentukan titik A
+        setCenter(e.latlng);
+        return;
+    }
+
+    // Langkah 2: ukur dari A ke titik klik
+    const homeLatLng = e.latlng;
+    const distKm  = (map.distance(centerLatLng, homeLatLng) / 1000).toFixed(1);
+    let estMins   = Math.round((distKm / 25) * 60);
+    if (estMins < 10) estMins = 10;
+    const lostHrs = Math.round((estMins * 2 * 22) / 60);
+
+    if (measureLine) map.removeLayer(measureLine);
+    if (homeMarker)  map.removeLayer(homeMarker);
+
+    measureLine = L.polyline([homeLatLng, centerLatLng], {
+        color: '#3b82f6', weight: 4, className: 'animated-dash'
+    }).addTo(map);
+
+    homeMarker = L.circleMarker(homeLatLng, {
+        radius: 7, fillColor: '#ef4444', color: '#fff', weight: 2, fillOpacity: 1
+    }).addTo(map)
+      .bindPopup(`<b style='color:#ef4444'>Titik B</b><br><b>${distKm} km</b> dari Titik A`)
+      .openPopup();
+
+    // Deteksi zona titik B
+    let zoneLabel = '—';
+    geojsonLayer.eachLayer(l => {
+        if (l.getBounds && l.getBounds().contains(homeLatLng)) {
+            const d = databaseZona[l.feature.properties.zone_key];
+            if (d) zoneLabel = `${d.badge} — ${d.solCode}: ${d.solTitle}`;
+        }
+    });
+
+    document.getElementById('res-distance').innerText = distKm;
+    document.getElementById('res-time').innerText     = estMins;
+    document.getElementById('res-lost').innerText     = lostHrs;
+
+    const zoneInfoEl = document.getElementById('komuter-zone-info');
+    document.getElementById('komuter-zone-label').innerText = ' ' + zoneLabel;
+    zoneInfoEl.classList.remove('hidden');
+
+    document.getElementById('measure-results').classList.remove('hidden');
+    document.getElementById('measure-results').classList.add('flex');
+});
+
+/* ─── RESET & PINDAH PUSAT ─── */
+document.getElementById('reset-komuter').addEventListener('click', clearMeasure);
+document.getElementById('btn-pindah-pusat').addEventListener('click', resetCenter);
+
+/* ─── REGION SELECTOR (Mode Zona) ─── */
+document.getElementById('region-selector').addEventListener('change', (e) => {
+    const val = e.target.value;
+    let targetZone = '';
+    if (val === 'tambora' || val === 'joharbaru') targetZone = 'zona_1';
+    else if (val === 'depok' || val === 'bekasi' || val === 'tangsel') targetZone = 'zona_2';
+    else if (val === 'sudirman' || val === 'cideng') targetZone = 'zona_3';
+    else if (val === 'puncak' || val === 'cianjur') targetZone = 'zona_4';
+    if (!targetZone) return;
+
+    selectZone(targetZone);
+    geojsonLayer.eachLayer(layer => {
+        if (layer.feature.properties.zone_key === targetZone) {
+            map.fitBounds(layer.getBounds(), { padding: [50, 50] });
+        }
+    });
+});
+
+/* ─── RESET (Mode Zona) ─── */
+document.getElementById('reset-button').addEventListener('click', () => {
+    document.getElementById('detail-panel').classList.add('hidden');
+    document.getElementById('detail-panel').classList.remove('flex');
+    document.getElementById('welcome-panel').classList.remove('hidden');
+    document.getElementById('region-selector').value = "";
+    geojsonLayer.eachLayer(l => { l.isSelected = false; geojsonLayer.resetStyle(l); });
+    map.setView([-6.25, 106.88], 10);
+});
+
+/* ─── SHARE ─── */
+document.getElementById('share-btn').addEventListener('click', () => {
+    const activeKey = (() => {
+        let k = '';
+        geojsonLayer.eachLayer(l => { if (l.isSelected) k = l.feature.properties.zone_key; });
+        return k;
+    })();
+    const z = databaseZona[activeKey] || {};
+    const text = `Refleksi saya di Pameran "House as Home" JFF 2026:\n${z.shareMsg || document.getElementById('zone-title').innerText}\nMari peduli pada keberlanjutan tata ruang Jabodetabekpunjur!\n#HouseAsHomeJFF2026 #RegenerasiJakarta`;
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+
+    const toast = document.getElementById('toast');
+    toast.classList.remove('translate-y-20', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+    setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+    }, 4000);
+});
+
+// Init
+setMode('zona');
+lucide.createIcons();
+</script>
+</body>
+</html>
