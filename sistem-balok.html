@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nalar Huni JFF 2026 - Diagnosis Kedaulatan Ruang</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            dark: '#0B0F19',
+                            card: '#161D30',
+                            border: '#23304D',
+                            text: '#F3F4F6',
+                            accent: '#3B82F6',
+                        },
+                        zone: {
+                            poet: '#10B981',      // Forest Green
+                            savior: '#D97706',    // Terracotta/Rust
+                            muse: '#2563EB',      // Electric Blue
+                            mage: '#7C3AED',      // Deep Purple
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0B0F19;
+            color: #F3F4F6;
+        }
+        .header-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #23304D;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3B82F6;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- Navbar -->
+    <header class="border-b border-cyber-border bg-cyber-dark/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center font-bold text-white header-font">NH</div>
+                <span class="header-font font-bold text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">NALAR HUNI JFF 2026</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6 text-sm text-gray-400">
+                <span>Pameran "Imajinasi Seribu Tahun Lagi"</span>
+                <span class="h-4 w-px bg-cyber-border"></span>
+                <span class="text-blue-400 font-medium"><i class="fa-solid fa-microchip mr-1.5"></i>Kalkulator Kedaulatan Perkotaan</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+        
+        <!-- SECTION 1: WELCOME SCREEN -->
+        <section id="section-welcome" class="space-y-8 max-w-3xl mx-auto text-center py-12">
+            <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-xs text-blue-400 font-mono uppercase tracking-wider">
+                <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                <span>Diagnosis Kedaulatan Perkotaan v1.2</span>
+            </div>
+            <h1 class="header-font text-4xl sm:text-6xl font-bold tracking-tight text-white leading-tight">
+                Bagaimana <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Ego Spasialmu</span> Mengubah Jakarta?
+            </h1>
+            <p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+                Di masa depan, ruang di Jakarta adalah negosiasi tiada akhir. Ikuti kuesioner diagnosis ini untuk merancang tipe hunianmu dan lihat bagaimana batas ego bawah sadarmu berbenturan dengan lanskap kota.
+            </p>
+            <div class="pt-6">
+                <button onclick="startQuiz()" class="px-8 py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-indigo-500/20 transform hover:-translate-y-0.5 active:translate-y-0 transition duration-200">
+                    <i class="fa-solid fa-play mr-2"></i>Mulai Diagnosis
+                </button>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 border-t border-cyber-border/60">
+                <div class="p-4 rounded-xl bg-cyber-card/40 border border-cyber-border/40">
+                    <div class="text-2xl font-bold text-emerald-400 header-font">16</div>
+                    <div class="text-xs text-gray-500 uppercase font-mono mt-1">Model Hunian</div>
+                </div>
+                <div class="p-4 rounded-xl bg-cyber-card/40 border border-cyber-border/40">
+                    <div class="text-2xl font-bold text-amber-500 header-font">4</div>
+                    <div class="text-xs text-gray-500 uppercase font-mono mt-1">Zona Krisis</div>
+                </div>
+                <div class="p-4 rounded-xl bg-cyber-card/40 border border-cyber-border/40">
+                    <div class="text-2xl font-bold text-purple-500 header-font">1</div>
+                    <div class="text-xs text-gray-500 uppercase font-mono mt-1">Sistem Terpadu</div>
+                </div>
+                <div class="p-4 rounded-xl bg-cyber-card/40 border border-cyber-border/40">
+                    <div class="text-2xl font-bold text-blue-400 header-font">100%</div>
+                    <div class="text-xs text-gray-500 uppercase font-mono mt-1">Data Realistis</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: INTERACTIVE QUIZ -->
+        <section id="section-quiz" class="hidden max-w-2xl mx-auto w-full bg-cyber-card border border-cyber-border rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6">
+            <!-- Progress Bar -->
+            <div class="space-y-2">
+                <div class="flex justify-between text-xs font-mono text-gray-400 uppercase tracking-wider">
+                    <span id="quiz-step-text">Pertanyaan 1 dari 8</span>
+                    <span id="quiz-progress-percent">12%</span>
+                </div>
+                <div class="h-1.5 w-full bg-cyber-dark rounded-full overflow-hidden">
+                    <div id="quiz-progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300" style="width: 12.5%"></div>
+                </div>
+            </div>
+
+            <!-- Question -->
+            <div class="space-y-4">
+                <div id="badge-question-type" class="inline-block px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-2xs font-mono uppercase tracking-wider">Mencari Persona...</div>
+                <h2 id="question-text" class="header-font text-xl sm:text-2xl font-semibold text-white leading-snug">Memuat pertanyaan...</h2>
+            </div>
+
+            <!-- Answers -->
+            <div id="answers-container" class="space-y-3 pt-2">
+                <!-- Answer options injected dynamically -->
+            </div>
+
+            <!-- Nav Buttons -->
+            <div class="flex justify-between items-center pt-4 border-t border-cyber-border">
+                <button id="btn-prev" onclick="prevQuestion()" class="px-4 py-2 rounded-lg font-semibold text-sm border border-cyber-border text-gray-400 hover:text-white hover:bg-cyber-dark/40 disabled:opacity-30 disabled:pointer-events-none transition">
+                    <i class="fa-solid fa-arrow-left mr-2"></i>Kembali
+                </button>
+                <div class="text-xs font-mono text-gray-500">Nalar Huni JFF 2026</div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: LOADING SCREEN -->
+        <section id="section-loading" class="hidden text-center space-y-6 py-16">
+            <div class="relative w-20 h-20 mx-auto">
+                <div class="absolute inset-0 rounded-full border-4 border-blue-500/20"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-t-transparent border-blue-500 animate-spin"></div>
+            </div>
+            <div class="space-y-2">
+                <h3 class="header-font text-xl font-bold text-white">Menganalisis Ego Spasial Anda</h3>
+                <p class="text-gray-400 text-sm max-w-xs mx-auto">Menghubungkan profil Persona dengan parameter krisis perkotaan Jabodetabekpunjur...</p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: DIAGNOSTIC RESULT & INTERACTIVE SIMULATION -->
+        <section id="section-result" class="hidden space-y-8 animate-fade-in">
+            <!-- Alternative System Switcher -->
+            <div class="bg-cyber-card/60 border border-cyber-border/80 p-4 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="space-y-1 text-center md:text-left">
+                    <h4 class="font-bold text-sm text-white header-font"><i class="fa-solid fa-circle-half-stroke mr-2 text-indigo-400"></i>Pilihan Alternatif Sistem Warna Balok Maket</h4>
+                    <p class="text-xs text-gray-400">Pilih bagaimana sistem memvisualisasikan tona balok LEGO pada maket pameran fisik.</p>
+                </div>
+                <div class="inline-flex rounded-lg bg-cyber-dark p-1 border border-cyber-border">
+                    <button id="btn-alt-1" onclick="switchAlternative(1)" class="px-4 py-2 rounded-md text-xs font-bold transition duration-200 bg-blue-600 text-white">
+                        Alternatif 1: 4 Warna Utama
+                    </button>
+                    <button id="btn-alt-2" onclick="switchAlternative(2)" class="px-4 py-2 rounded-md text-xs font-bold transition duration-200 text-gray-400 hover:text-white">
+                        Alternatif 2: 16 Tona Model
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Result Slip Card (Left column: 5 cols) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div id="result-slip" class="bg-cyber-card border border-cyber-border rounded-2xl overflow-hidden shadow-2xl relative">
+                        <!-- Top Header Zone Accent color bar -->
+                        <div id="result-accent-bar" class="h-3 w-full bg-blue-500"></div>
+
+                        <!-- Content Slip -->
+                        <div class="p-6 sm:p-8 space-y-6">
+                            <!-- Header Info -->
+                            <div class="flex justify-between items-start pb-4 border-b border-cyber-border/60">
+                                <div>
+                                    <div class="text-2xs font-mono text-gray-500 uppercase tracking-widest">DIAGNOSA KEDAULATAN RUANG</div>
+                                    <h3 id="result-project-name" class="header-font text-xl sm:text-2xl font-bold text-white mt-1">Rumah Terhubung - Apartemen Satu Gerbang</h3>
+                                </div>
+                                <div id="result-zone-badge" class="px-2 py-1 rounded text-2xs font-mono font-bold uppercase tracking-wider">ZONA 3</div>
+                            </div>
+
+                            <!-- Meta Metrics Grid -->
+                            <div class="grid grid-cols-2 gap-4 text-xs">
+                                <div class="space-y-1">
+                                    <div class="text-gray-500 uppercase font-mono text-2xs tracking-wider">Profil Utama (Persona)</div>
+                                    <div id="result-persona" class="text-white font-bold flex items-center gap-1.5">
+                                        <i class="fa-solid fa-compass text-blue-400"></i> THE SAVIOR
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="text-gray-500 uppercase font-mono text-2xs tracking-wider">Batas Ego (Shadow)</div>
+                                    <div id="result-shadow" class="text-white font-bold flex items-center gap-1.5">
+                                        <i class="fa-solid fa-mask text-purple-400"></i> PARANOID
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="text-gray-500 uppercase font-mono text-2xs tracking-wider">Zona Maket Fisik</div>
+                                    <div id="result-zone-location" class="text-white font-semibold">Zona 3: Simpul Transit</div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="text-gray-500 uppercase font-mono text-2xs tracking-wider">Stress Index Ego</div>
+                                    <div id="result-stress-index" class="text-amber-400 font-bold header-font">68%</div>
+                                </div>
+                            </div>
+
+                            <!-- Satirical Shadow Reflection -->
+                            <div class="p-4 rounded-xl bg-cyber-dark/60 border border-cyber-border/40 space-y-2 relative overflow-hidden">
+                                <div class="absolute right-3 top-3 text-4xl text-cyber-border/40"><i class="fa-solid fa-quote-right"></i></div>
+                                <div class="text-xs font-mono text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span> Refleksi Shadow Ego
+                                </div>
+                                <p id="result-reflection" class="text-xs text-gray-300 leading-relaxed relative z-10">
+                                    Visi kepemimpinanmu untuk menyelamatkan kelas pekerja (The Savior) di wilayah sprawl terjepit oleh ketakutanmu terhadap keamanan aset pribadi. Kamu mendambakan flat tengah kota yang terjangkau, namun karena sifat Paranoid-mu, kamu melarang adanya koridor komunal. Kamu menuntut sistem gerbang tunggal (one-gate) dengan CCTV biometrik ketat. Hunianmu aman, tapi kamu terasing dari tetangga.
+                                </p>
+                            </div>
+
+                            <!-- The Physical LEGO Block & Rules -->
+                            <div class="space-y-4">
+                                <h4 class="font-bold text-xs font-mono uppercase tracking-widest text-gray-400">Spesifikasi Balok Maket</h4>
+                                
+                                <div class="flex items-center gap-4 p-3 rounded-xl border border-cyber-border bg-cyber-dark/30">
+                                    <!-- Physical simulated brick rendering -->
+                                    <div id="lego-brick-preview" class="w-14 h-10 rounded shadow-inner border border-white/20 relative flex items-center justify-center font-bold font-mono text-2xs text-black/80" style="background: #111;">
+                                        <!-- LEGO Studs mock -->
+                                        <span class="absolute top-1 left-2 w-3 h-1.5 rounded-sm bg-white/20"></span>
+                                        <span class="absolute top-1 right-2 w-3 h-1.5 rounded-sm bg-white/20"></span>
+                                        <span class="absolute bottom-1 left-2 w-3 h-1.5 rounded-sm bg-white/20"></span>
+                                        <span class="absolute bottom-1 right-2 w-3 h-1.5 rounded-sm bg-white/20"></span>
+                                    </div>
+                                    <div class="space-y-0.5 text-xs">
+                                        <div id="lego-brick-color-name" class="font-bold text-white">Matte Black</div>
+                                        <div id="lego-brick-philosophy" class="text-gray-400 text-2xs">Bunker Tertutup / Anti-Komunal</div>
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl border border-red-500/20 bg-red-500/5 space-y-2">
+                                    <div class="text-xs font-bold text-red-400 flex items-center gap-2">
+                                        <i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Larangan Membangun / Aturan Main
+                                    </div>
+                                    <p id="result-boundary-rule" class="text-xs text-gray-300 leading-relaxed">
+                                        Dilarang keras menempatkan balok ini menyentuh struktur unit milik tetangga. Berikan jarak perimeter steril minimal 1 stud sebagai batas kedaulatan mutlak Anda.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Buttons action -->
+                            <div class="flex gap-3 pt-2">
+                                <button onclick="window.print()" class="flex-1 py-2.5 rounded-lg border border-cyber-border text-xs font-bold hover:bg-cyber-dark transition text-gray-300 hover:text-white">
+                                    <i class="fa-solid fa-print mr-1.5"></i>Cetak Hasil
+                                </button>
+                                <button onclick="resetDiagnosis()" class="flex-1 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition">
+                                    <i class="fa-solid fa-rotate mr-1.5"></i>Ulang Diagnosa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Maket Grid Simulator (Right column: 7 cols) -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="bg-cyber-card border border-cyber-border rounded-2xl p-6 space-y-6">
+                        <div class="space-y-1.5">
+                            <h3 class="header-font text-lg font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-cubes text-purple-400"></i>Simulasi Penempatan Maket Interaktif
+                            </h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">
+                                Letakkan balok diagnosis Anda di zona krisis yang tepat untuk melihat visualisasi arsitektur perkotaan dalam skala makro Jabodetabekpunjur.
+                            </p>
+                        </div>
+
+                        <!-- 4 Zones Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Zone 1 -->
+                            <div id="grid-zone-1" onclick="placeBlock(1)" class="p-4 rounded-xl border border-cyber-border bg-cyber-dark/40 hover:bg-cyber-dark/80 transition cursor-pointer relative group overflow-hidden">
+                                <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500"></div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="text-xs font-mono font-bold text-emerald-400">ZONA 1</div>
+                                        <h4 class="font-bold text-sm text-white mt-1">Kerentanan &amp; In-Situ</h4>
+                                        <p class="text-2xs text-gray-500 mt-1">Tambora, Johar Baru</p>
+                                    </div>
+                                    <span class="text-xs text-emerald-500/50 group-hover:text-emerald-400 transition font-mono">T1: Kampung</span>
+                                </div>
+                                <div class="mt-4 h-16 rounded-lg border border-dashed border-cyber-border/60 flex items-center justify-center bg-cyber-dark/10 relative overflow-hidden" id="zone-slot-1">
+                                    <span class="text-2xs text-gray-500">Klik untuk simulasikan</span>
+                                </div>
+                            </div>
+
+                            <!-- Zone 2 -->
+                            <div id="grid-zone-2" onclick="placeBlock(2)" class="p-4 rounded-xl border border-cyber-border bg-cyber-dark/40 hover:bg-cyber-dark/80 transition cursor-pointer relative group overflow-hidden">
+                                <div class="absolute top-0 left-0 w-1.5 h-full bg-amber-500"></div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="text-xs font-mono font-bold text-amber-500">ZONA 2</div>
+                                        <h4 class="font-bold text-sm text-white mt-1">Sprawl &amp; Transportasi</h4>
+                                        <p class="text-2xs text-gray-500 mt-1">Bekasi, Depok, Pamulang</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500/50 group-hover:text-amber-400 transition font-mono">T2: Terjangkau</span>
+                                </div>
+                                <div class="mt-4 h-16 rounded-lg border border-dashed border-cyber-border/60 flex items-center justify-center bg-cyber-dark/10 relative overflow-hidden" id="zone-slot-2">
+                                    <span class="text-2xs text-gray-500">Klik untuk simulasikan</span>
+                                </div>
+                            </div>
+
+                            <!-- Zone 3 -->
+                            <div id="grid-zone-3" onclick="placeBlock(3)" class="p-4 rounded-xl border border-cyber-border bg-cyber-dark/40 hover:bg-cyber-dark/80 transition cursor-pointer relative group overflow-hidden">
+                                <div class="absolute top-0 left-0 w-1.5 h-full bg-blue-500"></div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="text-xs font-mono font-bold text-blue-400">ZONA 3</div>
+                                        <h4 class="font-bold text-sm text-white mt-1">Isolasi &amp; Jarak</h4>
+                                        <p class="text-2xs text-gray-500 mt-1">Dukuh Atas, Lebak Bulus</p>
+                                    </div>
+                                    <span class="text-xs text-blue-500/50 group-hover:text-blue-400 transition font-mono">T3: Terhubung</span>
+                                </div>
+                                <div class="mt-4 h-16 rounded-lg border border-dashed border-cyber-border/60 flex items-center justify-center bg-cyber-dark/10 relative overflow-hidden" id="zone-slot-3">
+                                    <span class="text-2xs text-gray-500">Klik untuk simulasikan</span>
+                                </div>
+                            </div>
+
+                            <!-- Zone 4 -->
+                            <div id="grid-zone-4" onclick="placeBlock(4)" class="p-4 rounded-xl border border-cyber-border bg-cyber-dark/40 hover:bg-cyber-dark/80 transition cursor-pointer relative group overflow-hidden">
+                                <div class="absolute top-0 left-0 w-1.5 h-full bg-purple-500"></div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="text-xs font-mono font-bold text-purple-400">ZONA 4</div>
+                                        <h4 class="font-bold text-sm text-white mt-1">Ekologis &amp; Krisis</h4>
+                                        <p class="text-2xs text-gray-500 mt-1">Kamal Muara, Pesisir Utara</p>
+                                    </div>
+                                    <span class="text-xs text-purple-500/50 group-hover:text-purple-400 transition font-mono">T4: Hijau Mandiri</span>
+                                </div>
+                                <div class="mt-4 h-16 rounded-lg border border-dashed border-cyber-border/60 flex items-center justify-center bg-cyber-dark/10 relative overflow-hidden" id="zone-slot-4">
+                                    <span class="text-2xs text-gray-500">Klik untuk simulasikan</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Status Simulator Response Panel -->
+                        <div id="simulator-feedback-card" class="p-5 rounded-xl border border-cyber-border bg-cyber-dark/50 space-y-3 hidden">
+                            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-blue-400">
+                                <span class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></span>
+                                <span>Hasil Evaluasi Tata Ruang Makro</span>
+                            </div>
+                            <div id="simulator-feedback-text" class="text-xs text-gray-300 leading-relaxed">
+                                Evaluasi penempatan balok Anda terhadap sistem krisis Jabodetabekpunjur...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyber-border bg-cyber-dark py-6 text-center text-xs text-gray-500 space-y-2">
+        <p>© 2026 Jakarta Future Housing (JFF) - Koalisi Regenerasi Kota.</p>
+        <p class="text-2xs text-gray-600 font-mono uppercase tracking-wider">Akurasi data disinkronisasikan berdasarkan database urban planning UCRA &amp; RCUS.</p>
+    </footer>
+
+    <!-- Scripting Engine of Diagnostic & Simulation -->
+    <script>
+        // Kuesioner Data (8 Questions - 4 Persona, 4 Shadow)
+        const questions = [
+            // PERSONA QUESTIONS (Q1-Q4)
+            {
+                id: 1,
+                type: 'persona',
+                badgeText: 'Aspirasi Ruang Perkotaan',
+                question: 'Ketika memikirkan masa depan tempat tinggal Anda di Jakarta, apa prioritas utama Anda?',
+                answers: [
+                    { text: 'Mempertahankan kedekatan sosial dan kebersamaan komunitas lokal agar tidak terpecah.', score: { T1: 3, T2: 0, T3: 1, T4: 0 } },
+                    { text: 'Memiliki hunian yang layak dan terjangkau di pusat kota guna meminimalkan biaya hidup.', score: { T1: 0, T2: 3, T3: 1, T4: 0 } },
+                    { text: 'Hidup efisien di atas simpul transportasi massal agar bebas bergerak tanpa kendaraan pribadi.', score: { T1: 1, T2: 0, T3: 3, T4: 1 } },
+                    { text: 'Memastikan rumah ramah lingkungan, mandiri energi, dan siap menghadapi ancaman krisis iklim.', score: { T1: 0, T2: 0, T3: 1, T4: 3 } }
+                ]
+            },
+            {
+                id: 2,
+                type: 'persona',
+                badgeText: 'Fokus Wilayah Kerentanan',
+                question: 'Wilayah Jabodetabek mana yang paling mencerminkan kekhawatiran spasial Anda hari ini?',
+                answers: [
+                    { text: 'Kampung padat Johar Baru / Tambora yang rentan penataan buruk dan ancaman kebakaran.', score: { T1: 3, T2: 0, T3: 0, T4: 1 } },
+                    { text: 'Sabuk komuter luar (Bekasi/Depok) yang menguras waktu dan energi warga di perjalanan harian.', score: { T1: 0, T2: 3, T3: 1, T4: 0 } },
+                    { text: 'Kawasan transit premium yang dikepung gedung eksklusif dan membatasi akses bagi kelas menengah.', score: { T1: 1, T2: 0, T3: 3, T4: 0 } },
+                    { text: 'Pesisir utara yang tenggelam rob atau kawasan resapan hulu yang terus mengalami betonisasi.', score: { T1: 1, T2: 0, T3: 0, T4: 3 } }
+                ]
+            },
+            {
+                id: 3,
+                type: 'persona',
+                badgeText: 'Pola Mobilitas Urban',
+                question: 'Bagaimana hubungan ideal Anda dengan pola transportasi dalam keseharian?',
+                answers: [
+                    { text: 'Saya lebih menyukai berjalan kaki di lingkungan gang yang aman dan ramah pejalan kaki.', score: { T1: 3, T2: 0, T3: 1, T4: 1 } },
+                    { text: 'Saya rela menempuh rute komuter asalkan biaya perumahan saya tetap sebanding dan masuk akal.', score: { T1: 0, T2: 3, T3: 1, T4: 0 } },
+                    { text: 'Akses langsung "0 menit" menuju stasiun transit kereta cepat adalah kunci mutlak produktivitas.', score: { T1: 1, T2: 0, T3: 3, T4: 0 } },
+                    { text: 'Saya mencari infrastruktur yang sepenuhnya meminimalkan kebutuhan jejak karbon perjalanan saya.', score: { T1: 0, T2: 1, T3: 1, T4: 3 } }
+                ]
+            },
+            {
+                id: 4,
+                type: 'persona',
+                badgeText: 'Definisi Esensi Rumah',
+                question: 'Apa arti kontribusi utama sebuah "rumah" bagi kota menurut idealisme Anda?',
+                answers: [
+                    { text: 'Wadah merawat nilai kebudayaan lokal, gotong royong, dan memanusiakan manusia di akar rumput.', score: { T1: 3, T2: 1, T3: 0, T4: 0 } },
+                    { text: 'Jangkar penyeimbang stabilitas ekonomi keluarga dan pemenuhan hak kelayakan bermukim.', score: { T1: 1, T2: 3, T3: 0, T4: 1 } },
+                    { text: 'Katalis pemersatu mobilitas urban terpadu yang dinamis, modern, dan modernis.', score: { T1: 0, T2: 1, T3: 3, T4: 1 } },
+                    { text: 'Infrastruktur ekologis mandiri yang memulihkan dan menyembuhkan ekosistem sekitar.', score: { T1: 0, T2: 0, T3: 1, T4: 3 } }
+                ]
+            },
+            // SHADOW QUESTIONS (Q5-Q8)
+            {
+                id: 5,
+                type: 'shadow',
+                badgeText: 'Peta Kedaulatan Spasial',
+                question: 'Dalam merancang unit hunian, bagaimana Anda memandang kedaulatan visual dan teritorial Anda?',
+                answers: [
+                    { text: 'Fasad luar rumah saya harus unik, ekspresif, dan mencerminkan selera kedaulatan identitas saya.', score: { DEFENSIVE: 3, CONSUMPTIVE: 0, PARANOID: 0, SUPERFICIAL: 0 } },
+                    { text: 'Ruang yang efisien harus dioptimalkan untuk memaksimalkan potensi sewa, usaha, atau nilai ekonomi.', score: { DEFENSIVE: 0, CONSUMPTIVE: 3, PARANOID: 0, SUPERFICIAL: 1 } },
+                    { text: 'Keamanan, ketenangan ekstrem, dan proteksi batasan wilayah yang steril adalah prioritas mutlak.', score: { DEFENSIVE: 1, CONSUMPTIVE: 0, PARANOID: 3, SUPERFICIAL: 0 } },
+                    { text: 'Kecepatan konstruksi, kemudahan teknologi serba praktis, dan kepraktisan instan adalah segalanya.', score: { DEFENSIVE: 0, CONSUMPTIVE: 1, PARANOID: 0, SUPERFICIAL: 3 } }
+                ]
+            },
+            {
+                id: 6,
+                type: 'shadow',
+                badgeText: 'Ketakutan Bawah Sadar',
+                question: 'Apa kekhawatiran bawah sadar terbesar Anda terkait ruang hidup di perkotaan?',
+                answers: [
+                    { text: 'Kehilangan kendali kepemilikan lahan pribadi dan dipaksa tunduk pada aturan keseragaman massal.', score: { DEFENSIVE: 3, CONSUMPTIVE: 1, PARANOID: 0, SUPERFICIAL: 0 } },
+                    { text: 'Ketidakpastian finansial, beban cicilan berkepanjangan, atau devaluasi nilai aset properti di masa tua.', score: { DEFENSIVE: 0, CONSUMPTIVE: 3, PARANOID: 1, SUPERFICIAL: 0 } },
+                    { text: 'Infiltrasi publik, ancaman keamanan fisik, kriminalitas jalanan, dan hilangnya jarak privasi keluarga.', score: { DEFENSIVE: 1, CONSUMPTIVE: 0, PARANOID: 3, SUPERFICIAL: 0 } },
+                    { text: 'Kerumitan renovasi manual, birokrasi perizinan, dan iuran komunitas bertetangga yang berbelit-belit.', score: { DEFENSIVE: 0, CONSUMPTIVE: 0, PARANOID: 1, SUPERFICIAL: 3 } }
+                ]
+            },
+            {
+                id: 7,
+                type: 'shadow',
+                badgeText: 'Kompromi Teritorial (Trade-off)',
+                question: 'Jika terpaksa harus berkorban demi mewujudkan hunian tengah kota, kompromi mana yang paling Anda toleransi?',
+                answers: [
+                    { text: 'Lahan pribadi saya mengecil drastis, asalkan fasad visual luar tetap bebas saya kustomisasi penuh.', score: { DEFENSIVE: 3, CONSUMPTIVE: 0, PARANOID: 1, SUPERFICIAL: 0 } },
+                    { text: 'Berbagi kebisingan harian atau sekat ruang dengan aktivitas produktif demi kelancaran arus ekonomi.', score: { DEFENSIVE: 0, CONSUMPTIVE: 3, PARANOID: 0, SUPERFICIAL: 1 } },
+                    { text: 'Kehilangan area hijau terbuka bersama asal perumahan dilindungi gerbang pengaman satu pintu terpadu.', score: { DEFENSIVE: 1, CONSUMPTIVE: 0, PARANOID: 3, SUPERFICIAL: 0 } },
+                    { text: 'Menerima material fabrikasi non-permanen berukuran modular yang rentan terhadap modifikasi masa depan.', score: { DEFENSIVE: 0, CONSUMPTIVE: 1, PARANOID: 0, SUPERFICIAL: 3 } }
+                ]
+            },
+            {
+                id: 8,
+                type: 'shadow',
+                badgeText: 'Aturan Sosial Komunitas',
+                question: 'Bagaimana cara terbaik dalam mengelola interaksi sosial dan batas luar unit tempat tinggal Anda?',
+                answers: [
+                    { text: 'Tetangga boleh mengagumi fasad unik saya, namun teritorial unit dan batas tanah adalah milik mutlak saya.', score: { DEFENSIVE: 3, CONSUMPTIVE: 0, PARANOID: 1, SUPERFICIAL: 0 } },
+                    { text: 'Saling menyatukan ruang lantai bawah atau lorong untuk memperbesar peluang dagang dan efisiensi sewa.', score: { DEFENSIVE: 0, CONSUMPTIVE: 3, PARANOID: 0, SUPERFICIAL: 1 } },
+                    { text: 'Membatasi interaksi tatap muka langsung; sirkulasi masuk harus diidentifikasi sensor biometrik keamanan.', score: { DEFENSIVE: 1, CONSUMPTIVE: 0, PARANOID: 3, SUPERFICIAL: 0 } },
+                    { text: 'Segala urusan utilitas, sampah, dan kebersihan diselesaikan instan secara berbayar oleh operator digital.', score: { DEFENSIVE: 0, CONSUMPTIVE: 1, PARANOID: 0, SUPERFICIAL: 3 } }
+                ]
+            }
+        ];
+
+        // Scoring States
+        let currentQuestionIndex = 0;
+        let selectedAnswers = new Array(questions.length).fill(null);
+        let activeAlternative = 1; // Default to Alternative 1 (4 colors)
+
+        // Diagnostic Mapping Tables
+        const personaMapping = {
+            T1: { id: 'T1', name: 'Rumah Kampung Kota', zone: 'Zona 1: In-Situ / Kerentanan', zoneColor: 'emerald-500', zoneBg: 'bg-emerald-500', badgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' },
+            T2: { id: 'T2', name: 'Rumah Terjangkau', zone: 'Zona 2: Sprawl / Sabuk Komuter', zoneColor: 'amber-500', zoneBg: 'bg-amber-500', badgeClass: 'bg-amber-500/10 text-amber-500 border border-amber-500/20' },
+            T3: { id: 'T3', name: 'Rumah Terhubung', zone: 'Zona 3: Isolasi / Simpul TOD', zoneColor: 'blue-500', zoneBg: 'bg-blue-500', badgeClass: 'bg-blue-500/10 text-blue-400 border border-blue-500/20' },
+            T4: { id: 'T4', name: 'Rumah Hijau & Mandiri', zone: 'Zona 4: Ekologis / Garis Krisis', zoneColor: 'purple-500', zoneBg: 'bg-purple-500', badgeClass: 'bg-purple-500/10 text-purple-400 border border-purple-500/20' }
+        };
+
+        const resultModelMatrix = {
+            T1: {
+                DEFENSIVE: { name: 'Rumah Infill', eng: 'Urban Infill', reflection: 'Hasrat mempertahankan identitas swadaya (The Poet) membentur batas fisik kota. Kamu membangun struktur vertikal 3-4 lantai secara independen di atas persil milikmu sendiri. Demi ego identitasmu, kamu menolak relokasi, namun harus mengorbankan sebagian luas tapakmu untuk void udara vertikal agar sirkulasi gang sempit di sekitarmu tidak tercekik.' },
+                CONSUMPTIVE: { name: 'Kampung Susun', eng: 'Vertical Cluster', reflection: 'Kepedulian komunitasmu (The Poet) dikalahkan oleh tuntutan fungsionalitas ekonomi yang agresif. Kamu mengubah tempat tinggalmu di tengah kampung menjadi Kampung Susun tipe "Mezator" (Mezanin-Kantor). Ruang hidup keluargamu dipadatkan demi memberikan akses lantai dasar bagi logistik usaha dan area produktif bersama.' },
+                PARANOID: { name: 'Klaster Tertutup', eng: 'Micro Cluster', reflection: 'Mimpi kebersamaan komunal (The Poet) milikmu runtuh akibat bayang-bayang paranoid ancaman eksternal. Kamu mengonsolidasikan gang buntu keluargamu menjadi klaster hunian tertutup berpagar beton masif. Kamu menolak interaksi publik luar dan mengisolasi pertahanan sosialmu di dalam halaman tengah bersama secara eksklusif.' },
+                SUPERFICIAL: { name: 'Rumah-Rakit', eng: 'Stilt House', reflection: 'Romantisme kampung kota milikmu (The Poet) berbenturan dengan kemalasan menata struktur jangka panjang secara permanen. Kamu memilih Rumah-Rakit instan berbahan baja ringan fabrikasi mikro. Bangunanmu tampak estetik dan cepat berdiri tanpa semen basah, namun rapuh dalam menyumbang stabilitas struktural sosial dan ketahanan jangka panjang kawasan.' }
+            },
+            T2: {
+                DEFENSIVE: { name: 'Rumah Susun Tapak', eng: 'Vertical Townhouse', reflection: 'Visi penyelamatan inklusivitas kota (The Savior) milikmu terikat ego kepemilikan visual prestisius. Kamu menuntut kepemilikan individu atas tanah namun dibangun vertikal ramping (split-level). Kamu mendapatkan estetika kustomisasi yang unik, namun secara tata ruang makro, kamu membatasi densifikasi massal yang dibutuhkan jutaan pekerja lain.' },
+                CONSUMPTIVE: { name: 'Ruko Sewa Bersama', eng: 'Co-Sharing Housing', reflection: 'Upaya pembebasan biaya komuter (The Savior) milikmu berbalik menjadi kalkulasi keuntungan materialistis. Kamu mengadaptasi ruko mangkrak di tengah kota menjadi ruko sewa bersama berskala tinggi. Setiap jengkal ruang dalam disekat ketat demi mendatangkan pendapatan pasif sewa, meminimalkan kenyamanan psikologis demi angka efisiensi investasi.' },
+                PARANOID: { name: 'Apartemen Satu Gerbang', eng: 'One-Gate Block', reflection: 'Visi muliamu menata kestabilan inklusif kelas pekerja (The Savior) terjepit oleh kecemasan ekstrem akan kerugian aset. Kamu membangun apartemen terkelola satu gerbang dengan pengamanan CCTV biometrik ketat. Hunianmu bebas dari kekacauan jalan raya pusat kota, namun steril dan terisolasi dari sirkulasi kehidupan bertetangga di sekitarnya.' },
+                SUPERFICIAL: { name: 'Pod Huni Mandiri', eng: 'Pod-Living', reflection: 'Keinginanmu menyediakan solusi transisi perkotaan cepat (The Savior) terjebak dalam model hidup yang dangkal. Kamu memilih unit kapsul modular prefabrikasi siap huni yang ringkas dengan furnitur pintar serba lipat. Semuanya instan dan praktis untuk dipindahkan, namun memicu hilangnya komitmen penataan kawasan perkotaan yang permanen.' }
+            },
+            T3: {
+                DEFENSIVE: { name: 'Hunian Transit', eng: 'Transit Loft', reflection: 'Keinginan hidup modern terkoneksi (The Muse) milikmu terikat hasrat eksklusivitas personal yang tinggi. Kamu memilih hunian tipe Transit-Loft ikonik dengan desain plafon tinggi di dekat stasiun MRT. Kamu menikmati kepemilikan kustom yang membanggakan, namun merusak kelestarian lingkungan sosial akibat benteng pembatas privasi yang kaku.' },
+                CONSUMPTIVE: { name: 'Studio Komuter', eng: 'Comuter Studio', reflection: 'Ambisi eksplorasi dinamis (The Muse) milikmu terbentur perhitungan modalitas properti yang serakah. Kamu mendesain unit mikro studio komuter ultra-kecil (12-15 m²) berlokasi premium. Kamu memangkas luas ruang hidup pribadimu hingga batas minimum agar sisa uangmu dialokasikan penuh untuk konsumsi gaya hidup urban.' },
+                PARANOID: { name: 'Apartemen Skybridge', eng: 'Sky-Bridge Apartment', reflection: 'Impianmu akan kehidupan bebas tanpa batas di pusat transit (The Muse) lumpuh oleh paranoia sosial yang masif. Kamu membangun Apartemen Skybridge yang terhubung eksklusif via jembatan layang ke peron stasiun MRT. Kamu menghindari sirkulasi permukaan jalan raya yang dinamis demi kebersihan dan keamanan steril pribadimu.' },
+                SUPERFICIAL: { name: 'Rumah Kapsul Modular', eng: 'Plug-in Capsule', reflection: 'Semangat eksplorasi dan fleksibilitas urbanmu (The Muse) berbenturan dengan keengganan berpartisipasi merawat lingkungan sekitar. Kamu memilih Kapsul Modular sistem sewa digital yang menumpang pada struktur gedung parkir kosong. Unitmu sangat praktis dibawa bepergian, namun lepas tangan atas tanggung jawab sosial ketetanggaan.' }
+            },
+            T4: {
+                DEFENSIVE: { name: 'Pod Terapung', eng: 'Floating Pod', reflection: 'Visi pemulihan alam dan ekologi (The Mage) milikmu terjerat ego ketahanan individu yang egois. Menghadapi rob pesisir, kamu merancang Pod Terapung amfibi modern di atas ponton. Kamu bertahan hidup secara modern di atas air, namun abai menghubungkan utilitas desalinasi air bersihmu untuk membantu warga kampung pesisir sekitar yang kekurangan air.' },
+                CONSUMPTIVE: { name: 'Rumah Mandiri Energi', eng: 'Sirkular Off-Grid', reflection: 'Visi kedaulatan masa depan ekologismu (The Mage) berbalik menjadi benteng kalkulasi materialistis yang mandiri secara eksklusif. Kamu berinvestasi tinggi pada Rumah Mandiri Energi dengan sirkuit tertutup (BIPV & filter biologi mandiri). Kamu memotong biaya utilitas kota secara total, namun menolak berbagi energi surplusmu bagi ekosistem luar.' },
+                PARANOID: { name: 'Rumah Cangkang', eng: 'Climate-Shell House', reflection: 'Visi transformatif membela krisis iklim (The Mage) milikmu lumpuh oleh kecemasan ekstrem akan polutan perkotaan. Kamu membangun Rumah Cangkang dengan fasad ganda (double-skin envelope) masif penyaring polusi. Rumahmu adalah suaka bernapas yang bersih, namun bertindak sebagai benteng mati yang menolak integrasi sirkulasi udara alami kota.' },
+                SUPERFICIAL: { name: 'Kabin Hijau', eng: 'Eco Cabin', reflection: 'Keinginanmu menghadirkan inovasi ekologis transformatif (The Mage) terjebak dalam kompromi instan dan kosmetik. Kamu membeli Kabin Hijau fabrikasi modern yang diletakkan instan di kawasan resapan hulu. Konstruksinya praktis dan ramah tanah tanpa semen basah, namun minim sistem utilitas sirkular jangka panjang karena mengutamakan kenyamanan instan.' }
+            }
+        };
+
+        const legoBrickAlternative1 = {
+            DEFENSIVE: { colorName: 'Chrome Silver (Mirror)', philosophy: 'Kedaulatan Identitas / Memantulkan Diri sendiri', bgStyle: 'background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 50%, #94a3b8 100%); box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 4px 6px rgba(0,0,0,0.3);', borderClass: 'border-slate-300' },
+            CONSUMPTIVE: { colorName: 'Metallic Gold', philosophy: 'Beban Komodifikasi Ruang / Sisi Materialitas', bgStyle: 'background: linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #92400e 100%); box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), 0 4px 6px rgba(0,0,0,0.3);', borderClass: 'border-amber-400' },
+            PARANOID: { colorName: 'Matte Jet Black', philosophy: 'Bunker Tertutup / Ketakutan Keamanan Ekstrem', bgStyle: 'background: #111827; box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), 0 4px 6px rgba(0,0,0,0.4);', borderClass: 'border-gray-800' },
+            SUPERFICIAL: { colorName: 'Clear Transparent (Bening)', philosophy: 'Kerapuhan Struktural / Kepraktisan Instan', bgStyle: 'background: rgba(255,255,255,0.15); backdrop-filter: blur(4px); box-shadow: inset 0 0 10px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.15);', borderClass: 'border-white/40' }
+        };
+
+        const legoBrickAlternative2 = {
+            T1: {
+                DEFENSIVE: { colorName: 'Bright Silver (T1-DEF)', philosophy: 'Urban Infill Mandiri / Kustomisasi Swadaya', bgStyle: 'background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);', borderClass: 'border-slate-200' },
+                CONSUMPTIVE: { colorName: 'Pale Gold (T1-CON)', philosophy: 'Kampung Susun / Unit Mezator Produktif', bgStyle: 'background: linear-gradient(135deg, #fef3c7 0%, #f59e0b 100%);', borderClass: 'border-amber-200' },
+                PARANOID: { colorName: 'Charcoal Grey (T1-PAR)', philosophy: 'Klaster Tertutup / Gerbang Gang Buntu', bgStyle: 'background: #374151;', borderClass: 'border-gray-600' },
+                SUPERFICIAL: { colorName: 'Frosted Ice / Trans-Opal (T1-SUP)', philosophy: 'Rumah-Rakit Rangka Baja Modular', bgStyle: 'background: rgba(226, 232, 240, 0.4); backdrop-filter: blur(2px); border: 1px solid rgba(255,255,255,0.6);', borderClass: 'border-slate-100' }
+            },
+            T2: {
+                DEFENSIVE: { colorName: 'Platinum Silver (T2-DEF)', philosophy: 'Rumah Susun Tapak / Split-Level Prestisius', bgStyle: 'background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);', borderClass: 'border-slate-300' },
+                CONSUMPTIVE: { colorName: 'Deep Bronze / Copper (T2-CON)', philosophy: 'Ruko Sewa Bersama / Pembagian Biaya', bgStyle: 'background: linear-gradient(135deg, #b45309 0%, #78350f 100%);', borderClass: 'border-amber-800' },
+                PARANOID: { colorName: 'Dark Slate (T2-PAR)', philosophy: 'Apartemen Satu Gerbang / Flat Terkelola', bgStyle: 'background: #1f2937;', borderClass: 'border-gray-700' },
+                SUPERFICIAL: { colorName: 'Trans-Yellow Tint (T2-SUP)', philosophy: 'Pod Huni Mandiri Prefabrikasi', bgStyle: 'background: rgba(251, 191, 36, 0.4); backdrop-filter: blur(2px);', borderClass: 'border-amber-400' }
+            },
+            T3: {
+                DEFENSIVE: { colorName: 'Metallic Steel Grey (T3-DEF)', philosophy: 'Hunian Transit / Loft Ramping Ikonik', bgStyle: 'background: linear-gradient(135deg, #64748b 0%, #475569 100%);', borderClass: 'border-slate-500' },
+                CONSUMPTIVE: { colorName: 'Bright Gold (T3-CON)', philosophy: 'Studio Komuter / Efisiensi Nilai Lokasi', bgStyle: 'background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);', borderClass: 'border-amber-500' },
+                PARANOID: { colorName: 'Midnight Blue-Black (T3-PAR)', philosophy: 'Apartemen Skybridge / Konektivitas Steril', bgStyle: 'background: #0f172a;', borderClass: 'border-slate-800' },
+                SUPERFICIAL: { colorName: 'Trans-Blue Tint (T3-SUP)', philosophy: 'Rumah Kapsul Modular / Plug-in Pod', bgStyle: 'background: rgba(59, 130, 246, 0.4); backdrop-filter: blur(2px);', borderClass: 'border-blue-500' }
+            },
+            T4: {
+                DEFENSIVE: { colorName: 'Mirror Chrome (T4-DEF)', philosophy: 'Pod Terapung / Ketahanan Krisis Pesisir', bgStyle: 'background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #64748b 100%);', borderClass: 'border-white' },
+                CONSUMPTIVE: { colorName: 'Rose Gold / Metallic Pink (T4-CON)', philosophy: 'Rumah Mandiri Energi / Off-Grid Sirkular', bgStyle: 'background: linear-gradient(135deg, #fda4af 0%, #f43f5e 100%);', borderClass: 'border-rose-400' },
+                PARANOID: { colorName: 'Matte Jet Black (T4-PAR)', philosophy: 'Rumah Cangkang / Double-Skin Fasad Ganda', bgStyle: 'background: #030712;', borderClass: 'border-black' },
+                SUPERFICIAL: { colorName: 'Trans-Green Tint (T4-SUP)', philosophy: 'Kabin Hijau / Prefabrikasi Pintar Hulu', bgStyle: 'background: rgba(16, 185, 129, 0.4); backdrop-filter: blur(2px);', borderClass: 'border-emerald-500' }
+            }
+        };
+
+        const boundaryRules = {
+            DEFENSIVE: 'Wajib Mandiri (No Stack): Balok wajib diletakkan berdiri tegak secara independen di atas kavling. Dilarang keras menumpang secara vertikal di atas struktur bangunan unit milik tetangga.',
+            CONSUMPTIVE: 'Wajib Menjorok (Overhang): Balok diletakkan secara melintang, di mana bagian ujung luar wajib menjorok keluar batas grid kavling (overhanging) sebagai tanda ekspansi fungsi ekonomi.',
+            PARANOID: 'Wajib Berjarak (Perimeter Steril): Balok diletakkan secara tertidur datar, dan dilarang keras menyentuh balok unit tetangga mana pun (wajib menyisakan sela steril minimal 1 stud LEGO).',
+            SUPERFICIAL: 'Wajib Bersandar (Leaning): Balok tidak boleh diposisikan berdiri tegak sendiri; wajib diletakkan bersandar secara miring pada struktur penopang atau dinding gedung eksisting di sekitarnya.'
+        };
+
+        // Initialize quiz
+        function startQuiz() {
+            document.getElementById('section-welcome').classList.add('hidden');
+            document.getElementById('section-quiz').classList.remove('hidden');
+            currentQuestionIndex = 0;
+            selectedAnswers = new Array(questions.length).fill(null);
+            showQuestion();
+        }
+
+        // Display current question
+        function showQuestion() {
+            const q = questions[currentQuestionIndex];
+            
+            // Progress Update
+            const progressPercent = Math.round(((currentQuestionIndex + 1) / questions.length) * 100);
+            document.getElementById('quiz-step-text').textContent = `Pertanyaan ${currentQuestionIndex + 1} dari ${questions.length}`;
+            document.getElementById('quiz-progress-percent').textContent = `${progressPercent}%`;
+            document.getElementById('quiz-progress-bar').style.width = `${progressPercent}%`;
+
+            // Badge Question Type
+            const badge = document.getElementById('badge-question-type');
+            if (q.type === 'persona') {
+                badge.textContent = 'Mencari Persona...';
+                badge.className = 'inline-block px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-2xs font-mono uppercase tracking-wider';
+            } else {
+                badge.textContent = 'Mencari Shadow Ego...';
+                badge.className = 'inline-block px-2 py-1 rounded bg-purple-500/10 text-purple-400 text-2xs font-mono uppercase tracking-wider';
+            }
+
+            // Question Text
+            document.getElementById('question-text').textContent = q.question;
+
+            // Render Answers
+            const container = document.getElementById('answers-container');
+            container.innerHTML = '';
+            
+            q.answers.forEach((ans, idx) => {
+                const isSelected = selectedAnswers[currentQuestionIndex] === idx;
+                const button = document.createElement('button');
+                button.className = `w-full text-left p-4 rounded-xl border transition-all duration-200 flex items-start space-x-3 group ${
+                    isSelected 
+                        ? 'bg-blue-600/20 border-blue-500 text-white shadow-md shadow-blue-500/10' 
+                        : 'bg-cyber-dark/40 border-cyber-border text-gray-300 hover:text-white hover:bg-cyber-dark/80 hover:border-cyber-border/80'
+                }`;
+                
+                // Dot designator
+                const dotClass = isSelected 
+                    ? 'border-blue-400 bg-blue-500' 
+                    : 'border-gray-600 group-hover:border-gray-400';
+                
+                button.innerHTML = `
+                    <span class="w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center mt-0.5 transition ${dotClass}">
+                        ${isSelected ? '<span class="w-2 h-2 rounded-full bg-white"></span>' : ''}
+                    </span>
+                    <span class="text-sm font-medium leading-relaxed">${ans.text}</span>
+                `;
+                
+                button.onclick = () => selectAnswer(idx);
+                container.appendChild(button);
+            });
+
+            // Prev Button state
+            document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
+        }
+
+        // Handle answer selection
+        function selectAnswer(answerIndex) {
+            selectedAnswers[currentQuestionIndex] = answerIndex;
+            
+            // Highlight and auto-advance
+            showQuestion();
+            setTimeout(() => {
+                if (currentQuestionIndex < questions.length - 1) {
+                    currentQuestionIndex++;
+                    showQuestion();
+                } else {
+                    processResults();
+                }
+            }, 300);
+        }
+
+        // Navigate backwards
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+            }
+        }
+
+        // Calculate and process results
+        let diagnosticResults = null;
+
+        function processResults() {
+            document.getElementById('section-quiz').classList.add('hidden');
+            document.getElementById('section-loading').classList.remove('hidden');
+
+            // Scoring math
+            const scorePersona = { T1: 0, T2: 0, T3: 0, T4: 0 };
+            const scoreShadow = { DEFENSIVE: 0, CONSUMPTIVE: 0, PARANOID: 0, SUPERFICIAL: 0 };
+
+            selectedAnswers.forEach((ansIdx, qIdx) => {
+                const q = questions[qIdx];
+                const selectedAnswer = q.answers[ansIdx];
+                
+                // Add points
+                for (const [key, val] of Object.entries(selectedAnswer.score)) {
+                    if (q.type === 'persona') {
+                        scorePersona[key] += val;
+                    } else {
+                        scoreShadow[key] += val;
+                    }
+                }
+            });
+
+            // Find highest scores
+            const determinedPersona = Object.keys(scorePersona).reduce((a, b) => scorePersona[a] > scorePersona[b] ? a : b);
+            const determinedShadow = Object.keys(scoreShadow).reduce((a, b) => scoreShadow[a] > scoreShadow[b] ? a : b);
+
+            // Compute stress index (Ego tension)
+            const maxShadowScore = 12; // 4 questions * 3 max points
+            const currentShadowScore = scoreShadow[determinedShadow];
+            const stressIndexPercent = Math.round((currentShadowScore / maxShadowScore) * 100);
+
+            // Load mapped output data
+            const personaMeta = personaMapping[determinedPersona];
+            const modelMeta = resultModelMatrix[determinedPersona][determinedShadow];
+
+            diagnosticResults = {
+                persona: determinedPersona,
+                shadow: determinedShadow,
+                personaMeta: personaMeta,
+                modelMeta: modelMeta,
+                stressIndex: stressIndexPercent
+            };
+
+            // Fake processing delay for dramatic effect
+            setTimeout(() => {
+                document.getElementById('section-loading').classList.add('hidden');
+                document.getElementById('section-result').classList.remove('hidden');
+                renderResultSlip();
+            }, 1800);
+        }
+
+        // Update UI components with result slip details
+        function renderResultSlip() {
+            if (!diagnosticResults) return;
+
+            const res = diagnosticResults;
+            const accentBar = document.getElementById('result-accent-bar');
+            const zoneBadge = document.getElementById('result-zone-badge');
+
+            // Accent colors based on Persona Zone
+            accentBar.className = `h-3 w-full ${res.personaMeta.zoneBg}`;
+            zoneBadge.className = `px-2 py-1 rounded text-2xs font-mono font-bold uppercase tracking-wider ${res.personaMeta.badgeClass}`;
+            zoneBadge.textContent = res.personaMeta.id;
+
+            // Title & Meta Info
+            document.getElementById('result-project-name').textContent = `${res.personaMeta.name} - ${res.modelMeta.name}`;
+            document.getElementById('result-persona').innerHTML = `<i class="fa-solid fa-compass text-${res.personaMeta.zoneColor}"></i> ${res.persona.toUpperCase()}: THE ${getPersonaArchetypeLabel(res.persona)}`;
+            document.getElementById('result-shadow').innerHTML = `<i class="fa-solid fa-mask text-purple-400"></i> ${res.shadow}`;
+            document.getElementById('result-zone-location').textContent = res.personaMeta.zone;
+            
+            const stressVal = document.getElementById('result-stress-index');
+            stressVal.textContent = `${res.stressIndex}%`;
+            if (res.stressIndex >= 60) {
+                stressVal.className = 'text-red-400 font-bold header-font animate-pulse';
+            } else {
+                stressVal.className = 'text-amber-400 font-bold header-font';
+            }
+
+            // Reflection Text
+            document.getElementById('result-reflection').textContent = res.modelMeta.reflection;
+
+            // LEGO Spec rendering depending on alternative style
+            updateLegoBrickRender();
+
+            // Setup placement instruction rules
+            document.getElementById('result-boundary-rule').textContent = boundaryRules[res.shadow];
+
+            // Reset simulator display states
+            resetGrid();
+        }
+
+        // Helpers
+        function getPersonaArchetypeLabel(personaId) {
+            switch(personaId) {
+                case 'T1': return 'POET (Kolektif-Organik)';
+                case 'T2': return 'SAVIOR (Komersial-Inklusif)';
+                case 'T3': return 'MUSE (Transit-Oriented)';
+                case 'T4': return 'MAGE (Ekologis)';
+                default: return 'URBANIST';
+            }
+        }
+
+        // Toggle LEGO rendering alternative states
+        function switchAlternative(altNum) {
+            activeAlternative = altNum;
+            const btn1 = document.getElementById('btn-alt-1');
+            const btn2 = document.getElementById('btn-alt-2');
+
+            if (altNum === 1) {
+                btn1.className = 'px-4 py-2 rounded-md text-xs font-bold transition duration-200 bg-blue-600 text-white';
+                btn2.className = 'px-4 py-2 rounded-md text-xs font-bold transition duration-200 text-gray-400 hover:text-white';
+            } else {
+                btn1.className = 'px-4 py-2 rounded-md text-xs font-bold transition duration-200 text-gray-400 hover:text-white';
+                btn2.className = 'px-4 py-2 rounded-md text-xs font-bold transition duration-200 bg-blue-600 text-white';
+            }
+
+            updateLegoBrickRender();
+        }
+
+        // Handle structural updates on LEGO preview box
+        function updateLegoBrickRender() {
+            if (!diagnosticResults) return;
+            const res = diagnosticResults;
+            const brickPreview = document.getElementById('lego-brick-preview');
+            const colorLabel = document.getElementById('lego-brick-color-name');
+            const philosophyLabel = document.getElementById('lego-brick-philosophy');
+
+            let brickMeta;
+            if (activeAlternative === 1) {
+                brickMeta = legoBrickAlternative1[res.shadow];
+                colorLabel.textContent = brickMeta.colorName;
+                philosophyLabel.textContent = brickMeta.philosophy;
+                brickPreview.style = brickMeta.bgStyle;
+                brickPreview.className = `w-14 h-10 rounded shadow-inner border relative flex items-center justify-center font-bold font-mono text-2xs text-black/80 ${brickMeta.borderClass}`;
+            } else {
+                brickMeta = legoBrickAlternative2[res.persona][res.shadow];
+                colorLabel.textContent = brickMeta.colorName;
+                philosophyLabel.textContent = brickMeta.philosophy;
+                brickPreview.style = brickMeta.bgStyle;
+                brickPreview.className = `w-14 h-10 rounded shadow-inner border relative flex items-center justify-center font-bold font-mono text-2xs text-black/80 ${brickMeta.borderClass}`;
+            }
+        }
+
+        // DIAGNOSTIC MAKET SIMULATOR GRID CONTROLS
+        function resetGrid() {
+            for (let i = 1; i <= 4; i++) {
+                const slot = document.getElementById(`zone-slot-${i}`);
+                slot.innerHTML = `<span class="text-2xs text-gray-500"><i class="fa-solid fa-plus mr-1"></i>Klik untuk simulasikan</span>`;
+                slot.className = "mt-4 h-16 rounded-lg border border-dashed border-cyber-border/60 flex items-center justify-center bg-cyber-dark/10 relative overflow-hidden";
+            }
+            document.getElementById('simulator-feedback-card').classList.add('hidden');
+        }
+
+        function placeBlock(zoneId) {
+            if (!diagnosticResults) return;
+            const res = diagnosticResults;
+
+            // Reset other slots first
+            resetGrid();
+
+            const slot = document.getElementById(`zone-slot-${zoneId}`);
+            let brickMeta;
+            if (activeAlternative === 1) {
+                brickMeta = legoBrickAlternative1[res.shadow];
+            } else {
+                brickMeta = legoBrickAlternative2[res.persona][res.shadow];
+            }
+
+            // Visualise LEGO placed state inside the slot
+            slot.className = `mt-4 h-16 rounded-lg flex items-center justify-center relative overflow-hidden transition-all border border-cyber-border`;
+            slot.style = brickMeta.bgStyle;
+            slot.innerHTML = `
+                <div class="text-center font-mono text-xs font-bold text-black/90 drop-shadow-md z-10 select-none">
+                    ${res.modelMeta.name.toUpperCase()}
+                </div>
+                <!-- Simulating LEGO Studs vertically inside slot -->
+                <div class="absolute inset-0 grid grid-cols-4 opacity-15">
+                    <span class="w-2 h-2 rounded-full bg-white m-auto"></span>
+                    <span class="w-2 h-2 rounded-full bg-white m-auto"></span>
+                    <span class="w-2 h-2 rounded-full bg-white m-auto"></span>
+                    <span class="w-2 h-2 rounded-full bg-white m-auto"></span>
+                </div>
+            `;
+
+            // Display Feedback Panel text
+            const feedbackCard = document.getElementById('simulator-feedback-card');
+            const feedbackText = document.getElementById('simulator-feedback-text');
+            feedbackCard.classList.remove('hidden');
+
+            const isCorrectZone = (res.persona === 'T1' && zoneId === 1) || 
+                                  (res.persona === 'T2' && zoneId === 2) || 
+                                  (res.persona === 'T3' && zoneId === 3) || 
+                                  (res.persona === 'T4' && zoneId === 4);
+
+            if (isCorrectZone) {
+                feedbackText.innerHTML = `
+                    <div class="text-emerald-400 font-bold mb-1"><i class="fa-solid fa-circle-check mr-1.5"></i>ZONA SINKRONIS (KECUALI ATURAN BOUNDARIES)</div>
+                    Kamu telah menempatkan balok <span class="font-bold text-white">${brickMeta.colorName}</span> di <span class="font-bold text-white">${res.personaMeta.zone}</span>. 
+                    Meskipun lokasinya tepat, perhatikan batasan ego fisikmu: 
+                    <span class="italic text-gray-300">"${boundaryRules[res.shadow]}"</span>. 
+                    Setiap kelalaian meletakkan balok di maket fisik pameran akan memicu sensor penalti sistem tata kota.
+                `;
+            } else {
+                feedbackText.innerHTML = `
+                    <div class="text-amber-400 font-bold mb-1"><i class="fa-solid fa-circle-info mr-1.5"></i>ZONA CROSS-DATA / INTERVENSI CAMPURAN</div>
+                    Kamu sengaja mengintervensi zona krisis lain di maket dengan model <span class="font-bold text-white">${res.modelMeta.name}</span>! 
+                    Tindakan menaruh struktur <span class="font-bold text-white">${brickMeta.colorName}</span> ini memicu parameter simulasi silang baru. 
+                    Tim kurator akan mengolah data ini sebagai bentuk kontribusi spasial alternatif di luar kecenderungan aslimu.
+                `;
+            }
+        }
+
+        // Restart Quiz
+        function resetDiagnosis() {
+            document.getElementById('section-result').classList.add('hidden');
+            document.getElementById('section-welcome').classList.remove('hidden');
+            resetGrid();
+        }
+    </script>
+</body>
+</html>

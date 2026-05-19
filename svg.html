@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pustaka Aset Visual — JFF 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FFD93D; --orange: #FF8C42; --blue: #2E5BFF; --green: #00C853;
+    --pink: #FF6B9D; --red: #FF4848; --purple: #9B59B6; --cyan: #00BCD4;
+    --ink: #0A0A0A; --paper: #FAF6EE; --off: #FFFDF9;
+    --border: 3px solid var(--ink);
+    --shadow: 4px 4px 0 var(--ink);
+    --shadow-lg: 8px 8px 0 var(--ink);
+    --r: 12px;
+  }
+  
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 40px 20px;
+    background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+  
+  /* ── HEADER ────────────────────────────────────────── */
+  header {
+    text-align: center; margin-bottom: 50px;
+    border-bottom: var(--border); padding-bottom: 30px;
+  }
+  .display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; line-height: 0.95; }
+  .title { font-size: clamp(48px, 8vw, 76px); margin-bottom: 10px; }
+  .subtitle { font-size: 18px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.05em; }
+  .desc { font-size: 15px; color: rgba(0,0,0,0.6); max-width: 600px; margin: 15px auto 0; line-height: 1.6; }
+
+  /* ── NAVIGATION PILLS ──────────────────────────────── */
+  .nav-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+  .pill {
+    padding: 10px 20px; border-radius: 99px; border: var(--border);
+    font-size: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer;
+    background: white; transition: all 0.15s; box-shadow: var(--shadow);
+  }
+  .pill:hover { transform: translateY(-2px); box-shadow: 6px 6px 0 var(--ink); }
+  .pill.active { background: var(--blue); color: white; }
+
+  /* ── SECTION HEADER ────────────────────────────────── */
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 36px; margin: 40px 0 20px;
+    border-left: 8px solid var(--ink); padding-left: 15px; line-height: 1;
+  }
+
+  /* ── GRIDS ─────────────────────────────────────────── */
+  .grid-3d { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+  .grid-2d { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+
+  /* ── CARDS ──────────────────────────────────────────── */
+  .card {
+    background: white; border: var(--border); border-radius: var(--r);
+    box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column;
+    transition: transform 0.2s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  
+  .card-header {
+    padding: 16px; border-bottom: var(--border); display: flex;
+    justify-content: space-between; align-items: center;
+  }
+  .card-title { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; }
+  .card-badge {
+    font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 99px;
+    border: 2px solid var(--ink); text-transform: uppercase;
+  }
+  
+  .visual-box {
+    background: var(--ink); aspect-ratio: 16/10; display: flex;
+    align-items: center; justify-content: center; position: relative;
+    border-bottom: var(--border); overflow: hidden;
+  }
+  .visual-box svg { width: 100%; height: 100%; }
+  
+  .card-body { padding: 18px; flex-grow: 1; display: flex; flex-direction: column; gap: 12px; }
+  .card-desc { font-size: 13px; line-height: 1.5; color: rgba(0,0,0,0.7); }
+  .card-meta { font-size: 11px; font-weight: 700; color: rgba(0,0,0,0.4); text-transform: uppercase; }
+
+  /* ── ACTION BUTTONS ────────────────────────────────── */
+  .btn-group { display: flex; gap: 8px; margin-top: auto; }
+  .btn {
+    flex: 1; padding: 10px; border-radius: 8px; border: 2px solid var(--ink);
+    font-size: 11px; font-weight: 800; text-transform: uppercase; cursor: pointer;
+    transition: all 0.1s; text-align: center; font-family: inherit;
+  }
+  .btn-primary { background: var(--yellow); color: var(--ink); box-shadow: 2px 2px 0 var(--ink); }
+  .btn-primary:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+  .btn-secondary { background: white; color: var(--ink); box-shadow: 2px 2px 0 var(--ink); }
+  .btn-secondary:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+
+  /* ── NOTIFICATION ──────────────────────────────────── */
+  .toast {
+    position: fixed; bottom: 20px; right: 20px; background: var(--ink);
+    color: white; padding: 12px 24px; border-radius: 8px; font-size: 12px;
+    font-weight: 700; text-transform: uppercase; box-shadow: var(--shadow);
+    transform: translateY(100px); opacity: 0; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 999;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="subtitle">Arsip Ekspor & Kompilasi Aset</div>
+    <h1 class="display title">PUSTAKA ASET VISUAL</h1>
+    <p class="desc">
+      Gunakan halaman pustaka mandiri ini untuk mengunduh berkas Blueprint SVG asli serta diagram struktur lego pameran <strong>Nalar Huni JFF 2026</strong> guna kelancaran migrasi data ke Google Drive.
+    </p>
+  </header>
+
+  <!-- Navigation -->
+  <div class="nav-pills">
+    <div class="pill active" onclick="filterCategory('all')">Semua Aset</div>
+    <div class="pill" onclick="filterCategory('traditionalist')">T1: The Traditionalist</div>
+    <div class="pill" onclick="filterCategory('established')">T2: The Established</div>
+    <div class="pill" onclick="filterCategory('urbanist')">T3: The Urbanist</div>
+    <div class="pill" onclick="filterCategory('idealist')">T4: The Idealist</div>
+  </div>
+
+  <!-- SECTION: BLUEPRINT ARSITEKTUR -->
+  <div class="section-title">1. Cetak Biru Cetakan Vektor (SVG Blueprints)</div>
+  <div class="grid-2d" id="blueprint-grid">
+    <!-- SVG Blueprints will be injected here via Javascript to maintain clarity and avoid token truncation -->
+  </div>
+
+  <!-- SECTION: STRUKTUR BALOK LEGO -->
+  <div class="section-title">2. Diagram Visualisasi Balok LEGO</div>
+  <div class="grid-3d" id="lego-grid">
+    <!-- LEGO Diagrams will be injected here -->
+  </div>
+</div>
+
+<!-- Toast notification element -->
+<div class="toast" id="toast">Berhasil disalin!</div>
+
+<script>
+// Data Model Struktur 16 kombinasi blueprint
+const models = [
+  // THE TRADITIONALIST (T1)
+  {
+    persona: 'traditionalist',
+    zone: 'T1',
+    shadow: 'DEFENSIVE',
+    name: 'Rumah Infill',
+    code: 'T1-DEF',
+    desc: 'Membangun persil tunggal vertikal 3-4 lantai secara mandiri di gang sempit. Menyisakan void vertikal (lightwell) selebar 1 meter.',
+    color: '#FF8C42',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#FF8C42" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="130" y="80" width="140" height="130" rx="4" fill="#111" stroke="#FF8C42" stroke-width="3"/>
+            <line x1="130" y1="130" x2="270" y2="130" />
+            <line x1="130" y1="170" x2="270" y2="170" />
+            <rect x="145" y="95" width="40" height="25" stroke="#FF8C42" stroke-dasharray="2 2"/>
+            <rect x="215" y="95" width="40" height="25" stroke="#FF8C42"/>
+            <path d="M165 170v40M235 170v40" />
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T1-DEF INFILL</text>`
+  },
+  {
+    persona: 'traditionalist',
+    zone: 'T1',
+    shadow: 'CONSUMPTIVE',
+    name: 'Kampung Susun',
+    code: 'T1-CON',
+    desc: 'Unit hunian tipe Mezator (Mezanin + Usaha) dengan lantai dasar terdedikasi untuk ruang UMKM gerobak warga.',
+    color: '#FF8C42',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#FF8C42" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400M0 200h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="100" y="70" width="200" height="140" rx="4" fill="#111" stroke="#FF8C42" stroke-width="3"/>
+            <line x1="100" y1="140" x2="300" y2="140" />
+            <!-- Commercial partition grid lines -->
+            <path d="M150 140v70M200 140v70M250 140v70" />
+            <circle cx="200" cy="105" r="15" stroke="#FF8C42"/>
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T1-CON KAMPUNG SUSUN</text>`
+  },
+  {
+    persona: 'traditionalist',
+    zone: 'T1',
+    shadow: 'PARANOID',
+    name: 'Klaster Tertutup',
+    code: 'T1-PAR',
+    desc: 'Ujung gang buntu terisolasi berstruktur beton tahan api dengan courtyard privat yang mengendalikan akses luar.',
+    color: '#FF8C42',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#FF8C42" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400M0 200h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="110" y="60" width="180" height="150" rx="4" fill="#111" stroke="#FF8C42" stroke-dasharray="6 4" stroke-width="3"/>
+            <rect x="140" y="90" width="120" height="90" rx="2" stroke="#FF8C42"/>
+            <path d="M140 135h120M200 90v90" />
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T1-PAR KLASTER TERTUTUP</text>`
+  },
+  {
+    persona: 'traditionalist',
+    zone: 'T1',
+    shadow: 'SUPERFICIAL',
+    name: 'Rumah Rakit',
+    code: 'T1-SUP',
+    desc: 'Struktur rakitan modular baja ringan instan tanpa pengerjaan beton basah di dalam gang sempit.',
+    color: '#FF8C42',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#FF8C42" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400M0 200h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <!-- Stilts / structural legs -->
+            <path d="M120 160v50M160 160v50M240 160v50M280 160v50" stroke-width="3"/>
+            <rect x="100" y="80" width="200" height="80" rx="6" fill="#111" stroke="#FF8C42" stroke-width="3"/>
+            <path d="M150 80v80M250 80v80" />
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T1-SUP RUMAH RAKIT</text>`
+  },
+
+  // THE ESTABLISHED (T2)
+  {
+    persona: 'established',
+    zone: 'T2',
+    shadow: 'DEFENSIVE',
+    name: 'Rumah Susun Tapak',
+    code: 'T2-DEF',
+    desc: 'Unit vertikal split-level di persil mini tengah kota untuk menjaga kedaulatan visual tanah individu.',
+    color: '#FFD93D',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#FFD93D" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400M0 200h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="150" y="50" width="100" height="160" fill="#111" stroke="#FFD93D" stroke-width="3"/>
+            <path d="M150 90h100M150 130h100M150 170h100" />
+            <!-- Split level decorative step line -->
+            <path d="M170 50v160M230 50v160" stroke-dasharray="4 4" />
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T2-DEF RUSUN TAPAK</text>`
+  },
+  {
+    persona: 'established',
+    zone: 'T2',
+    shadow: 'CONSUMPTIVE',
+    name: 'Ruko Sewa Bersama',
+    code: 'T2-CON',
+    desc: 'Transformasi ruko mangkrak pusat kota menjadi unit hunian sekat kompak efisiensi tinggi.',
+    color: '#FFD93D',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#FFD93D" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="110" y="60" width="180" height="150" fill="#111" stroke="#FFD93D" stroke-width="3"/>
+            <path d="M110 110h180M110 160h180" />
+            <rect x="130" y="75" width="40" height="25" stroke="#FFD93D"/>
+            <rect x="230" y="75" width="40" height="25" stroke="#FFD93D"/>
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T2-CON RUKO SEWA BERSAMA</text>`
+  },
+  {
+    persona: 'established',
+    zone: 'T2',
+    shadow: 'PARANOID',
+    name: 'Apartemen Satu Gerbang',
+    code: 'T2-PAR',
+    desc: 'Rusun bertingkat rendah terproteksi gerbang pintar dengan kontrol akses biometrik penjamin privasi aset.',
+    color: '#FFD93D',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#FFD93D" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="120" y="50" width="160" height="160" fill="#111" stroke="#FFD93D" stroke-width="3"/>
+            <!-- Heavy secure gate frame -->
+            <rect x="180" y="160" width="40" height="50" fill="none" stroke="#FFD93D" stroke-width="3"/>
+            <line x1="200" y1="160" x2="200" y2="210" stroke="#FFD93D"/>
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T2-PAR SATU GERBANG</text>`
+  },
+  {
+    persona: 'established',
+    zone: 'T2',
+    shadow: 'SUPERFICIAL',
+    name: 'Pod Huni Mandiri',
+    code: 'T2-SUP',
+    desc: 'Kapsul hunian prefabrikasi minimalis modular yang langsung diletakkan cepat siap pakai.',
+    color: '#FFD93D',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#FFD93D" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="130" y="80" width="140" height="90" rx="12" fill="#111" stroke="#FFD93D" stroke-width="3"/>
+            <rect x="150" y="100" width="100" height="50" rx="6" stroke="#FFD93D"/>
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T2-SUP POD HUNI MANDIRI</text>`
+  },
+
+  // THE URBANIST (T3)
+  {
+    persona: 'urbanist',
+    zone: 'T3',
+    shadow: 'DEFENSIVE',
+    name: 'Hunian Transit',
+    code: 'T3-DEF',
+    desc: 'Gedung ramping berlantai tinggi dekat stasiun MRT, berfasad jendela kaca privat yang tebal.',
+    color: '#2E5BFF',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#2E5BFF" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="170" y="30" width="60" height="190" fill="#111" stroke="#2E5BFF" stroke-width="3"/>
+            <rect x="180" y="45" width="40" height="35" stroke="#2E5BFF"/>
+            <rect x="180" y="135" width="40" height="35" stroke="#2E5BFF"/>
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T3-DEF HUNIAN TRANSIT</text>`
+  },
+  {
+    persona: 'urbanist',
+    zone: 'T3',
+    shadow: 'CONSUMPTIVE',
+    name: 'Studio Komuter',
+    code: 'T3-CON',
+    desc: 'Unit studio mikro efisiensi tinggi 12-15m² yang menukar keterbatasan ruang demi lokasi elite.',
+    color: '#2E5BFF',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#2E5BFF" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="120" y="40" width="160" height="170" fill="#111" stroke="#2E5BFF" stroke-width="3"/>
+            <path d="M120 90h160M120 140h160" />
+            <rect x="135" y="55" width="30" height="25" stroke="#2E5BFF"/>
+            <rect x="185" y="55" width="30" height="25" stroke="#2E5BFF"/>
+            <rect x="235" y="55" width="30" height="25" stroke="#2E5BFF"/>
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T3-CON STUDIO KOMUTER</text>`
+  },
+  {
+    persona: 'urbanist',
+    zone: 'T3',
+    shadow: 'PARANOID',
+    name: 'Apartemen Skybridge',
+    code: 'T3-PAR',
+    desc: 'Gedung apartemen terhubung jembatan layang tertutup langsung menuju peron stasiun komuter.',
+    color: '#2E5BFF',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#2E5BFF" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="150" y="40" width="80" height="180" fill="#111" stroke="#2E5BFF" stroke-width="3"/>
+            <line x1="230" y1="100" x2="350" y2="100" stroke="#2E5BFF" stroke-width="3"/>
+            <line x1="230" y1="130" x2="350" y2="130" stroke="#2E5BFF" stroke-width="3"/>
+            <path d="M270 100v30M310 100v30" />
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T3-PAR SKYBRIDGE APARTMENT</text>`
+  },
+  {
+    persona: 'urbanist',
+    zone: 'T3',
+    shadow: 'SUPERFICIAL',
+    name: 'Rumah Kapsul Modular',
+    code: 'T3-SUP',
+    desc: 'Pod kapsul sewa praktis terpasang numpang menempel di rangka struktur gedung parkir kosong.',
+    color: '#2E5BFF',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#2E5BFF" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <!-- Outer structure frame -->
+            <rect x="110" y="40" width="180" height="170" stroke="#2E5BFF" stroke-dasharray="3 3" stroke-width="2"/>
+            <!-- Embedded capsule modules -->
+            <rect x="130" y="60" width="50" height="40" rx="8" fill="#111" stroke="#2E5BFF" stroke-width="3"/>
+            <rect x="210" y="60" width="50" height="40" rx="8" fill="#111" stroke="#2E5BFF" stroke-width="3"/>
+            <rect x="130" y="130" width="50" height="40" rx="8" fill="#111" stroke="#2E5BFF" stroke-width="3"/>
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T3-SUP KAPSUL MODULAR</text>`
+  },
+
+  // THE IDEALIST (T4)
+  {
+    persona: 'idealist',
+    zone: 'T4',
+    shadow: 'DEFENSIVE',
+    name: 'Pod Terapung',
+    code: 'T4-DEF',
+    desc: 'Kapsul hunian amfibi berfondasi ponton styrofoam semen ringan penahan banjir rob pasang surut.',
+    color: '#00C853',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#00C853" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <line x1="120" y1="40" x2="120" y2="210" stroke="white" stroke-width="4"/>
+            <line x1="280" y1="40" x2="280" y2="210" stroke="white" stroke-width="4"/>
+            <rect x="140" y="80" width="120" height="90" rx="12" fill="#111" stroke="#00C853" stroke-width="3"/>
+            <path d="M140 135h120" stroke-dasharray="2 2" />
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T4-DEF POD TERAPUNG</text>`
+  },
+  {
+    persona: 'idealist',
+    zone: 'T4',
+    shadow: 'CONSUMPTIVE',
+    name: 'Rumah Mandiri Energi',
+    code: 'T4-CON',
+    desc: 'Bangunan sirkular off-grid terpasang solar panel atap dengan filter pemurnian air mandiri.',
+    color: '#00C853',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#00C853" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="130" y="80" width="140" height="130" rx="4" fill="#111" stroke="#00C853" stroke-width="3"/>
+            <!-- Slanted solar roof -->
+            <path d="M110 80h180l-40-40H150l-40 40z" fill="#00C853" opacity="0.5"/>
+            <circle cx="200" cy="140" r="20" stroke="#00C853" />
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T4-CON MANDIRI ENERGI</text>`
+  },
+  {
+    persona: 'idealist',
+    zone: 'T4',
+    shadow: 'PARANOID',
+    name: 'Rumah Cangkang',
+    code: 'T4-PAR',
+    desc: 'Fasad berselimut lapisan ganda kulit tanaman rimbun tebal penyaring polusi debu industri.',
+    color: '#00C853',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#00C853" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="130" y="70" width="140" height="140" fill="#111" stroke="#00C853" stroke-width="4"/>
+            <!-- Outer shielding vegetative lines -->
+            <rect x="110" y="50" width="180" height="180" stroke="#00C853" stroke-width="1.5" stroke-dasharray="4 8"/>
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T4-PAR RUMAH CANGKANG</text>`
+  },
+  {
+    persona: 'idealist',
+    zone: 'T4',
+    shadow: 'SUPERFICIAL',
+    name: 'Kabin Hijau',
+    code: 'T4-SUP',
+    desc: 'Kabin prefab ringan ramah ekologi yang dipasang cepat instan tanpa merusak topografi tanah resapan hulu.',
+    color: '#00C853',
+    svg: `<rect width="400" height="250" fill="#0A0A0A"/>
+          <g stroke="#00C853" stroke-width="2" opacity="0.8">
+            <path d="M0 50h400M0 100h400M0 150h400" stroke-dasharray="3 3" opacity="0.3"/>
+            <rect x="140" y="80" width="120" height="80" rx="15" fill="#111" stroke="#00C853" stroke-width="3"/>
+            <path d="M140 120h120M200 80v80" />
+          </g>
+          <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T4-SUP KABIN HIJAU</text>`
+  }
+];
+
+// Master Warna Balok LEGO (Alternatif 1 & 2)
+const legoStyles = {
+  alt1: {
+    DEFENSIVE: { name: 'Chrome Silver', style: 'background: linear-gradient(135deg, #e2e8f0, #94a3b8); border: 2px solid var(--ink); color: var(--ink);' },
+    CONSUMPTIVE: { name: 'Metallic Gold', style: 'background: linear-gradient(135deg, #fbbf24, #d97706); border: 2px solid var(--ink); color: var(--ink);' },
+    PARANOID: { name: 'Matte Black', style: 'background: #1e293b; border: 2px solid var(--ink); color: white;' },
+    SUPERFICIAL: { name: 'Clear Transparent', style: 'background: rgba(255,255,255,0.4); backdrop-filter: blur(4px); border: 2px dashed var(--ink); color: var(--ink);' }
+  },
+  alt2: {
+    T1: {
+      DEFENSIVE: { name: 'Bright Silver (T1)', style: 'background: #cbd5e1; border: 2px solid var(--ink);' },
+      CONSUMPTIVE: { name: 'Pale Gold (T1)', style: 'background: #fde047; border: 2px solid var(--ink);' },
+      PARANOID: { name: 'Charcoal Grey (T1)', style: 'background: #475569; border: 2px solid var(--ink); color: white;' },
+      SUPERFICIAL: { name: 'Frost White (T1)', style: 'background: #f8fafc; border: 2px solid rgba(0,0,0,0.3);' }
+    },
+    T2: {
+      DEFENSIVE: { name: 'Platinum Silver (T2)', style: 'background: #94a3b8; border: 2px solid var(--ink);' },
+      CONSUMPTIVE: { name: 'Deep Bronze (T2)', style: 'background: #b45309; border: 2px solid var(--ink); color: white;' },
+      PARANOID: { name: 'Dark Slate (T2)', style: 'background: #1e293b; border: 2px solid var(--ink); color: white;' },
+      SUPERFICIAL: { name: 'Trans-Yellow (T2)', style: 'background: rgba(253, 224, 71, 0.4); border: 2px dashed rgba(0,0,0,0.4);' }
+    },
+    T3: {
+      DEFENSIVE: { name: 'Steel Grey (T3)', style: 'background: #64748b; border: 2px solid var(--ink); color: white;' },
+      CONSUMPTIVE: { name: 'Bright Gold (T3)', style: 'background: #eab308; border: 2px solid var(--ink);' },
+      PARANOID: { name: 'Midnight Blue (T3)', style: 'background: #0f172a; border: 2px solid var(--ink); color: white;' },
+      SUPERFICIAL: { name: 'Trans-Blue (T3)', style: 'background: rgba(59, 130, 246, 0.4); border: 2px dashed rgba(0,0,0,0.4);' }
+    },
+    T4: {
+      DEFENSIVE: { name: 'Mirror Chrome (T4)', style: 'background: linear-gradient(135deg, #ffffff, #64748b); border: 2px solid var(--ink);' },
+      CONSUMPTIVE: { name: 'Rose Gold (T4)', style: 'background: #fda4af; border: 2px solid var(--ink);' },
+      PARANOID: { name: 'Jet Black (T4)', style: 'background: #030712; border: 2px solid var(--ink); color: white;' },
+      SUPERFICIAL: { name: 'Trans-Green (T4)', style: 'background: rgba(16, 185, 129, 0.4); border: 2px dashed rgba(0,0,0,0.4);' }
+    }
+  }
+};
+
+// Merender halaman Blueprint SVG
+function renderBlueprints() {
+  const grid = document.getElementById('blueprint-grid');
+  grid.innerHTML = '';
+  
+  models.forEach(model => {
+    const card = document.createElement('div');
+    card.className = `card filter-item ${model.persona}`;
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-title">${model.name}</span>
+        <span class="card-badge" style="background:${model.color}">${model.code}</span>
+      </div>
+      <div class="visual-box" id="svg-container-${model.code}">
+        <svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+          ${model.svg}
+        </svg>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">${model.desc}</p>
+        <span class="card-meta">Zona Maket: ${model.zone} | Ego: ${model.shadow}</span>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="copySVGCode('${model.code}')">Salin SVG</button>
+          <button class="btn btn-secondary" onclick="downloadSVG('${model.code}', '${model.name}')">Unduh</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// Merender representasi lego
+function renderLegoDiagrams() {
+  const grid = document.getElementById('lego-grid');
+  grid.innerHTML = '';
+
+  // Render Alternatif 1 (Sederhana 4 Warna Shadow)
+  Object.entries(legoStyles.alt1).forEach(([shadowName, meta]) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-title">ALT 1: ${shadowName}</span>
+        <span class="card-badge" style="background:var(--pink)">ALT-1</span>
+      </div>
+      <div class="visual-box" style="${meta.style}; aspect-ratio:16/9;">
+         <div style="font-family:'Bebas Neue', sans-serif; font-size:24px; text-shadow:0 1px 3px rgba(0,0,0,0.2);">${meta.name}</div>
+      </div>
+      <div class="card-body">
+         <p class="card-desc">Satu tona warna LEGO tunggal murni merepresentasikan parameter ego Shadow psikologis pengunjung tanpa dipengaruhi pembagian zona maket.</p>
+         <span class="card-meta">Lego Spec: ${meta.name}</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// FUNGSI COPY TO CLIPBOARD (Meningkatkan Aksesibilitas Ekspor Aset)
+function copySVGCode(code) {
+  const model = models.find(m => m.code === code);
+  const fullCode = `<svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">\n${model.svg}\n</svg>`;
+  
+  navigator.clipboard.writeText(fullCode).then(() => {
+    showToast(`Kode SVG ${code} berhasil disalin!`);
+  });
+}
+
+// FUNGSI UNDUH FILE SVG
+function downloadSVG(code, name) {
+  const model = models.find(m => m.code === code);
+  const fullCode = `<svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">\n${model.svg}\n</svg>`;
+  const blob = new Blob([fullCode], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${code}_${name.replace(/\s+/g, '_')}.svg`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+// Toast Notifier Helper
+function showToast(text) {
+  const toast = document.getElementById('toast');
+  toast.textContent = text;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// Navigasi & Filter Kategori
+function filterCategory(cat) {
+  document.querySelectorAll('.pill').forEach(pill => pill.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const cards = document.querySelectorAll('.filter-item');
+  cards.forEach(card => {
+    if (cat === 'all' || card.classList.contains(cat)) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+window.onload = function() {
+  renderBlueprints();
+  renderLegoDiagrams();
+};
+</script>
+</body>
+</html>

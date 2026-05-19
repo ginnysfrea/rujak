@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JFF 2026 — Image Asset Pack</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0A0A0A; --paper:#FAF6EE; --off:#F0EBE0;
+  --yellow:#FFD93D; --orange:#FF8C42; --blue:#2E5BFF;
+  --green:#00C853; --pink:#FF6B9D; --cyan:#00BCD4;
+  --border:2.5px solid var(--ink);
+  --shadow:4px 4px 0 var(--ink);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--paper);color:var(--ink)}
+
+/* TOP */
+.top-bar{background:var(--ink);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--yellow)}
+.top-brand{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.05em;color:var(--yellow)}
+.top-meta{font-size:11px;font-weight:700;color:rgba(255,255,255,0.45);letter-spacing:0.1em;text-transform:uppercase}
+.btn-dl-all{padding:10px 20px;background:var(--yellow);color:var(--ink);border:2.5px solid var(--yellow);border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;box-shadow:3px 3px 0 rgba(255,255,255,0.3);transition:all 0.1s}
+.btn-dl-all:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 rgba(255,255,255,0.3)}
+
+/* STATS */
+.stats-row{display:flex;gap:12px;padding:20px 28px 0;flex-wrap:wrap}
+.stat-chip{padding:8px 16px;border:var(--border);border-radius:99px;background:white;font-size:12px;font-weight:700;box-shadow:2px 2px 0 var(--ink)}
+
+/* SECTIONS */
+.section{padding:28px 28px 0}
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:var(--border)}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em}
+.section-badge{padding:4px 12px;border-radius:99px;border:2px solid var(--ink);font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase}
+.section-count{font-size:12px;font-weight:700;color:rgba(0,0,0,0.35);margin-left:auto}
+
+/* GRID */
+.asset-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:32px}
+.asset-grid.wide{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.asset-grid.matrix{grid-template-columns:repeat(4,1fr)}
+
+/* CARD */
+.asset-card{border:var(--border);border-radius:14px;background:white;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+.asset-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);transition:all 0.1s}
+.card-preview{width:100%;display:flex;align-items:center;justify-content:center;padding:16px;min-height:140px;position:relative}
+.card-preview svg{width:100%;height:auto;display:block}
+.card-preview.blueprint-prev{background:#0A0A0A;min-height:160px}
+.card-preview.lego-prev{background:#F5F0E8;min-height:120px}
+.card-preview.avatar-prev{background:white;min-height:140px;padding:12px}
+.card-body{padding:12px 14px;border-top:2px solid rgba(0,0,0,0.08);display:flex;flex-direction:column;gap:6px}
+.card-title{font-size:13px;font-weight:800;line-height:1.3}
+.card-sub{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;opacity:0.4}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;border:1.5px solid var(--ink);letter-spacing:0.06em;text-transform:uppercase}
+.card-actions{display:flex;gap:6px;padding:10px 14px;border-top:1.5px solid rgba(0,0,0,0.06);margin-top:auto}
+.btn-dl{flex:1;padding:8px;background:var(--ink);color:white;border:none;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;transition:all 0.1s}
+.btn-dl:hover{background:#333}
+.btn-copy{padding:8px 10px;background:white;color:var(--ink);border:2px solid var(--ink);border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:800;cursor:pointer;transition:all 0.1s}
+.btn-copy:hover{background:var(--yellow)}
+
+/* MATRIX LABELS */
+.matrix-axis-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:4px;padding:0}
+.matrix-axis-col{text-align:center;font-size:10px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:6px;border-radius:6px}
+.matrix-row-label{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.04em;margin-bottom:8px;padding:6px 0;border-bottom:1.5px solid rgba(0,0,0,0.1)}
+
+/* PERSONA COLORS */
+.p-t1{background:#FF8C42;color:white}
+.p-t2{background:#FFD93D;color:#0A0A0A}
+.p-t3{background:#2E5BFF;color:white}
+.p-t4{background:#00C853;color:white}
+.s-def{background:#94A3B8;color:#0A0A0A}
+.s-con{background:#D97706;color:white}
+.s-par{background:#1E293B;color:white}
+.s-sup{background:#BAE6FD;color:#0A0A0A}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:700;opacity:0;transition:opacity 0.3s;z-index:999;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1}
+
+/* FOOTER */
+.footer{padding:32px 28px;border-top:var(--border);margin-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;color:rgba(0,0,0,0.25)}
+.footer-note{font-size:11px;color:rgba(0,0,0,0.35);font-weight:600}
+
+@media(max-width:600px){
+  .asset-grid.matrix{grid-template-columns:repeat(2,1fr)}
+  .stats-row,.top-bar{padding:14px 16px}
+  .section{padding:20px 16px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div>
+    <div class="top-brand">JFF 2026 — Image Asset Pack</div>
+    <div class="top-meta">House as Home · RCUS × Ourchetype · 24 SVG Assets</div>
+  </div>
+  <button class="btn-dl-all" onclick="downloadAll()">⬇ Download Semua (Multiple)</button>
+</div>
+
+<div class="stats-row">
+  <div class="stat-chip">📦 24 SVG Asset Total</div>
+  <div class="stat-chip">🧍 4 Avatar Karakter LEGO</div>
+  <div class="stat-chip">📐 4 Blueprint Hunian</div>
+  <div class="stat-chip">🧱 16 LEGO Canvas (4×4 Matriks)</div>
+  <div class="stat-chip">✅ Siap Download SVG Individual</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     BAGIAN 1: AVATAR KARAKTER LEGO
+═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-title">Avatar Karakter LEGO</div>
+    <div class="section-badge" style="background:var(--yellow)">Persona</div>
+    <div class="section-count">4 asset · 160×160px</div>
+  </div>
+  <div class="asset-grid" id="grid-avatar"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     BAGIAN 2: BLUEPRINT SVG
+═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-title">Blueprint Hunian</div>
+    <div class="section-badge" style="background:var(--cyan)">Arsitektur</div>
+    <div class="section-count">4 asset · 400×250px</div>
+  </div>
+  <div class="asset-grid wide" id="grid-blueprint"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     BAGIAN 3: LEGO CANVAS (MATRIKS 4×4)
+═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-title">LEGO Canvas — Matriks 4×4</div>
+    <div class="section-badge" style="background:var(--orange);color:white">Isometrik</div>
+    <div class="section-count">16 asset · 200×120px</div>
+  </div>
+  <!-- Axis labels -->
+  <div class="matrix-axis-row">
+    <div class="matrix-axis-col s-def">DEFENSIVE</div>
+    <div class="matrix-axis-col s-con">CONSUMPTIVE</div>
+    <div class="matrix-axis-col s-par">PARANOID</div>
+    <div class="matrix-axis-col s-sup">SUPERFICIAL</div>
+  </div>
+  <div id="grid-canvas"></div>
+</div>
+
+<div class="footer">
+  <div class="footer-brand">House as Home JFF 2026</div>
+  <div class="footer-note">Semua asset adalah inline SVG yang dihasilkan secara dinamis dari index.html · RCUS & Ourchetype</div>
+</div>
+
+<div id="toast">✓ SVG disalin ke clipboard</div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA: semua SVG verbatim dari index.html
+// ══════════════════════════════════════════
+
+// ── AVATAR SVGs ──────────────────────────
+const avatars = [
+  {
+    id: 'avatar-traditionalist',
+    label: 'The Traditionalist',
+    sub: 'T1 · Kampung Kota',
+    tagClass: 'p-t1',
+    tagLabel: 'T1',
+    svg: `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="160" height="160" rx="20" fill="#FFE5D9"/>
+      <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
+      <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
+      <path d="M43 55 C50 42 70 38 80 46 C90 38 110 42 117 55 L110 65 L50 65 Z" fill="#8B4513" stroke="#111" stroke-width="2.5"/>
+      <path d="M72 41 L88 41 L80 50 Z" fill="#D2691E" stroke="#111" stroke-width="2"/>
+      <circle cx="65" cy="78" r="7" fill="#111"/>
+      <circle cx="63" cy="76" r="2.5" fill="#FFF"/>
+      <circle cx="95" cy="78" r="7" fill="#111"/>
+      <circle cx="93" cy="76" r="2.5" fill="#FFF"/>
+      <path d="M72 92 Q80 99 88 92" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="56" cy="85" r="4.5" fill="#FF8C42" opacity="0.6"/>
+      <circle cx="104" cy="85" r="4.5" fill="#FF8C42" opacity="0.6"/>
+      <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#D2691E" stroke="#111" stroke-width="3"/>
+      <path d="M80 110 L80 128" stroke="#111" stroke-width="2.5"/>
+    </svg>`
+  },
+  {
+    id: 'avatar-established',
+    label: 'The Established',
+    sub: 'T2 · Terjangkau',
+    tagClass: 'p-t2',
+    tagLabel: 'T2',
+    svg: `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="160" height="160" rx="20" fill="#FEF9E7"/>
+      <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
+      <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
+      <path d="M43 55 Q55 35 80 40 Q105 35 117 55 Q115 35 80 30 Q45 35 43 55 Z" fill="#DAA520" stroke="#111" stroke-width="2.5"/>
+      <circle cx="63" cy="75" r="11" stroke="#111" stroke-width="2.5" fill="none"/>
+      <circle cx="97" cy="75" r="11" stroke="#111" stroke-width="2.5" fill="none"/>
+      <line x1="74" y1="75" x2="86" y2="75" stroke="#111" stroke-width="2.5"/>
+      <circle cx="61" cy="73" r="2.5" fill="#111"/>
+      <circle cx="95" cy="73" r="2.5" fill="#111"/>
+      <circle cx="63" cy="71" r="1" fill="#FFF"/>
+      <circle cx="97" cy="71" r="1" fill="#FFF"/>
+      <path d="M74 91 Q80 96 86 91" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#2B3E50" stroke="#111" stroke-width="3"/>
+      <path d="M70 110 L80 125 L90 110 Z" fill="#FFF" stroke="#111" stroke-width="2"/>
+      <path d="M77 122 L83 122 L85 140 L75 140 Z" fill="#FF4848"/>
+    </svg>`
+  },
+  {
+    id: 'avatar-urbanist',
+    label: 'The Urbanist',
+    sub: 'T3 · Terhubung',
+    tagClass: 'p-t3',
+    tagLabel: 'T3',
+    svg: `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="160" height="160" rx="20" fill="#EBF5FB"/>
+      <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
+      <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
+      <path d="M43 55 C43 40 117 40 117 55" stroke="#4A90E2" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <rect x="36" y="55" width="12" height="24" rx="4" fill="#111" stroke="#4A90E2" stroke-width="2"/>
+      <rect x="112" y="55" width="12" height="24" rx="4" fill="#111" stroke="#4A90E2" stroke-width="2"/>
+      <rect x="52" y="68" width="22" height="14" rx="3" fill="#111"/>
+      <rect x="86" y="68" width="22" height="14" rx="3" fill="#111"/>
+      <line x1="74" y1="73" x2="86" y2="73" stroke="#111" stroke-width="3"/>
+      <path d="M55 71 L61 71" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M89 71 L95 71" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M70 94 Q76 96 82 91" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#222" stroke="#111" stroke-width="3"/>
+      <circle cx="80" cy="125" r="8" fill="#4A90E2"/>
+    </svg>`
+  },
+  {
+    id: 'avatar-idealist',
+    label: 'The Idealist',
+    sub: 'T4 · Hijau & Mandiri',
+    tagClass: 'p-t4',
+    tagLabel: 'T4',
+    svg: `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="160" height="160" rx="20" fill="#E8F8F5"/>
+      <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
+      <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
+      <path d="M35 52 C35 48 45 42 80 42 C115 42 125 48 125 52 L115 58 L45 58 Z" fill="#228B22" stroke="#111" stroke-width="2.5"/>
+      <path d="M52 42 L108 42 L100 32 L60 32 Z" fill="#1E5D1E" stroke="#111" stroke-width="2"/>
+      <circle cx="65" cy="78" r="7" fill="#111"/>
+      <circle cx="63" cy="75" r="2" fill="#FFF"/>
+      <circle cx="66" cy="79" r="1" fill="#FFF"/>
+      <circle cx="95" cy="78" r="7" fill="#111"/>
+      <circle cx="93" cy="75" r="2" fill="#FFF"/>
+      <circle cx="96" cy="79" r="1" fill="#FFF"/>
+      <circle cx="56" cy="85" r="6" fill="#FF6B9D" opacity="0.5"/>
+      <circle cx="104" cy="85" r="6" fill="#FF6B9D" opacity="0.5"/>
+      <path d="M70 88 Q80 96 90 88" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+      <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#4CAF50" stroke="#111" stroke-width="3"/>
+      <path d="M65 110 L80 125 L95 110" fill="none" stroke="#111" stroke-width="2.5"/>
+    </svg>`
+  }
+];
+
+// ── BLUEPRINT SVGs ──────────────────────
+const blueprints = [
+  {
+    id: 'blueprint-traditionalist',
+    label: 'Blueprint T1 — Kampung Kota',
+    sub: 'Hunian Infill · Gang Sempit',
+    tagClass: 'p-t1',
+    tagLabel: 'T1',
+    svg: `<svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="250" fill="#0A0A0A"/>
+      <g stroke="#FF8C42" stroke-width="2" opacity="0.8">
+        <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250" stroke-dasharray="3 3" opacity="0.3"/>
+        <rect x="130" y="80" width="140" height="130" rx="4" fill="#111" stroke="#FF8C42" stroke-width="3"/>
+        <line x1="130" y1="130" x2="270" y2="130"/>
+        <line x1="130" y1="170" x2="270" y2="170"/>
+        <rect x="145" y="95" width="40" height="25" stroke="#FF8C42" stroke-dasharray="2 2"/>
+        <rect x="215" y="95" width="40" height="25" stroke="#FF8C42"/>
+        <path d="M165 170v40M235 170v40"/>
+        <circle cx="200" cy="150" r="10" fill="none" stroke="#FF8C42"/>
+        <path d="M190 150h20"/>
+      </g>
+      <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T1 KAMPUNG KOTA</text>
+    </svg>`
+  },
+  {
+    id: 'blueprint-established',
+    label: 'Blueprint T2 — Terjangkau',
+    sub: 'Hunian Susun Tapak · Vertikal',
+    tagClass: 'p-t2',
+    tagLabel: 'T2',
+    svg: `<svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="250" fill="#0A0A0A"/>
+      <g stroke="#FFD93D" stroke-width="2" opacity="0.8">
+        <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250M350 0v250" stroke-dasharray="3 3" opacity="0.3"/>
+        <rect x="150" y="40" width="100" height="180" rx="4" fill="#111" stroke="#FFD93D" stroke-width="3"/>
+        <line x1="150" y1="80" x2="250" y2="80"/>
+        <line x1="150" y1="120" x2="250" y2="120"/>
+        <line x1="150" y1="160" x2="250" y2="160"/>
+        <rect x="165" y="50" width="25" height="20" stroke="#FFD93D"/>
+        <rect x="210" y="50" width="25" height="20" stroke="#FFD93D"/>
+        <rect x="165" y="90" width="25" height="20" stroke="#FFD93D"/>
+        <rect x="210" y="90" width="25" height="20" stroke="#FFD93D"/>
+        <rect x="165" y="130" width="25" height="20" stroke="#FFD93D"/>
+        <rect x="210" y="130" width="25" height="20" stroke="#FFD93D"/>
+      </g>
+      <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T2 TERJANGKAU</text>
+    </svg>`
+  },
+  {
+    id: 'blueprint-urbanist',
+    label: 'Blueprint T3 — Transit Hub',
+    sub: 'Slim Building · TOD',
+    tagClass: 'p-t3',
+    tagLabel: 'T3',
+    svg: `<svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="250" fill="#0A0A0A"/>
+      <g stroke="#2E5BFF" stroke-width="2" opacity="0.8">
+        <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250M350 0v250" stroke-dasharray="3 3" opacity="0.3"/>
+        <rect x="170" y="30" width="60" height="190" fill="#111" stroke="#2E5BFF" stroke-width="3"/>
+        <line x1="230" y1="100" x2="350" y2="100" stroke="#2E5BFF" stroke-width="2"/>
+        <line x1="230" y1="120" x2="350" y2="120" stroke="#2E5BFF" stroke-width="2"/>
+        <path d="M260 100v20M290 100v20M320 100v20" stroke="#2E5BFF"/>
+        <rect x="180" y="45" width="40" height="35" stroke="#2E5BFF"/>
+        <rect x="180" y="135" width="40" height="35" stroke="#2E5BFF"/>
+      </g>
+      <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T3 TRANSIT HUB</text>
+    </svg>`
+  },
+  {
+    id: 'blueprint-idealist',
+    label: 'Blueprint T4 — Hijau & Mandiri',
+    sub: 'Amphibious · Climate Frontier',
+    tagClass: 'p-t4',
+    tagLabel: 'T4',
+    svg: `<svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="250" fill="#0A0A0A"/>
+      <g stroke="#00C853" stroke-width="2" opacity="0.8">
+        <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250M350 0v250" stroke-dasharray="3 3" opacity="0.3"/>
+        <line x1="120" y1="40" x2="120" y2="210" stroke="white" stroke-width="4"/>
+        <line x1="280" y1="40" x2="280" y2="210" stroke="white" stroke-width="4"/>
+        <rect x="130" y="80" width="140" height="90" rx="10" fill="#111" stroke="#00C853" stroke-width="3"/>
+        <path d="M150 140h100" stroke="#00C853" stroke-width="2"/>
+        <path d="M120 80 Q200 50 280 80" stroke="#00C853" stroke-width="3"/>
+        <circle cx="200" cy="115" r="15" stroke="#00C853"/>
+      </g>
+      <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T4 HIJAU &amp; MANDIRI</text>
+    </svg>`
+  }
+];
+
+// ── LEGO CANVAS SVGs (4×4 Matrix) ───────
+const personas = ['traditionalist','established','urbanist','idealist'];
+const shadows  = ['DEFENSIVE','CONSUMPTIVE','PARANOID','SUPERFICIAL'];
+
+const personaMeta = {
+  traditionalist: { label:'The Traditionalist', short:'T1', tagClass:'p-t1' },
+  established:    { label:'The Established',    short:'T2', tagClass:'p-t2' },
+  urbanist:       { label:'The Urbanist',        short:'T3', tagClass:'p-t3' },
+  idealist:       { label:'The Idealist',        short:'T4', tagClass:'p-t4' },
+};
+const shadowMeta = {
+  DEFENSIVE:   { label:'Defensive',   code:'DEF', tagClass:'s-def' },
+  CONSUMPTIVE: { label:'Consumptive', code:'CON', tagClass:'s-con' },
+  PARANOID:    { label:'Paranoid',    code:'PAR', tagClass:'s-par' },
+  SUPERFICIAL: { label:'Superficial', code:'SUP', tagClass:'s-sup' },
+};
+const modelNames = {
+  'traditionalist-DEFENSIVE':'Hunian Infill','traditionalist-CONSUMPTIVE':'Kampung Susun',
+  'traditionalist-PARANOID':'Klaster Tertutup','traditionalist-SUPERFICIAL':'Hunian-Rakit',
+  'established-DEFENSIVE':'Hunian Susun Tapak','established-CONSUMPTIVE':'Ruko Sewa Bersama',
+  'established-PARANOID':'Apartemen 1 Gerbang','established-SUPERFICIAL':'Pod Huni Mandiri',
+  'urbanist-DEFENSIVE':'Hunian Transit','urbanist-CONSUMPTIVE':'Studio Komuter',
+  'urbanist-PARANOID':'Apartemen Skybridge','urbanist-SUPERFICIAL':'Hunian Kapsul Modular',
+  'idealist-DEFENSIVE':'Pod Terapung','idealist-CONSUMPTIVE':'Hunian Mandiri Energi',
+  'idealist-PARANOID':'Hunian Cangkang','idealist-SUPERFICIAL':'Kabin Hijau',
+};
+
+function getCanvasSVG(persona, shadow) {
+  // All 16 combinations from index.html getLegoCanvasSVG()
+  if (persona==='traditionalist') {
+    if (shadow==='DEFENSIVE') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(60,20)">
+        <path d="M10 85 L40 70 L70 85 L40 100 Z" fill="rgba(0,0,0,0.1)"/>
+        <path d="M20 50 L40 60 L40 90 L20 80 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/>
+        <path d="M40 60 L60 50 L60 80 L40 90 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/>
+        <path d="M20 50 L40 40 L60 50 L40 60 Z" fill="#CBD5E1" stroke="#111" stroke-width="1.5"/>
+        <path d="M42 80 L58 72 L58 77 L42 85 Z" fill="#1E293B" opacity="0.4" stroke="#111" stroke-width="1"/>
+        <rect x="34" y="32" width="12" height="6" rx="2" fill="#E2E8F0" stroke="#111"/>
+      </g></svg>`;
+    if (shadow==='CONSUMPTIVE') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,15)">
+        <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.1)"/>
+        <path d="M20 55 L50 70 L50 95 L20 80 Z" fill="#D97706" stroke="#111" stroke-width="1.5"/>
+        <path d="M50 70 L80 55 L80 80 L50 95 Z" fill="#B45309" stroke="#111" stroke-width="1.5"/>
+        <path d="M20 55 L50 40 L80 55 L50 70 Z" fill="#FBBF24" stroke="#111" stroke-width="1.5"/>
+        <path d="M25 35 L50 47 L50 65 L25 53 Z" fill="#FBBF24" stroke="#111" stroke-width="1"/>
+        <path d="M50 47 L75 35 L75 53 L50 65 Z" fill="#D97706" stroke="#111" stroke-width="1"/>
+        <path d="M25 35 L50 23 L75 35 L50 47 Z" fill="#FEF08A" stroke="#111" stroke-width="1"/>
+      </g></svg>`;
+    if (shadow==='PARANOID') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,15)">
+        <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.15)"/>
+        <path d="M15 50 L45 65 L45 90 L15 75 Z" fill="#475569" stroke="#111" stroke-width="1.5"/>
+        <path d="M45 65 L75 50 L75 75 L45 90 Z" fill="#334155" stroke="#111" stroke-width="1.5"/>
+        <path d="M15 50 L45 35 L75 50 L45 65 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/>
+        <path d="M33 51 L45 45 L57 51 L45 57 Z" fill="#0F172A" stroke="#111" stroke-width="1"/>
+      </g></svg>`;
+    return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,15)">
+        <line x1="25" y1="55" x2="25" y2="90" stroke="#64748B" stroke-width="2"/>
+        <line x1="50" y1="67" x2="50" y2="102" stroke="#64748B" stroke-width="2"/>
+        <line x1="75" y1="55" x2="75" y2="90" stroke="#64748B" stroke-width="2"/>
+        <path d="M20 40 L50 55 L50 75 L20 60 Z" fill="rgba(241,245,249,0.8)" stroke="#111" stroke-width="1.5"/>
+        <path d="M50 55 L80 40 L80 60 L50 75 Z" fill="rgba(203,213,225,0.8)" stroke="#111" stroke-width="1.5"/>
+        <path d="M20 40 L50 25 L80 40 L50 55 Z" fill="rgba(255,255,255,0.9)" stroke="#111" stroke-width="1.5"/>
+      </g></svg>`;
+  }
+  if (persona==='established') {
+    if (shadow==='DEFENSIVE') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(60,10)">
+        <path d="M5 90 L35 75 L65 90 L35 105 Z" fill="rgba(0,0,0,0.1)"/>
+        <path d="M15 65 L35 75 L35 95 L15 85 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/>
+        <path d="M35 75 L55 65 L55 85 L35 95 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/>
+        <path d="M15 65 L35 55 L55 65 L35 75 Z" fill="#CBD5E1" stroke="#111" stroke-width="1.5"/>
+        <g transform="translate(2,-22)">
+          <path d="M15 65 L35 75 L35 95 L15 85 Z" fill="#E2E8F0" stroke="#111" stroke-width="1.5"/>
+          <path d="M35 75 L55 65 L55 85 L35 95 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/>
+          <path d="M15 65 L35 55 L55 65 L35 75 Z" fill="#FFFFFF" stroke="#111" stroke-width="1.5"/>
+        </g>
+      </g></svg>`;
+    if (shadow==='CONSUMPTIVE') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,20)">
+        <path d="M5 80 L45 60 L105 90 L65 110 Z" fill="rgba(0,0,0,0.1)"/>
+        <path d="M10 50 L50 70 L50 95 L10 75 Z" fill="#B45309" stroke="#111" stroke-width="1.5"/>
+        <path d="M50 70 L90 50 L90 75 L50 95 Z" fill="#78350F" stroke="#111" stroke-width="1.5"/>
+        <path d="M10 50 L50 30 L90 50 L50 70 Z" fill="#D2691E" stroke="#111" stroke-width="1.5"/>
+        <rect x="22" y="62" width="10" height="20" fill="#78350F" stroke="#111" stroke-width="1"/>
+        <rect x="62" y="58" width="10" height="20" fill="#5C2505" stroke="#111" stroke-width="1"/>
+      </g></svg>`;
+    if (shadow==='PARANOID') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,15)">
+        <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.2)"/>
+        <path d="M20 50 L50 65 L50 90 L20 75 Z" fill="#1F2937" stroke="#111" stroke-width="1.5"/>
+        <path d="M50 65 L80 50 L80 75 L50 90 Z" fill="#111827" stroke="#111" stroke-width="1.5"/>
+        <path d="M20 50 L50 35 L80 50 L50 65 Z" fill="#374151" stroke="#111" stroke-width="1.5"/>
+        <path d="M42 66 L52 71 L52 82 L42 77 Z" fill="#FFD93D" stroke="#111" stroke-width="1.2"/>
+      </g></svg>`;
+    return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,20)">
+        <path d="M15 50 L45 65 L45 85 L15 70 Z" fill="rgba(253,224,71,0.7)" stroke="#111" stroke-width="1.5"/>
+        <path d="M45 65 L75 50 L75 70 L45 85 Z" fill="rgba(234,179,8,0.7)" stroke="#111" stroke-width="1.5"/>
+        <path d="M15 50 L45 35 L75 50 L45 65 Z" fill="rgba(254,240,138,0.8)" stroke="#111" stroke-width="1.5"/>
+        <g transform="translate(10,-20)">
+          <path d="M15 50 L45 65 L45 85 L15 70 Z" fill="rgba(253,224,71,0.9)" stroke="#111" stroke-width="1"/>
+          <path d="M45 65 L75 50 L75 70 L45 85 Z" fill="rgba(234,179,8,0.9)" stroke="#111" stroke-width="1"/>
+          <path d="M15 50 L45 35 L75 50 L45 65 Z" fill="rgba(255,253,204,0.95)" stroke="#111" stroke-width="1"/>
+        </g>
+      </g></svg>`;
+  }
+  if (persona==='urbanist') {
+    if (shadow==='DEFENSIVE') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(60,10)">
+        <path d="M5 90 L35 75 L65 90 L35 105 Z" fill="rgba(0,0,0,0.1)"/>
+        <path d="M15 35 L35 45 L35 95 L15 85 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/>
+        <path d="M35 45 L55 35 L55 85 L35 95 Z" fill="#475569" stroke="#111" stroke-width="1.5"/>
+        <path d="M15 35 L35 25 L55 35 L35 45 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/>
+        <path d="M38 52 L50 46 L50 72 L38 78 Z" fill="#1E293B" stroke="#2E5BFF" stroke-width="1"/>
+      </g></svg>`;
+    if (shadow==='CONSUMPTIVE') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,20)">
+        <path d="M5 80 L45 60 L105 90 L65 110 Z" fill="rgba(0,0,0,0.1)"/>
+        <path d="M15 50 L35 58 L35 83 L15 75 Z" fill="#EAB308" stroke="#111" stroke-width="1.2"/>
+        <path d="M35 58 L55 50 L55 75 L35 83 Z" fill="#CA8A04" stroke="#111" stroke-width="1.2"/>
+        <path d="M15 50 L35 42 L55 50 L35 58 Z" fill="#FDE047" stroke="#111" stroke-width="1.2"/>
+        <g transform="translate(30,-12)">
+          <path d="M15 50 L35 58 L35 83 L15 75 Z" fill="#EAB308" stroke="#111" stroke-width="1.2"/>
+          <path d="M35 58 L55 50 L55 75 L35 83 Z" fill="#CA8A04" stroke="#111" stroke-width="1.2"/>
+          <path d="M15 50 L35 42 L55 50 L35 58 Z" fill="#FEF08A" stroke="#111" stroke-width="1.2"/>
+        </g>
+      </g></svg>`;
+    if (shadow==='PARANOID') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(45,10)">
+        <path d="M5 95 L45 75 L115 110 L75 130 Z" fill="rgba(0,0,0,0.2)"/>
+        <path d="M10 40 L30 50 L30 90 L10 80 Z" fill="#0F172A" stroke="#111" stroke-width="1.5"/>
+        <path d="M30 50 L50 40 L50 80 L30 90 Z" fill="#020617" stroke="#111" stroke-width="1.5"/>
+        <path d="M10 40 L30 30 L50 40 L30 50 Z" fill="#1E293B" stroke="#111" stroke-width="1.5"/>
+        <g transform="translate(50,20)">
+          <path d="M10 40 L30 50 L30 90 L10 80 Z" fill="#0F172A" stroke="#111" stroke-width="1.5"/>
+          <path d="M30 50 L50 40 L50 80 L30 90 Z" fill="#020617" stroke="#111" stroke-width="1.5"/>
+          <path d="M10 40 L30 30 L50 40 L30 50 Z" fill="#1E293B" stroke="#111" stroke-width="1.5"/>
+        </g>
+        <path d="M35 55 L85 75 L85 83 L35 63 Z" fill="#334155" stroke="#111" stroke-width="1"/>
+      </g></svg>`;
+    return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,15)">
+        <path d="M10 40 L45 25 L80 40 L45 55 Z" stroke="#475569" stroke-width="2" fill="none"/>
+        <line x1="10" y1="40" x2="10" y2="85" stroke="#475569" stroke-width="2"/>
+        <line x1="45" y1="55" x2="45" y2="100" stroke="#475569" stroke-width="2"/>
+        <line x1="80" y1="40" x2="80" y2="85" stroke="#475569" stroke-width="2"/>
+        <rect x="22" y="52" width="45" height="30" rx="8" fill="rgba(56,189,248,0.6)" stroke="#2E5BFF" stroke-width="1.5"/>
+        <circle cx="35" cy="67" r="5" fill="rgba(255,255,255,0.7)"/>
+      </g></svg>`;
+  }
+  // idealist
+  if (shadow==='DEFENSIVE') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(50,15)">
+      <line x1="20" y1="20" x2="20" y2="90" stroke="#94A3B8" stroke-width="3"/>
+      <line x1="80" y1="20" x2="80" y2="90" stroke="#94A3B8" stroke-width="3"/>
+      <path d="M15 65 L50 80 L85 65 L50 50 Z" fill="#E2E8F0" stroke="#111" stroke-width="1.5"/>
+      <path d="M22 45 L50 58 L50 72 L22 59 Z" fill="#FFFFFF" stroke="#111" stroke-width="1.5"/>
+      <path d="M50 58 L78 45 L78 59 L50 72 Z" fill="#CBD5E1" stroke="#111" stroke-width="1.5"/>
+      <path d="M22 45 L50 32 L78 45 L50 58 Z" fill="#E2E8F0" stroke="#111" stroke-width="1.5"/>
+    </g></svg>`;
+  if (shadow==='CONSUMPTIVE') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(50,15)">
+      <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.1)"/>
+      <path d="M20 55 L50 70 L50 95 L20 80 Z" fill="#F43F5E" stroke="#111" stroke-width="1.5"/>
+      <path d="M50 70 L80 55 L80 80 L50 95 Z" fill="#BE123C" stroke="#111" stroke-width="1.5"/>
+      <path d="M20 55 L50 40 L80 55 L50 70 Z" fill="#FDA4AF" stroke="#111" stroke-width="1.5"/>
+      <path d="M30 42 L50 32 L70 42 L50 52 Z" fill="#00C853" stroke="#111" stroke-width="1.2"/>
+    </g></svg>`;
+  if (shadow==='PARANOID') return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(50,15)">
+      <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.15)"/>
+      <path d="M20 50 L50 65 L50 90 L20 75 Z" fill="#0F172A" stroke="#111" stroke-width="2"/>
+      <path d="M50 65 L80 50 L80 75 L50 90 Z" fill="#020617" stroke="#111" stroke-width="2"/>
+      <path d="M20 50 L50 35 L80 50 L50 65 Z" fill="#1E293B" stroke="#111" stroke-width="2"/>
+      <path d="M14 55 Q35 70 44 95" stroke="#00C853" stroke-width="3" fill="none"/>
+    </g></svg>`;
+  return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(50,15)">
+      <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,198,83,0.2)" stroke="#00C853" stroke-dasharray="2 2" stroke-width="1"/>
+      <path d="M20 50 L50 65 L50 85 L20 70 Z" fill="rgba(16,185,129,0.6)" stroke="#00C853" stroke-width="1.5"/>
+      <path d="M50 65 L80 50 L80 70 L50 85 Z" fill="rgba(4,120,87,0.6)" stroke="#00C853" stroke-width="1.5"/>
+      <path d="M20 50 L50 35 L80 50 L50 65 Z" fill="rgba(52,211,153,0.7)" stroke="#00C853" stroke-width="1.5"/>
+    </g></svg>`;
+}
+
+// ══════════════════════════════════════════
+// ASSET REGISTRY — semua SVG disimpan di sini
+// onclick hanya pakai registry ID, tidak inline SVG
+// ══════════════════════════════════════════
+const _registry = {};   // id → { svg, filename }
+let   _regIdx   = 0;
+
+function reg(svgStr, filename) {
+  const id = 'asset_' + (_regIdx++);
+  _registry[id] = { svg: svgStr, filename };
+  return id;
+}
+
+function dlById(id)   { const r = _registry[id]; if (r) downloadSVG(r.svg, r.filename); }
+function copyById(id) { const r = _registry[id]; if (r) copySVG(r.svg); }
+
+function makeCard(svgStr, label, sub, tagClass, tagLabel, filename, previewClass='avatar-prev') {
+  const id = reg(svgStr, filename);
+  const card = document.createElement('div');
+  card.className = 'asset-card';
+  card.innerHTML = `
+    <div class="card-preview ${previewClass}">${svgStr}</div>
+    <div class="card-body">
+      <div class="card-sub">${sub}</div>
+      <div class="card-title">${label}</div>
+      <div class="card-tags"><span class="tag ${tagClass}">${tagLabel}</span></div>
+    </div>
+    <div class="card-actions">
+      <button class="btn-dl"   onclick="dlById('${id}')">⬇ SVG</button>
+      <button class="btn-copy" onclick="copyById('${id}')" title="Copy SVG code">📋</button>
+    </div>`;
+  return card;
+}
+
+function renderAll() {
+  // Avatars
+  const ga = document.getElementById('grid-avatar');
+  ga.innerHTML = '';
+  avatars.forEach(a => ga.appendChild(
+    makeCard(a.svg, a.label, a.sub, a.tagClass, a.tagLabel,
+      `JFF2026_${a.id}.svg`, 'avatar-prev')));
+
+  // Blueprints
+  const gb = document.getElementById('grid-blueprint');
+  gb.innerHTML = '';
+  blueprints.forEach(b => gb.appendChild(
+    makeCard(b.svg, b.label, b.sub, b.tagClass, b.tagLabel,
+      `JFF2026_${b.id}.svg`, 'blueprint-prev')));
+
+  // Canvas matrix — row by persona
+  const gc = document.getElementById('grid-canvas');
+  gc.innerHTML = '';
+  personas.forEach(p => {
+    const pm = personaMeta[p];
+    const rowLabel = document.createElement('div');
+    rowLabel.className = 'matrix-row-label';
+    rowLabel.innerHTML = `<span class="tag ${pm.tagClass}">${pm.short}</span> &nbsp;${pm.label}`;
+    gc.appendChild(rowLabel);
+
+    const grid = document.createElement('div');
+    grid.className = 'asset-grid matrix';
+    shadows.forEach(s => {
+      const sm = shadowMeta[s];
+      const key = `${p}-${s}`;
+      const name = modelNames[key] || key;
+      const svg = getCanvasSVG(p, s);
+      const fname = `JFF2026_canvas_${pm.short}-${sm.code}.svg`;
+      grid.appendChild(makeCard(svg, name,
+        `${pm.short} × ${sm.code}`,
+        pm.tagClass, pm.short, fname, 'lego-prev'));
+    });
+    gc.appendChild(grid);
+  });
+}
+
+// ══════════════════════════════════════════
+// DOWNLOAD & COPY
+// ══════════════════════════════════════════
+function downloadSVG(svgStr, filename) {
+  const blob = new Blob([svgStr], {type:'image/svg+xml'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('⬇ ' + filename + ' diunduh');
+}
+
+function copySVG(svgStr) {
+  navigator.clipboard.writeText(svgStr).then(() => showToast('📋 SVG disalin ke clipboard'));
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function downloadAll() {
+  const all = [
+    ...avatars.map(a => ({svg: a.svg, name:`JFF2026_${a.id}.svg`})),
+    ...blueprints.map(b => ({svg: b.svg, name:`JFF2026_${b.id}.svg`})),
+    ...personas.flatMap(p => shadows.map(s => ({
+      svg: getCanvasSVG(p, s),
+      name: `JFF2026_canvas_${personaMeta[p].short}-${shadowMeta[s].code}.svg`
+    })))
+  ];
+  // Download one by one with slight delay so browser doesn't block
+  all.forEach((item, i) => {
+    setTimeout(() => downloadSVG(item.svg, item.name), i * 120);
+  });
+  showToast(`⬇ Mengunduh ${all.length} file SVG...`);
+}
+
+// Init
+renderAll();
+</script>
+
+<div id="toast">✓</div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hunian Masa Depan — RCUS & JFF 2026</title>
+<title>Rumah Masa Depan — RCUS & JFF 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -283,7 +283,7 @@
     text-align: left; width: 100%;
   }
 
-  /* Unified Card 2: Blueprint SVG + Tipe Hunian */
+  /* Unified Card 2: Blueprint SVG + Tipe Rumah */
   .result-card-spatial {
     background: #FFFFFF;
     border: var(--border);
@@ -393,112 +393,14 @@
     100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
   }
 
-  /* ── DEV / FREE MENU ─────────────────────────────────── */
-  #dev-menu-fab {
-    position: fixed; bottom: 20px; right: 16px; z-index: 500;
-    width: 48px; height: 48px; border-radius: 50%;
-    background: var(--ink); color: var(--yellow);
-    border: 2.5px solid var(--yellow);
-    font-size: 20px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
-    transition: transform 0.2s; -webkit-tap-highlight-color: transparent;
-  }
-  #dev-menu-fab:hover { transform: scale(1.1); }
-  #dev-menu-panel {
-    position: fixed; bottom: 76px; right: 16px; z-index: 499;
-    background: var(--ink); border: 2.5px solid var(--yellow);
-    border-radius: 16px; padding: 16px; width: 240px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    display: none; flex-direction: column; gap: 8px;
-    transform-origin: bottom right;
-  }
-  #dev-menu-panel.open { display: flex; animation: fadeSlideIn 0.2s ease forwards; }
-  #dev-menu-panel .dev-title {
-    font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.1em;
-    color: var(--yellow); margin-bottom: 4px; text-align: center;
-  }
-  .dev-btn {
-    width: 100%; padding: 10px 14px; border-radius: 8px;
-    border: 2px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.06); color: white;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 12px; font-weight: 700; cursor: pointer;
-    text-align: left; transition: background 0.15s; letter-spacing: 0.02em;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .dev-btn:hover { background: rgba(255,255,255,0.15); }
-  .dev-btn.active { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
-  .dev-sep { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 2px 0; }
-  .dev-note { font-size: 10px; color: rgba(255,255,255,0.35); text-align: center; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
-
-  /* ── MOBILE FIRST ────────────────────────────────────── */
-  /* Touch tap area minimum 44px */
-  .pill-opt { min-height: 44px; display: inline-flex; align-items: center; }
-  .btn { min-height: 48px; }
-  .fc-card { min-height: 100px; }
-
-  @media (max-width: 600px) {
-    /* Nav */
-    .top-nav { padding: 8px 12px; }
-    .nav-brand { font-size: 20px; }
-    .nav-section-pill { font-size: 10px; padding: 4px 10px; }
-    .nav-info { font-size: 10px; }
-
-    /* Start screen */
-    #screen-start { padding: 72px 16px 32px; }
-    .hero-title { font-size: clamp(52px, 18vw, 84px); }
-    .hero-sub { font-size: clamp(18px, 5vw, 28px); }
-    .hero-desc { font-size: 14px; }
-    .start-boxes { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-    .start-box { padding: 12px 10px; }
-    .start-box-num { font-size: 30px; }
-    .flow-pills { gap: 6px; }
-    .flow-pill { font-size: 10px; padding: 5px 10px; }
-    .btn-lg { padding: 16px 24px; font-size: 15px; }
-
-    /* Section screens */
-    .section-screen { padding-top: 72px; }
-    .section-header { padding: 16px 16px 0; gap: 10px; }
-    .section-num { font-size: 52px; }
-    .section-title { font-size: 26px; }
-    .q-container { padding: 16px; gap: 14px; max-width: 100%; }
-
-    /* Forced choice */
+  @media (max-width: 540px) {
+    .start-boxes { grid-template-columns: 1fr 1fr 1fr; }
+    .fc-text { font-size: 13px; }
     .fc-wrap { grid-template-columns: 1fr auto 1fr; gap: 8px; }
-    .fc-card { padding: 14px 12px; border-radius: 12px; gap: 8px; }
-    .fc-text { font-size: 13px; line-height: 1.45; }
-    .fc-vs { font-size: 22px; width: 28px; }
-    .q-text { font-size: 15px; line-height: 1.4; }
-    .q-num-badge { width: 36px; height: 36px; font-size: 14px; flex-shrink: 0; }
-
-    /* Footer nav */
-    .q-footer { padding: 14px 16px 24px; max-width: 100%; }
-    .btn { padding: 12px 18px; font-size: 13px; }
-
-    /* Pills */
-    .pill-opt { padding: 10px 14px; font-size: 13px; }
-    .text-input { padding: 13px 16px; font-size: 14px; }
-
-    /* Result */
-    #screen-result { padding: 72px 12px 32px; }
-    .result-container { gap: 16px; }
-    .result-card-profile { padding: 20px 16px; border-radius: 18px; }
-    .result-persona-title { font-size: 32px; }
-    .result-avatar-frame { width: 110px; height: 110px; }
-    .result-card-spatial { padding: 16px; border-radius: 18px; }
-    .result-dark-panel { padding: 20px 16px; border-radius: 18px; }
-    .result-dark-model-title { font-size: 22px; }
+    .top-nav { padding: 10px 14px; }
+    .q-text { font-size: 16px; }
+    .result-container { border-radius: 20px; }
     .result-demog-grid { grid-template-columns: 1fr; }
-    .bar-label { width: 100px; font-size: 10px; }
-    .toggle-wrap { margin: 0 12px 16px; }
-  }
-
-  @media (max-width: 380px) {
-    .fc-card { padding: 10px 8px; }
-    .fc-text { font-size: 12px; }
-    .start-box-num { font-size: 24px; }
-    .q-text { font-size: 14px; }
   }
 
   /* ── ANIMATIONS ─────────────────────────────────────── */
@@ -532,11 +434,11 @@
 <!-- ╚══════════════════════╝ -->
 <div id="screen-start" class="screen active">
   <div class="hero-wrap">
-    <div class="start-badge">Rujak Center for Urban Studies & OURCHETYPE 2026</div>
-    <div class="hero-title display">HOUSE<br>AS<br>HOME</div>
+    <div class="start-badge">Rujak Center for Urban Studies & JFF 2026</div>
+    <div class="hero-title display">RUMAH<br>MASA<br>DEPAN</div>
     <div class="hero-sub display">Nalar Huni & Ego Perkotaan</div>
     <p class="hero-desc">
-      Ikuti kuesioner interaktif untuk temukan hunianmu di Jabodetabekpunjur.
+      Ikuti kuesioner interaktif 16-langkah kedaulatan ruang untuk menguji visi berhuni idealmu melawan kenyataan spasial Jabodetabek.
     </p>
     <div class="flow-pills">
       <span class="flow-pill" style="background:var(--cyan); font-weight:800;">Identitas</span>
@@ -575,7 +477,7 @@
     <div class="section-header">
       <div class="section-num display">01</div>
       <div>
-        <div class="section-title display">Data Diri</div>
+        <div class="section-title display">Koleksi Data Diri</div>
         <div class="section-desc">Identitas dasar untuk pemetaan kedaulatan ruang.</div>
       </div>
     </div>
@@ -598,8 +500,8 @@
     <div class="section-header">
       <div class="section-num display">02</div>
       <div>
-        <div class="section-title display">Ego Spasial</div>
-        <div class="section-desc">Pilihlah opsi yang paling mencerminkan dirimu.</div>
+        <div class="section-title display">Bongkar Ego Spasial</div>
+        <div class="section-desc">Pilihlah opsi yang paling mencerminkan naluri berhuni aslimu.</div>
       </div>
     </div>
     <div class="q-container" id="fc-q-container">
@@ -642,7 +544,7 @@
     <div class="section-header">
       <div class="section-num display">03</div>
       <div>
-        <div class="section-title display">Realitas & Beban</div>
+        <div class="section-title display">Audit Realitas & Beban</div>
         <div class="section-desc">Kalkulasi kondisi spasial saat ini vs kemungkinan masa depan.</div>
       </div>
     </div>
@@ -688,7 +590,7 @@
     <!-- Separation Arrow -->
     <div class="result-sep-arrow">▼</div>
 
-    <!-- Unified Card 2: Blueprint SVG + Tipe Hunian -->
+    <!-- Unified Card 2: Blueprint SVG + Tipe Rumah -->
     <div class="result-card-spatial">
       <!-- Blueprint SVG Frame -->
       <div class="result-img-container" id="result-visual-frame">
@@ -696,9 +598,9 @@
       </div>
       
       <div class="result-badge-type">
-        <span class="result-badge-label">Rekomendasi Tipe Hunian Ideal</span>
-        <span class="result-badge-val" id="result-tipe-nama">Hunian Kampung Kota</span>
-        <span class="result-badge-desc" id="result-tipe-desc">Deskripsi tipe hunian ideal berdasarkan profil Persona</span>
+        <span class="result-badge-label">Rekomendasi Tipe Rumah Ideal</span>
+        <span class="result-badge-val" id="result-tipe-nama">Rumah Kampung Kota</span>
+        <span class="result-badge-desc" id="result-tipe-desc">Deskripsi tipe rumah ideal berdasarkan profil Persona</span>
       </div>
     </div>
 
@@ -708,15 +610,15 @@
     <!-- Bottom Dark Panel: Shadow & Lego Assembly Guidance -->
     <div class="result-dark-panel">
       <div class="result-dark-bridge">
-        Kamu mempunyai hunian impian sendiri, namun pilihan-pilihanmu ternyata memengaruhi hunianmu menjadi...
+        Hasil aslimu adalah cita-cita ideal, namun spektrum ketahanan bawah sadarmu (Shadow) ternyata memengaruhi wujud fisik rancanganmu...
       </div>
 
       <!-- Specific Shadow Model Intervened Card -->
       <div class="result-dark-model-card">
-        <span class="label-xs" style="color:var(--orange);">Model Spasial Hunian</span>
+        <span class="label-xs" style="color:var(--orange);">Model Spasial Hasil Shadow</span>
         <div class="result-dark-model-title" id="result-shadow-model-title" style="color:var(--blue);">Kampung Susun</div>
         <div class="result-dark-model-desc" id="result-shadow-model-desc">
-          Deskripsi model hunian yang diintervensi oleh shadow ego...
+          Deskripsi model rumah yang diintervensi oleh shadow ego...
         </div>
       </div>
 
@@ -727,7 +629,7 @@
 
       <!-- Zona Maket Box -->
       <div class="result-dark-zona-box">
-        <div class="result-dark-zona-title" id="result-zona-title">ZONA 1: PADAT DAN RENTAN</div>
+        <div class="result-dark-zona-title" id="result-zona-title">ZONA 1: COLLABORATIVE KAMPUNG</div>
         <div class="result-dark-zona-desc" id="result-zona-desc">
           Deskripsi petunjuk letak geografis dan rules penataan zona pada maket...
         </div>
@@ -794,28 +696,28 @@ const demogQuestions = [
 const questionPool = {
   // 1. PERSONA
   Q1:  { id: 'Q1',  section: '1. Persona',
-    text: 'Kalau bisa memilih hunian sendiri, apa kesan pertama yang ingin kamu tunjukkan dari tampilan hunianmu?',
+    text: 'Kalau bisa memilih rumah sendiri, apa kesan pertama yang ingin kamu tunjukkan dari tampilan rumahmu?',
     a: 'Ramah & terbuka; tanpa pagar tinggi, banyak tanaman.',
     b: 'Aman & privat; pagar kokoh tinggi, eksklusif.',
     sA: { traditionalist: 1.35, idealist: 1.15 },
     sB: { established: 1.05, urbanist: 0.75 } },
 
   Q1a: { id: 'Q1a', section: '1. Persona',
-    text: 'Kalau ada orang asing duduk sebentar di area depan hunianmu, apa reaksimu?',
-    a: 'Santai saja, senang hunian bisa bermanfaat bagi sekitar.',
+    text: '(Jika Q1 = A) Kalau ada orang asing duduk sebentar di area depan rumahmu, apa reaksimu?',
+    a: 'Santai saja, senang rumah bisa bermanfaat bagi sekitar.',
     b: 'Agak risih, merasa privasi mulai terganggu.',
     sA: { traditionalist: 1.35 },
     sB: { DEFENSIVE: 0.70 } },
 
   Q1b: { id: 'Q1b', section: '1. Persona',
-    text: 'Kenapa harus ada pagar?',
+    text: '(Jika Q1 = B) Kenapa harus ada pagar?',
     a: 'Untuk keamanan.',
     b: 'Membangun citra.',
     sA: { PARANOID: 0.85 },
     sB: { CONSUMPTIVE: 1.10 } },
 
   Q2A: { id: 'Q2A', section: '1. Persona',
-    text: 'Mana yang bikin kamu bangga saat cerita soal lokasi hunian ke kolega?',
+    text: 'Mana yang bikin kamu bangga saat cerita soal lokasi rumah ke kolega?',
     a: '"Pusat kota, ke mana-mana tinggal jalan kaki."',
     b: '"Cluster eksklusif, tenang dan jauh dari kebisingan."',
     sA: { urbanist: 0.75 },
@@ -837,21 +739,21 @@ const questionPool = {
     sB: { DEFENSIVE: 0.70 } },
 
   Q3a: { id: 'Q3a', section: '2. Shadow',
-    text: 'Berapa lama waktu yang rela kamu tukar di jalan demi punya hunian tapak di pinggiran?',
+    text: '(Jika Q3 = A) Berapa lama waktu yang rela kamu tukar di jalan demi punya rumah tapak di pinggiran?',
     a: 'Maksimal 2 jam, lebih dari itu mental hayati lelah.',
     b: 'Ya berapa aja gimana nasib, konsekuensi pilihan sendiri.',
     sA: { CONSUMPTIVE: 1.10 },
     sB: { SUPERFICIAL: 1.50 } },
 
   Q3b: { id: 'Q3b', section: '2. Shadow',
-    text: 'Kalau biaya sewa di pusat naik drastis, kamu pilih pindah jauh atau sharing unit (co-living)?',
+    text: '(Jika Q3 = B) Kalau biaya sewa di pusat naik drastis, kamu pilih pindah jauh atau sharing unit (co-living)?',
     a: 'Sharing unit, waktu terlalu berharga untuk habis di jalan.',
     b: 'Pindah jauh aja, butuh ruang pribadi meski di pinggiran.',
     sA: { SUPERFICIAL: 1.50 },
     sB: { DEFENSIVE: 0.70 } },
 
   Q4A: { id: 'Q4A', section: '2. Shadow',
-    text: 'Emosi karena apa yang paling sering terbawa pulang ke hunian?',
+    text: 'Emosi karena apa yang paling sering terbawa pulang ke rumah?',
     a: 'Lelah fisik akibat macet atau desakan di transportasi umum.',
     b: 'Kesal lihat banyak gedung kosong di kota, tapi nggak bisa ditinggali.',
     sA: { CONSUMPTIVE: 1.10 },
@@ -866,35 +768,35 @@ const questionPool = {
 
   // 3. ANIMA/US
   Q5:  { id: 'Q5',  section: '3. Anima/us',
-    text: 'Kalau hunianmu didominasi tangga, paling banyak mengarah ke mana?',
+    text: 'Kalau rumahmu didominasi tangga, paling banyak mengarah ke mana?',
     a: 'Ruang bersama, tempat ngobrol.',
     b: 'Kamar tidur, supaya bisa pulihkan energi.',
     sA: { traditionalist: 1.35 },
     sB: { idealist: 1.15 } },
 
   Q5a: { id: 'Q5a', section: '3. Anima/us',
-    text: 'Nyaman nggak berbagi dapur/ruang tamu dengan penghuni lain demi lokasi strategis?',
+    text: '(Jika Q5 = A) Nyaman nggak berbagi dapur/ruang tamu dengan penghuni lain demi lokasi strategis?',
     a: 'Nyaman, asal aturan dan kebersihannya ditaati.',
-    b: 'Nggak, yang namanya hunian adalah privasi.',
+    b: 'Nggak, yang namanya rumah adalah privasi.',
     sA: { traditionalist: 1.35, urbanist: 0.75 },
     sB: { established: 1.05 } },
 
   Q5b: { id: 'Q5b', section: '3. Anima/us',
-    text: 'Apa satu hal di area privatmu yang nggak boleh diganti fasilitas publik secanggih apa pun?',
+    text: '(Jika Q5 = B) Apa satu hal di area privatmu yang nggak boleh diganti fasilitas publik secanggih apa pun?',
     a: 'Sudut kerja atau area produktif.',
     b: 'Kamar mandi pribadi.',
     sA: { idealist: 1.15 },
     sB: { DEFENSIVE: 0.70 } },
 
   Q6A: { id: 'Q6A', section: '3. Anima/us',
-    text: 'Kalau kamu punya area hijau luas dekat hunian, lebih baik jadi milik pribadi atau taman warga?',
+    text: 'Kalau kamu punya area hijau luas dekat rumah, lebih baik jadi milik pribadi atau taman warga?',
     a: 'Taman warga, biar semua orang punya akses ruang hijau.',
     b: 'Teras pribadi, ingin udara segar tanpa harus bersinggungan orang lain.',
     sA: { idealist: 1.15 },
     sB: { DEFENSIVE: 0.70 } },
 
   Q6B: { id: 'Q6B', section: '3. Anima/us',
-    text: 'Gimana pendapatmu jika tangga hunianmu terhubung langsung ke cafe atau ruang kreatif di bawah?',
+    text: 'Gimana pendapatmu jika tangga rumahmu terhubung langsung ke cafe atau ruang kreatif di bawah?',
     a: 'Asik! Hidup jadi lebih praktis, dinamis, dan produktif.',
     b: 'Khawatir berisik dan masalah keamanan terganggu sih.',
     sA: { urbanist: 0.75 },
@@ -904,19 +806,19 @@ const questionPool = {
   Q7:  { id: 'Q7',  section: '4. Self',
     text: 'Lihat kotamu di malam hari, seperti apa yang kamu impikan 10 tahun lagi?',
     a: 'Kota padat yang nyaman untuk pejalan kaki & saling terhubung.',
-    b: 'Kota rapi dengan batas jelas antara area bisnis & hunian.',
+    b: 'Kota rapi dengan batas jelas antara area bisnis & perumahan.',
     sA: { urbanist: 0.75 },
     sB: { established: 1.05 } },
 
   Q7a: { id: 'Q7a', section: '4. Self',
-    text: 'Kamu mau nggak, terlibat aktif di koperasi warga untuk kelola gedung hunianmu bareng tetangga?',
+    text: '(Jika Q7 = A) Kamu mau nggak, terlibat aktif di koperasi warga untuk kelola gedung hunianmu bareng tetangga?',
     a: 'Yes! Partisipasi warga jadi kunci lingkungan tetap terjaga.',
     b: 'Nggak deh, kita bayar pengelola profesional aja.',
     sA: { traditionalist: 1.35 },
     sB: { SUPERFICIAL: 1.50 } },
 
   Q7b: { id: 'Q7b', section: '4. Self',
-    text: 'Kalau ada gedung baru menghalangi sinar matahari ke hunianmu, apa yang kamu lakukan?',
+    text: '(Jika Q7 = B) Kalau ada gedung baru menghalangi sinar matahari ke rumahmu, apa yang kamu lakukan?',
     a: 'Ajak warga nego kompensasi berupa ruang publik hijau.',
     b: 'Tempuh jalur hukum atau pindah ke area yang lebih aman.',
     sA: { idealist: 1.15 },
@@ -930,7 +832,7 @@ const questionPool = {
     sB: { established: 1.05 } },
 
   Q8B: { id: 'Q8B', section: '4. Self',
-    text: 'Kalau lampu hunianmu adalah pesan untuk pemerintah, apa yang ingin kamu sampaikan?',
+    text: 'Kalau lampu rumahmu adalah pesan untuk pemerintah, apa yang ingin kamu sampaikan?',
     a: '"Kami butuh akses hidup di pusat kota, bukan sekadar sertifikat."',
     b: '"Beri kami perlindungan dan kepastian hukum atas aset yang kami beli."',
     sA: { urbanist: 0.75 },
@@ -983,27 +885,27 @@ const affordQuestions = [
   { id: 'B_kabkota', text: 'Kabupaten/Kota domisili tempat tinggalmu saat ini?', type: 'text', placeholder: 'Ketik nama kota/kabupaten...' },
   { id: 'B_kecamatan', text: 'Kecamatan domisilimu saat ini?', type: 'text', placeholder: 'Ketik kecamatan tempat tinggalmu...' },
   { id: 'C_status_hunian', text: 'Apa status kepemilikan hunianmu saat ini?', type: 'pill', opts: ['Milik Sendiri', 'Sewa / Kontrak', 'Milik Orang Tua / Keluarga', 'Indekos', 'Lainnya'] },
-  { id: 'C_tipe_hunian', text: 'Apa tipe fisik hunianmu saat ini?', type: 'pill', opts: ['Hunian Tapak', 'Apartemen / Rusun', 'Hunian Kampung', 'Lainnya'] },
+  { id: 'C_tipe_hunian', text: 'Apa tipe fisik hunianmu saat ini?', type: 'pill', opts: ['Rumah Tapak', 'Apartemen / Rusun', 'Rumah Kampung', 'Lainnya'] },
   { id: 'C_moda', text: 'Apa moda transportasi komuter utamamu?', type: 'pill', opts: ['Motor Pribadi', 'Mobil Pribadi', 'KRL / MRT / LRT / Busway', 'Ojek Online / Angkutan Umum', 'WFH / Tidak Komuter'] },
   { id: 'C_waktu_komuter', text: 'Berapa waktu tempuh komutermu sekali jalan?', type: 'pill', opts: ['< 15 Menit', '15 - 30 Menit', '31 - 60 Menit', '1 - 2 Jam', '> 2 Jam', 'Tidak Komuter'] },
   { id: 'D_kamar', text: 'Jumlah kamar tidur minimal yang mutlak kamu butuhkan?', type: 'pill', opts: ['Studio (1 Ruang)', '1 Kamar', '2 Kamar', '3 Kamar', '4+ Kamar'] },
   { id: 'D_luas', text: 'Berapa luas bangunan minimal yang kamu rasa layak untuk keluargamu?', type: 'pill', opts: ['< 21 m²', '21 - 36 m²', '37 - 50 m²', '51 - 70 m²', '71 - 100 m²', '> 100 m²'] },
-  { id: 'D_tipe_impian', text: 'Tipe fisik hunian apa yang ingin kamu capai di masa depan?', type: 'pill', opts: ['Hunian Tapak Mandiri', 'Rusun / Apartemen Pusat Kota', 'Townhouse / Cluster Pinggiran', 'Kampung Vertikal Kolektif'] },
-  { id: 'E_tradeoff', text: 'Jika budget terbatas, apa "trade-off" utama yang bersedia kamu korbankan?', type: 'pill', opts: ['Ukuran unit kecil asal lokasi nempel pusat', 'Lokasi sangat jauh di pinggiran asal Hunian tapak luas', 'Sewa jangka panjang saja asal akses transportasi mudah', 'Tidak ingin berkompromi sama sekali'] },
+  { id: 'D_tipe_impian', text: 'Tipe fisik hunian apa yang ingin kamu capai di masa depan?', type: 'pill', opts: ['Rumah Tapak Mandiri', 'Rusun / Apartemen Pusat Kota', 'Townhouse / Cluster Pinggiran', 'Kampung Vertikal Kolektif'] },
+  { id: 'E_tradeoff', text: 'Jika budget terbatas, apa "trade-off" utama yang bersedia kamu korbankan?', type: 'pill', opts: ['Ukuran unit kecil asal lokasi nempel pusat', 'Lokasi sangat jauh di pinggiran asal rumah tapak luas', 'Sewa jangka panjang saja asal akses transportasi mudah', 'Tidak ingin berkompromi sama sekali'] },
   { id: 'E_waktu_maks', text: 'Berapa durasi komuter maksimal sekali jalan yang masih bisa kamu toleransi?', type: 'pill', opts: ['< 30 Menit', '30 - 60 Menit', '1 - 1.5 Jam', '1.5 - 2 Jam', 'Tidak Sanggup Komuter'] },
-  { id: 'G_visual', text: 'Pilih kecenderungan visual hunian impianmu di maket pameran:', type: 'pill', opts: ['Landed House Berhalaman Terbuka', 'Vertical High-Rise Terintegrasi', 'Co-Living Unit Berbagi Fasilitas', 'Hunian Kampung dengan Fasad Ekspresif'] },
+  { id: 'G_visual', text: 'Pilih kecenderungan visual hunian impianmu di maket pameran:', type: 'pill', opts: ['Landed House Berhalaman Terbuka', 'Vertical High-Rise Terintegrasi', 'Co-Living Unit Berbagi Fasilitas', 'Rumah Kampung dengan Fasad Ekspresif'] },
   { id: 'G_rusun', text: 'Apakah kamu bersedia tinggal di hunian vertikal (Rusun/Apartemen) di masa depan?', type: 'pill', opts: ['Sangat Bersedia (Menukar tanah demi efisiensi)', 'Hanya Terpaksa (Jika tidak ada pilihan tapak terjangkau)', 'Hanya untuk Investasi / Disewakan kembali', 'Sama sekali tidak bersedia'] }
 ];
 
 const modelMatrix = {
   traditionalist: {
-    DEFENSIVE: { name: 'Hunian Infill', en: 'Urban Infill', code: 'T1-DEF', desc: 'Membangun persil tunggal vertikal 3-4 lantai secara mandiri di gang sempit. Komprominya adalah menyisakan void udara vertikal (lightwell) selebar 1 meter agar unit tetap mendapat ventilasi alami di tengah kepadatan.' },
-    CONSUMPTIVE: { name: 'Kampung Susun', en: 'Vertical Cluster', code: 'T1-CON', desc: 'Rancangan unit tipe mezator (Mezanin + Kantor) di mana area hunian di loteng terpisah dari lantai dasar usaha keluarga. Koridor dirancang ekstra lebar (3 meter) agar gerobak jualan warga lancar bergerak.' },
+    DEFENSIVE: { name: 'Rumah Infill', en: 'Urban Infill', code: 'T1-DEF', desc: 'Membangun persil tunggal vertikal 3-4 lantai secara mandiri di gang sempit. Komprominya adalah menyisakan void udara vertikal (lightwell) selebar 1 meter agar unit tetap mendapat ventilasi alami di tengah kepadatan.' },
+    CONSUMPTIVE: { name: 'Kampung Susun', en: 'Vertical Cluster', code: 'T1-CON', desc: 'Rancangan unit tipe mezator (Mezanin + Usaha) di mana area hunian di loteng terpisah dari lantai dasar usaha keluarga. Koridor dirancang ekstra lebar (3 meter) agar gerobak jualan warga lancar bergerak.' },
     PARANOID: { name: 'Klaster Tertutup', en: 'Micro Cluster', code: 'T1-PAR', desc: 'Konsolidasi 5-12 KK di ujung gang buntu menggunakan sistem satu gerbang utama (one-gate system) dengan struktur beton tahan api dan courtyard dalam yang membatasi akses eksternal.' },
-    SUPERFICIAL: { name: 'Hunian-Rakit', en: 'Stilt House', code: 'T1-SUP', desc: 'Konstruksi kering menggunakan struktur rangka baja ringan modular yang diselipkan cepat di gang sempit tanpa perlu pengerjaan beton basah yang lama.' }
+    SUPERFICIAL: { name: 'Rumah-Rakit', en: 'Stilt House', code: 'T1-SUP', desc: 'Konstruksi kering menggunakan struktur rangka baja ringan modular yang diselipkan cepat di gang sempit tanpa perlu pengerjaan beton basah yang lama.' }
   },
   established: {
-    DEFENSIVE: { name: 'Hunian Susun Tapak', en: 'Vertical Townhouse', code: 'T2-DEF', desc: 'Unit townhouse vertikal split-level di atas persil mini (30-50m²) tengah kota, memadatkan fungsi hunian secara vertikal untuk menjaga kedaulatan visual tanah individu.' },
+    DEFENSIVE: { name: 'Rumah Susun Tapak', en: 'Vertical Townhouse', code: 'T2-DEF', desc: 'Unit townhouse vertikal split-level di atas persil mini (30-50m²) tengah kota, memadatkan fungsi hunian secara vertikal untuk menjaga kedaulatan visual tanah individu.' },
     CONSUMPTIVE: { name: 'Ruko Sewa Bersama', en: 'Co-Sharing Housing', code: 'T2-CON', desc: 'Transformasi ruko mangkrak pusat kota menjadi unit-unit kompak siap pakai dengan area dapur dan cuci bersama demi penghematan operasional bulanan.' },
     PARANOID: { name: 'Apartemen Satu Gerbang', en: 'One-Gate Block', code: 'T2-PAR', desc: 'Apartemen vertikal rendah terkelola dengan perlindungan gerbang pintar (smart-card) dan area bermain internal yang sepenuhnya terisolasi dari bahaya lingkungan luar.' },
     SUPERFICIAL: { name: 'Pod Huni Mandiri', en: 'Pod-Living', code: 'T2-SUP', desc: 'Pod kapsul rakitan yang sudah lengkap dengan perabot lipat pintar (transformer furniture) untuk kemudahan huni instan.' }
@@ -1012,13 +914,13 @@ const modelMatrix = {
     DEFENSIVE: { name: 'Hunian Transit', en: 'Transit Loft', code: 'T3-DEF', desc: 'Gedung ramping (slim building) setinggi 5-7 lantai tepat di dekat stasiun dengan unit loft beratribut jendela kaca raksasa kedap suara.' },
     CONSUMPTIVE: { name: 'Studio Komuter', en: 'Comuter Studio', code: 'T3-CON', desc: 'Unit mikro fungsional 12-15m² yang memangkas luas ruang pribadi demi mengutamakan alamat prestisius tengah kota dan menihilkan area parkir mobil.' },
     PARANOID: { name: 'Apartemen Skybridge', en: 'Sky-Bridge Apartment', code: 'T3-PAR', desc: 'Blok hunian terintegrasi dengan akses jembatan layang (skybridge) langsung ke peron stasiun MRT/LRT untuk keamanan jalur steril komuter.' },
-    SUPERFICIAL: { name: 'Hunian Kapsul Modular', en: 'Plug-in Capsule', code: 'T3-SUP', desc: 'Kapsul tidur modular siap pakai yang ditumpangkan langsung ke dalam struktur baja gedung parkir komersial yang sepi.' }
+    SUPERFICIAL: { name: 'Rumah Kapsul Modular', en: 'Plug-in Capsule', code: 'T3-SUP', desc: 'Kapsul tidur modular siap pakai yang ditumpangkan langsung ke dalam struktur baja gedung parkir komersial yang sepi.' }
   },
   idealist: {
     DEFENSIVE: { name: 'Pod Terapung', en: 'Floating Pod', code: 'T4-DEF', desc: 'Unit kapsul amfibi dengan fondasi ponton styrofoam berlapis semen ringan yang memungkinkannya terapung setinggi 1.5 meter saat rob datang.' },
-    CONSUMPTIVE: { name: 'Hunian Mandiri Energi', en: 'Sirkular Off-Grid', code: 'T4-CON', desc: 'Hunian dengan atap terintegrasi panel surya (BIPV) dan sistem sirkular filter biologis (closed-loop) yang mengolah air hujan menjadi air layak pakai.' },
-    PARANOID: { name: 'Hunian Cangkang', en: 'Climate-Shell House', code: 'T4-PAR', desc: 'Bangunan berselimut fasad ganda (double-skin envelope) dari tanaman rimbun masif yang bertindak sebagai filter polutan industri dan kebisingan.' },
-    SUPERFICIAL: { name: 'Kabin Hijau', en: 'Eco Cabin', code: 'T4-SUP', desc: 'Kabin modular prefab ramah lingkungan terintegrasi yang dipasang cepat di area resapan air hulu tanpa semen basah.' }
+    CONSUMPTIVE: { name: 'Rumah Mandiri Energi', en: 'Sirkular Off-Grid', code: 'T4-CON', desc: 'Rumah dengan atap terintegrasi panel surya (BIPV) dan sistem sirkular filter biologis (closed-loop) yang mengolah air hujan menjadi air layak pakai.' },
+    PARANOID: { name: 'Rumah Cangkang', en: 'Climate-Shell House', code: 'T4-PAR', desc: 'Bangunan berselimut fasad ganda (double-skin envelope) dari tanaman rimbun masif yang bertindak sebagai filter polutan industri dan kebisingan.' },
+    SUPERFICIAL: { name: 'Kabin Hijau', en: 'Eco Cabin', code: 'T4-SUP', desc: 'Kabin modular prefab ramah lingkungan terintegrasi kontrol AI yang dipasang cepat di area resapan air hulu tanpa semen basah.' }
   }
 };
 
@@ -1065,10 +967,10 @@ const boundariesText = {
 };
 
 const zonaMapping = {
-  traditionalist: { id: '1', name: 'ZONA 1: PADAT DAN RENTAN', desc: 'Tambora, Johar Baru, Penjaringan. Wilayah in-situ dengan modal sosial gotong royong tinggi, namun terancam kerentanan fisik/kebakaran. Pemasangan balok wajib berkolaborasi.' },
-  established: { id: '2', name: 'ZONA 2: SPRAWL DAN TRANSPORTASI', desc: 'Bekasi, Depok, Pamulang, Ciputat (Sabuk Komuter). Mengurai ketegangan urban sprawl dengan penyediaan rusunawa hemat biaya yang terstruktur.' },
-  urbanist: { id: '3', name: 'ZONA 3: ISOLASI DAN JARAK', desc: 'Cideng, Harmoni, Simpul TOD. Mengoptimalkan ruko kosong mangkrak di pusat kota menjadi hunian modular aktif hemat ruang.' },
-  idealist: { id: '4', name: 'ZONA 4: EKOLOGIS DAN KRISIS', desc: 'Kamal Muara, Pesisir Utara, Puncak. Garis depan resiliensi iklim. Membutuhkan arsitektur sirkular amfibi otonom yang ramah air.' }
+  traditionalist: { id: '1', name: 'ZONA 1: COLLABORATIVE KAMPUNG', desc: 'Lokasi real: Tambora, Johar Baru, Penjaringan. Wilayah in-situ dengan modal sosial gotong royong tinggi, namun terancam kerentanan fisik/kebakaran. Pemasangan balok wajib berkolaborasi.' },
+  established: { id: '2', name: 'ZONA 2: STRATEGIC VERTICAL', desc: 'Lokasi real: Bekasi, Depok, Pamulang, Ciputat (Sabuk Komuter). Mengurai ketegangan urban sprawl dengan penyediaan rusunawa hemat biaya yang terstruktur.' },
+  urbanist: { id: '3', name: 'ZONA 3: ADAPTIVE URBAN CORE', desc: 'Lokasi real: Cideng, Harmoni, Simpul TOD. Mengoptimalkan ruko kosong mangkrak di pusat kota menjadi hunian modular aktif hemat ruang.' },
+  idealist: { id: '4', name: 'ZONA 4: CLIMATE FRONTIER', desc: 'Lokasi real: Kamal Muara, Pesisir Utara, Puncak. Garis depan resiliensi iklim. Membutuhkan arsitektur sirkular amfibi otonom yang ramah air.' }
 };
 
 // ── APP FLOW CONTROL ──
@@ -1437,13 +1339,13 @@ function updateResultLayout() {
   document.getElementById('result-persona-title').textContent = primaryLabel.name;
   document.getElementById('result-persona-desc').textContent = primaryLabel.desc;
 
-  const tipeHunianLabels = {
-    traditionalist: { name: 'Hunian Kampung Kota', desc: 'Rancangan hunian yang menjaga kearifan lokal, mengutamakan relasi sosial dan keadilan bermukim.' },
-    established: { name: 'Hunian Layak', desc: 'Hunian vertikal layak huni dengan jaminan dan akses penyeimbang sprawl.' },
-    urbanist: { name: 'Hunian Terhubung', desc: 'Unit apartemen kompak terintegrasi langsung dengan simpul transit TOD.' },
-    idealist: { name: 'Hunian Hijau & Mandiri', desc: 'Sistem hunian berkelanjutan otonom dengan resiliensi iklim tingkat tinggi.' }
+  const tipeRumahLabels = {
+    traditionalist: { name: 'Rumah Kampung Kota', desc: 'Rancangan hunian yang mengutamakan pertahanan ikatan sosial masyarakat dan keadilan in-situ.' },
+    established: { name: 'Rumah Terjangkau', desc: 'Hunian vertikal hemat biaya dengan jaminan kelayakan huni dan akses penyeimbang sprawl.' },
+    urbanist: { name: 'Rumah Terhubung', desc: 'Unit apartemen kompak terintegrasi langsung dengan simpul transit TOD.' },
+    idealist: { name: 'Rumah Hijau & Mandiri', desc: 'Sistem hunian berkelanjutan otonom dengan resiliensi iklim tingkat tinggi.' }
   };
-  const tipeLabel = tipeHunianLabels[res.primaryPersona];
+  const tipeLabel = tipeRumahLabels[res.primaryPersona];
   document.getElementById('result-tipe-nama').textContent = tipeLabel.name;
   document.getElementById('result-tipe-desc').textContent = tipeLabel.desc;
 
@@ -1467,7 +1369,7 @@ function updateResultLayout() {
   const boundaryDesc = boundariesText[res.primaryShadow];
   document.getElementById('result-zona-desc').innerHTML = `
     <strong>Geografis:</strong> ${zonaMeta.desc}<br><br>
-    <strong>Batasan Hunian (Shadow):</strong> <em>${boundaryDesc}</em>
+    <strong>Batasan Boundary Hunian (Shadow):</strong> <em>${boundaryDesc}</em>
   `;
 
   const confBadge = document.getElementById('result-confidence');
@@ -1892,11 +1794,11 @@ function downloadAllAssetsAndShare() {
     idealist: 'THE IDEALIST'
   };
   
-  const rawText = `=== RESUME DIAGNOSA HUNIAN MASA DEPAN ===
+  const rawText = `=== RESUME DIAGNOSA RUMAH MASA DEPAN ===
 Nama Responden: ${demogAnswers['nama'] || 'Warga'}
 Email: ${demogAnswers['email'] || '-'}
 Arketipe Utama: ${pLabels[computedResult.primaryPersona]}
-Tipe Hunian Ideal: ${document.getElementById('result-tipe-nama').textContent}
+Tipe Rumah Ideal: ${document.getElementById('result-tipe-nama').textContent}
 Model Spasial Akhir (Shadow): ${document.getElementById('result-shadow-model-title').textContent}
 Zona Penempatan Maket: ${document.getElementById('result-zona-title').textContent}
 Komponen LEGO: ${document.getElementById('result-brick-color').textContent}
@@ -1916,10 +1818,10 @@ Indeks Konflik Shadow: ${computedResult.stressIndex}% Stress`;
   URL.revokeObjectURL(url);
 
   // Trigger Native Share API if supported
-  const shareText = `Hasil kuesioner "Hunian Masa Depan" JFF 2026 saya: ${pLabels[computedResult.primaryPersona]} - ${document.getElementById('result-shadow-model-title').textContent}! Ikuti kuesionernya untuk temukan hunian sesuai dirimu!`;
+  const shareText = `Hasil kuesioner "Rumah Masa Depan" JFF 2026 saya: ${pLabels[computedResult.primaryPersona]} - ${document.getElementById('result-shadow-model-title').textContent}! Ikuti kuesionernya untuk menguji ego spasialmu!`;
   if (navigator.share) {
     navigator.share({
-      title: 'Hunian Masa Depan — RCUS JFF 2026',
+      title: 'Rumah Masa Depan — RCUS JFF 2026',
       text: shareText
     }).catch(err => console.log(err));
   } else {
@@ -1976,129 +1878,6 @@ function restartSurvey() {
 window.onload = function() {
   showScreen('start');
 };
-</script>
-
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║  DEV / FREE MENU (FLOATING)  ║ -->
-<!-- ╚══════════════════════════════╝ -->
-<button id="dev-menu-fab" onclick="toggleDevMenu()" title="Dev / Demo Mode" aria-label="Dev Menu">⚡</button>
-
-<div id="dev-menu-panel">
-  <div class="dev-title">⚡ DEV / DEMO MODE</div>
-  <hr class="dev-sep">
-  <div class="dev-note">Lompat ke bagian</div>
-  <button class="dev-btn" onclick="devGoTo('demografi')">📋 Data Diri (awal)</button>
-  <button class="dev-btn" onclick="devGoTo('fc')">🎯 16 Dilema (skip demografi)</button>
-  <button class="dev-btn" onclick="devGoTo('afford')">🏠 Beban Hunian (skip s/d FC)</button>
-  <button class="dev-btn" onclick="devGoTo('result')">✨ Langsung Hasil Diagnosa</button>
-  <hr class="dev-sep">
-  <div class="dev-note">Isi otomatis &amp; lanjut</div>
-  <button class="dev-btn" onclick="devSkipDemog()">⏭ Skip Demografi → FC</button>
-  <button class="dev-btn" onclick="devSkipAfford()">⏭ Skip Beban Hunian → Hasil</button>
-  <button class="dev-btn" onclick="devFillAll()" style="background:rgba(255,211,61,0.15);border-color:var(--yellow);color:var(--yellow);">⚡ Isi Semua → Langsung Hasil</button>
-  <hr class="dev-sep">
-  <button class="dev-btn" style="color:rgba(255,255,255,0.35);font-size:11px;border-color:transparent;" onclick="toggleDevMenu()">✕ Tutup menu</button>
-</div>
-
-<script>
-// ══ DEV MENU ══════════════════════════════════════════════
-(function() {
-  var _open = false;
-
-  window.toggleDevMenu = function() {
-    _open = !_open;
-    document.getElementById('dev-menu-panel').classList.toggle('open', _open);
-    document.getElementById('dev-menu-fab').textContent = _open ? '✕' : '⚡';
-  };
-
-  document.addEventListener('click', function(e) {
-    if (_open &&
-        !e.target.closest('#dev-menu-panel') &&
-        !e.target.closest('#dev-menu-fab')) {
-      _open = false;
-      document.getElementById('dev-menu-panel').classList.remove('open');
-      document.getElementById('dev-menu-fab').textContent = '⚡';
-    }
-  });
-})();
-
-// Dummy data helpers
-function _dummyDemog() {
-  if (typeof demogAnswers === 'undefined') return;
-  demogAnswers = {
-    nama: 'Demo User', email: 'demo@jff2026.id',
-    usia: '26 - 35', pendidikan: 'Sarjana (S1)',
-    gender: 'Tidak ingin menyebutkan',
-    pekerjaan: 'Kreatif / Seni', status_nikah: 'Belum Menikah'
-  };
-  demogIdx = demogQuestions.length;
-}
-
-function _dummyFC() {
-  if (typeof fcAnswers === 'undefined') return;
-  var keys = ['Q1','Q1a','Q2A','Q2B','Q3','Q3a','Q4A','Q4B','Q5','Q5a','Q6A','Q6B','Q7','Q7a','Q8A','Q8B'];
-  keys.forEach(function(id) { fcAnswers[id] = Math.random() > 0.5 ? 'A' : 'B'; });
-  fcIdx = 16;
-}
-
-function _dummyAfford() {
-  if (typeof affordAnswers === 'undefined') return;
-  Object.assign(affordAnswers, {
-    A_anggota:'2 Orang', B_provinsi:'DKI Jakarta', B_kabkota:'Jakarta Pusat',
-    B_kecamatan:'Tidak relevan', C_status_hunian:'Sewa / Kontrak',
-    C_tipe_hunian:'Apartemen / Rusun', C_moda:'KRL / MRT / LRT',
-    C_waktu_komuter:'31 - 60 Menit', D_kamar:'1 Kamar', D_luas:'21 - 36 m²',
-    D_tipe_impian:'Apartemen / Rusun Pusat Kota', E_tradeoff:'Kecil tapi dekat',
-    E_waktu_maks:'31 - 60 Menit', G_visual:'Vertical High-Rise Terintegrasi',
-    G_rusun:'Sangat Bersedia'
-  });
-  affordIdx = affordQuestions.length;
-}
-
-function _closeMenu() {
-  document.getElementById('dev-menu-panel').classList.remove('open');
-  document.getElementById('dev-menu-fab').textContent = '⚡';
-}
-
-function devGoTo(target) {
-  _closeMenu();
-  document.getElementById('top-nav').style.display = 'flex';
-  if (target === 'demografi') {
-    demogIdx = 0; startSurvey();
-  } else if (target === 'fc') {
-    _dummyDemog();
-    showScreen('fc'); renderFC();
-  } else if (target === 'afford') {
-    _dummyDemog(); _dummyFC();
-    showScreen('afford'); renderAffordQ();
-  } else if (target === 'result') {
-    _dummyDemog(); _dummyFC(); _dummyAfford();
-    calculateResults();
-  }
-}
-
-function devSkipDemog() {
-  _closeMenu();
-  document.getElementById('top-nav').style.display = 'flex';
-  _dummyDemog();
-  showScreen('fc'); renderFC();
-}
-
-function devSkipAfford() {
-  _closeMenu();
-  document.getElementById('top-nav').style.display = 'flex';
-  if (demogIdx < demogQuestions.length) _dummyDemog();
-  if (fcIdx < 16) _dummyFC();
-  _dummyAfford();
-  calculateResults();
-}
-
-function devFillAll() {
-  _closeMenu();
-  document.getElementById('top-nav').style.display = 'flex';
-  _dummyDemog(); _dummyFC(); _dummyAfford();
-  calculateResults();
-}
 </script>
 </body>
 </html>

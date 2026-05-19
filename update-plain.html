@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hunian Masa Depan — RCUS & JFF 2026</title>
+<title>Rumah Masa Depan — RCUS & JFF 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -72,6 +72,20 @@
     font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
     padding: 6px 14px; border-radius: 99px;
     border: 2.5px solid var(--ink); background: var(--yellow);
+  }
+
+  /* ── CARDS ──────────────────────────────────────────── */
+  .card-pop {
+    background: white;
+    border: var(--border);
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+  }
+  .card-pop-lg {
+    background: white;
+    border: var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
   }
 
   /* ── BUTTONS ────────────────────────────────────────── */
@@ -238,44 +252,34 @@
   }
   .toggle-btn.active { background: var(--ink); color: white; }
 
-  /* ── RESULT SCREEN (UPDATED AS PER NEW WIREFRAME) ─────── */
+  /* ── RESULT WIREFRAME ───────────────────────────────── */
   #screen-result {
     padding: 80px 16px 40px; min-height: 100vh;
     background: var(--paper); position: relative;
   }
   .result-container {
     max-width: 500px; margin: 0 auto;
-    display: flex; flex-direction: column; gap: 24px;
+    border: var(--border); border-radius: 30px;
+    background: white; box-shadow: var(--shadow-lg);
+    overflow: hidden; display: flex; flex-direction: column;
   }
   
-  /* Unified Card 1: Nama Profil + Avatar Lego + Deskripsi */
-  .result-card-profile {
-    background: #FFFFFF;
-    border: var(--border);
-    border-radius: 24px;
-    box-shadow: var(--shadow-lg);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
+  .result-light-panel {
+    background: var(--off); padding: 30px 24px;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; gap: 20px;
+    border-bottom: var(--border);
   }
-  .result-user-greeting { font-size: 14px; font-weight: 700; color: rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 0.05em; }
-  .result-persona-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; line-height: 1; color: var(--ink); }
+  .result-user-greeting { font-size: 16px; font-weight: 700; color: rgba(0,0,0,0.5); }
+  .result-persona-title { font-family: 'Bebas Neue', sans-serif; font-size: 48px; line-height: 0.9; color: var(--ink); }
   
-  .result-avatar-frame {
-    width: 140px; height: 140px;
-    border: var(--border);
-    border-radius: 16px;
-    background: var(--off);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .result-img-container {
+    width: 100%; border: var(--border); border-radius: 16px;
+    overflow: hidden; background: #EAEAEA; aspect-ratio: 16/10;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; box-shadow: var(--shadow);
   }
-  .result-avatar-frame svg { width: 100%; height: 100%; }
+  .result-img-container svg { width: 100%; height: 100%; display: block; }
 
   .result-desc-card {
     background: #EFECE6; border: var(--border); border-radius: 12px;
@@ -283,49 +287,25 @@
     text-align: left; width: 100%;
   }
 
-  /* Unified Card 2: Blueprint SVG + Tipe Hunian */
-  .result-card-spatial {
-    background: #FFFFFF;
-    border: var(--border);
-    border-radius: 24px;
-    box-shadow: var(--shadow-lg);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .result-img-container {
-    width: 100%; border: var(--border); border-radius: 16px;
-    overflow: hidden; background: #0A0A0A; aspect-ratio: 16/10;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; box-shadow: var(--shadow);
-  }
-  .result-img-container svg { width: 100%; height: 100%; display: block; }
-
   .result-badge-type {
     display: flex; flex-direction: column; gap: 4px;
-    padding: 16px; border: var(--border); border-radius: 14px;
-    background: var(--off); width: 100%; text-align: left;
+    padding: 14px; border: var(--border); border-radius: 14px;
+    background: white; width: 100%; text-align: left;
     box-shadow: var(--shadow);
   }
   .result-badge-label { font-size: 10px; font-weight: 800; opacity: 0.5; text-transform: uppercase; }
-  .result-badge-val { font-size: 18px; font-weight: 800; color: var(--blue); }
+  .result-badge-val { font-size: 16px; font-weight: 800; color: var(--blue); }
   .result-badge-desc { font-size: 12px; font-weight: 500; opacity: 0.7; line-height: 1.4; margin-top: 4px; }
 
-  /* Joint arrow separator */
   .result-sep-arrow {
     display: flex; align-items: center; justify-content: center;
-    font-size: 32px; font-weight: 800; color: var(--ink);
-    margin: -8px 0; z-index: 10;
+    font-size: 44px; font-weight: 800; color: var(--ink);
+    margin: -10px 0; z-index: 10;
   }
 
-  /* Bottom dark panel (Shadow Interventions) */
   .result-dark-panel {
-    background: var(--ink); color: white; padding: 32px 24px;
-    border: var(--border); border-radius: 24px;
-    box-shadow: var(--shadow-lg);
-    display: flex; flex-direction: column; gap: 20px;
+    background: var(--ink); color: white; padding: 36px 24px;
+    display: flex; flex-direction: column; gap: 24px;
   }
   .result-dark-bridge {
     font-size: 13px; font-weight: 600; line-height: 1.6; color: rgba(255,255,255,0.7);
@@ -356,8 +336,8 @@
     border: 3px dashed rgba(255,255,255,0.3); border-radius: 16px; padding: 20px;
     background: rgba(255,255,255,0.02); display: flex; flex-direction: column; align-items: center; gap: 12px;
   }
-  .result-dark-lego-title { font-family: 'Bebas Neue', sans-serif; font-size: 14px; opacity: 0.6; tracking: 0.05em; }
-  .result-lego-canvas { width: 100%; aspect-ratio: 16/10; background: rgba(0,0,0,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .result-dark-lego-title { font-family: 'Bebas Neue', sans-serif; font-size: 16px; opacity: 0.6; tracking: 0.05em; }
+  .result-lego-canvas { width: 100%; min-height: 140px; aspect-ratio: 16/10; background: rgba(0,0,0,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
   .result-disclaimer {
     text-align: center; font-size: 11px; font-weight: 700; color: rgba(0,0,0,0.4);
@@ -388,120 +368,30 @@
     animation: confetti-fall linear forwards;
   }
   
+  /* Buttons inside Result */
+  .result-action-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
   @keyframes confetti-fall {
     0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
     100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
   }
 
-  /* ── DEV / FREE MENU ─────────────────────────────────── */
-  #dev-menu-fab {
-    position: fixed; bottom: 20px; right: 16px; z-index: 500;
-    width: 48px; height: 48px; border-radius: 50%;
-    background: var(--ink); color: var(--yellow);
-    border: 2.5px solid var(--yellow);
-    font-size: 20px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
-    transition: transform 0.2s; -webkit-tap-highlight-color: transparent;
-  }
-  #dev-menu-fab:hover { transform: scale(1.1); }
-  #dev-menu-panel {
-    position: fixed; bottom: 76px; right: 16px; z-index: 499;
-    background: var(--ink); border: 2.5px solid var(--yellow);
-    border-radius: 16px; padding: 16px; width: 240px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    display: none; flex-direction: column; gap: 8px;
-    transform-origin: bottom right;
-  }
-  #dev-menu-panel.open { display: flex; animation: fadeSlideIn 0.2s ease forwards; }
-  #dev-menu-panel .dev-title {
-    font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.1em;
-    color: var(--yellow); margin-bottom: 4px; text-align: center;
-  }
-  .dev-btn {
-    width: 100%; padding: 10px 14px; border-radius: 8px;
-    border: 2px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.06); color: white;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 12px; font-weight: 700; cursor: pointer;
-    text-align: left; transition: background 0.15s; letter-spacing: 0.02em;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .dev-btn:hover { background: rgba(255,255,255,0.15); }
-  .dev-btn.active { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
-  .dev-sep { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 2px 0; }
-  .dev-note { font-size: 10px; color: rgba(255,255,255,0.35); text-align: center; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
-
-  /* ── MOBILE FIRST ────────────────────────────────────── */
-  /* Touch tap area minimum 44px */
-  .pill-opt { min-height: 44px; display: inline-flex; align-items: center; }
-  .btn { min-height: 48px; }
-  .fc-card { min-height: 100px; }
-
-  @media (max-width: 600px) {
-    /* Nav */
-    .top-nav { padding: 8px 12px; }
-    .nav-brand { font-size: 20px; }
-    .nav-section-pill { font-size: 10px; padding: 4px 10px; }
-    .nav-info { font-size: 10px; }
-
-    /* Start screen */
-    #screen-start { padding: 72px 16px 32px; }
-    .hero-title { font-size: clamp(52px, 18vw, 84px); }
-    .hero-sub { font-size: clamp(18px, 5vw, 28px); }
-    .hero-desc { font-size: 14px; }
-    .start-boxes { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-    .start-box { padding: 12px 10px; }
-    .start-box-num { font-size: 30px; }
-    .flow-pills { gap: 6px; }
-    .flow-pill { font-size: 10px; padding: 5px 10px; }
-    .btn-lg { padding: 16px 24px; font-size: 15px; }
-
-    /* Section screens */
-    .section-screen { padding-top: 72px; }
-    .section-header { padding: 16px 16px 0; gap: 10px; }
-    .section-num { font-size: 52px; }
-    .section-title { font-size: 26px; }
-    .q-container { padding: 16px; gap: 14px; max-width: 100%; }
-
-    /* Forced choice */
+  @media (max-width: 540px) {
+    .start-boxes { grid-template-columns: 1fr 1fr 1fr; }
+    .fc-text { font-size: 13px; }
     .fc-wrap { grid-template-columns: 1fr auto 1fr; gap: 8px; }
-    .fc-card { padding: 14px 12px; border-radius: 12px; gap: 8px; }
-    .fc-text { font-size: 13px; line-height: 1.45; }
-    .fc-vs { font-size: 22px; width: 28px; }
-    .q-text { font-size: 15px; line-height: 1.4; }
-    .q-num-badge { width: 36px; height: 36px; font-size: 14px; flex-shrink: 0; }
-
-    /* Footer nav */
-    .q-footer { padding: 14px 16px 24px; max-width: 100%; }
-    .btn { padding: 12px 18px; font-size: 13px; }
-
-    /* Pills */
-    .pill-opt { padding: 10px 14px; font-size: 13px; }
-    .text-input { padding: 13px 16px; font-size: 14px; }
-
-    /* Result */
-    #screen-result { padding: 72px 12px 32px; }
-    .result-container { gap: 16px; }
-    .result-card-profile { padding: 20px 16px; border-radius: 18px; }
-    .result-persona-title { font-size: 32px; }
-    .result-avatar-frame { width: 110px; height: 110px; }
-    .result-card-spatial { padding: 16px; border-radius: 18px; }
-    .result-dark-panel { padding: 20px 16px; border-radius: 18px; }
-    .result-dark-model-title { font-size: 22px; }
+    .top-nav { padding: 10px 14px; }
+    .q-text { font-size: 16px; }
+    .result-container { border-radius: 20px; }
     .result-demog-grid { grid-template-columns: 1fr; }
-    .bar-label { width: 100px; font-size: 10px; }
-    .toggle-wrap { margin: 0 12px 16px; }
   }
 
-  @media (max-width: 380px) {
-    .fc-card { padding: 10px 8px; }
-    .fc-text { font-size: 12px; }
-    .start-box-num { font-size: 24px; }
-    .q-text { font-size: 14px; }
-  }
-
-  /* ── ANIMATIONS ─────────────────────────────────────── */
   @keyframes fadeSlideIn {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -532,11 +422,11 @@
 <!-- ╚══════════════════════╝ -->
 <div id="screen-start" class="screen active">
   <div class="hero-wrap">
-    <div class="start-badge">Rujak Center for Urban Studies & OURCHETYPE 2026</div>
-    <div class="hero-title display">HOUSE<br>AS<br>HOME</div>
+    <div class="start-badge">Rujak Center for Urban Studies & JFF 2026</div>
+    <div class="hero-title display">RUMAH<br>MASA<br>DEPAN</div>
     <div class="hero-sub display">Nalar Huni & Ego Perkotaan</div>
     <p class="hero-desc">
-      Ikuti kuesioner interaktif untuk temukan hunianmu di Jabodetabekpunjur.
+      Ikuti kuesioner interaktif 16-langkah kedaulatan ruang untuk menguji visi berhuni idealmu melawan kenyataan spasial Jabodetabek.
     </p>
     <div class="flow-pills">
       <span class="flow-pill" style="background:var(--cyan); font-weight:800;">Identitas</span>
@@ -575,7 +465,7 @@
     <div class="section-header">
       <div class="section-num display">01</div>
       <div>
-        <div class="section-title display">Data Diri</div>
+        <div class="section-title display">Koleksi Data Diri</div>
         <div class="section-desc">Identitas dasar untuk pemetaan kedaulatan ruang.</div>
       </div>
     </div>
@@ -598,8 +488,8 @@
     <div class="section-header">
       <div class="section-num display">02</div>
       <div>
-        <div class="section-title display">Ego Spasial</div>
-        <div class="section-desc">Pilihlah opsi yang paling mencerminkan dirimu.</div>
+        <div class="section-title display">Bongkar Ego Spasial</div>
+        <div class="section-desc">Pilihlah opsi yang paling mencerminkan naluri berhuni aslimu.</div>
       </div>
     </div>
     <div class="q-container" id="fc-q-container">
@@ -642,7 +532,7 @@
     <div class="section-header">
       <div class="section-num display">03</div>
       <div>
-        <div class="section-title display">Realitas & Beban</div>
+        <div class="section-title display">Audit Realitas & Beban</div>
         <div class="section-desc">Kalkulasi kondisi spasial saat ini vs kemungkinan masa depan.</div>
       </div>
     </div>
@@ -669,65 +559,60 @@
   </div>
 
   <div class="result-container">
-    
-    <!-- Unified Card 1: Profil + Avatar + Deskripsi -->
-    <div class="result-card-profile">
+    <!-- Top Light Panel -->
+    <div class="result-light-panel">
       <div class="result-user-greeting">Halo, <span id="user-display-name">Warga</span></div>
+      
+      <!-- Avatar karakter persona -->
+      <div id="result-avatar-wrap" style="width:90px;height:90px;margin:0 auto 8px auto;border-radius:16px;overflow:hidden;border:3px solid var(--ink);box-shadow:var(--shadow);background:#FFF;"></div>
+
       <div class="result-persona-title" id="result-persona-title">THE TRADITIONALIST</div>
       
-      <!-- LEGO Avatar Container (Clean Frame) -->
-      <div class="result-avatar-frame" id="result-avatar-frame">
-        <!-- SVG Avatar will be injected here -->
+      <!-- Tampak Hunian Visual (SVG Art) -->
+      <div class="result-img-container" id="result-visual-frame">
+        <!-- Terisi secara dinamis -->
       </div>
       
+      <!-- Tombol Unduh Aset Sesuai Permintaan -->
+      <div class="result-action-panel">
+        <button class="btn btn-white btn-full" onclick="downloadCurrentBlueprint()">📥 Unduh Cetak Biru (SVG)</button>
+      </div>
+
       <div class="result-desc-card" id="result-persona-desc">
         Deskripsi hasil profil-hunian (persona)
       </div>
-    </div>
 
-    <!-- Separation Arrow -->
-    <div class="result-sep-arrow">▼</div>
-
-    <!-- Unified Card 2: Blueprint SVG + Tipe Hunian -->
-    <div class="result-card-spatial">
-      <!-- Blueprint SVG Frame -->
-      <div class="result-img-container" id="result-visual-frame">
-        <!-- Blueprint SVG will be injected here -->
-      </div>
-      
       <div class="result-badge-type">
-        <span class="result-badge-label">Rekomendasi Tipe Hunian Ideal</span>
-        <span class="result-badge-val" id="result-tipe-nama">Hunian Kampung Kota</span>
-        <span class="result-badge-desc" id="result-tipe-desc">Deskripsi tipe hunian ideal berdasarkan profil Persona</span>
+        <span class="result-badge-label">Tipe Rumah Ideal</span>
+        <span class="result-badge-val" id="result-tipe-nama">Rumah Kampung Kota</span>
+        <span class="result-badge-desc" id="result-tipe-desc">Deskripsi tipe rumah</span>
       </div>
     </div>
 
     <!-- Separation Arrow -->
     <div class="result-sep-arrow">▼</div>
 
-    <!-- Bottom Dark Panel: Shadow & Lego Assembly Guidance -->
+    <!-- Bottom Dark Panel -->
     <div class="result-dark-panel">
       <div class="result-dark-bridge">
-        Kamu mempunyai hunian impian sendiri, namun pilihan-pilihanmu ternyata memengaruhi hunianmu menjadi...
+        Hasil aslimu adalah cita-cita ideal, namun spektrum ketahanan bawah sadarmu (Shadow) ternyata memengaruhi wujud fisik rancanganmu...
       </div>
 
       <!-- Specific Shadow Model Intervened Card -->
       <div class="result-dark-model-card">
-        <span class="label-xs" style="color:var(--orange);">Model Spasial Hunian</span>
+        <span class="label-xs" style="color:var(--orange);">Model Spasial Hasil Shadow</span>
         <div class="result-dark-model-title" id="result-shadow-model-title" style="color:var(--blue);">Kampung Susun</div>
         <div class="result-dark-model-desc" id="result-shadow-model-desc">
-          Deskripsi model hunian yang diintervensi oleh shadow ego...
+          Deskripsi model rumah yang diintervensi oleh shadow ego...
         </div>
       </div>
 
-      <!-- Brick claim instruction -->
       <div class="result-dark-brick-claim">
         Silakan ambil balok fisik warna <span id="result-brick-color">Lego Color</span>, lalu pasang pada zona maket pameran di bawah ini:
       </div>
 
-      <!-- Zona Maket Box -->
       <div class="result-dark-zona-box">
-        <div class="result-dark-zona-title" id="result-zona-title">ZONA 1: PADAT DAN RENTAN</div>
+        <div class="result-dark-zona-title" id="result-zona-title">ZONA 1: COLLABORATIVE KAMPUNG</div>
         <div class="result-dark-zona-desc" id="result-zona-desc">
           Deskripsi petunjuk letak geografis dan rules penataan zona pada maket...
         </div>
@@ -737,8 +622,9 @@
       <div class="result-dark-lego-box">
         <div class="result-dark-lego-title">PANDUAN STRUKTUR LEGO</div>
         <div class="result-lego-canvas" id="result-lego-canvas">
-          <!-- Inline SVG dynamic representation of the block styling -->
+          <!-- Terisi secara dinamis -->
         </div>
+        <button class="btn btn-white btn-full" style="margin-top:10px;" onclick="downloadCurrentLegoSVG()">📥 Unduh Gambar LEGO (SVG)</button>
       </div>
 
       <!-- Stress Index Badge -->
@@ -755,18 +641,15 @@
   <div class="result-disclaimer">
     <span>⚠️ DISCLAIMER</span>
     <span style="font-size:10px;">Hasil kalkulasi didasarkan pada model simulasi realistis RCUS & Ourchetype 2026.</span>
-    <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;justify-content:center;align-items:center;">
-      <!-- Single Master Download & Share Button on the Bottom -->
-      <button class="btn btn-yellow btn-full" style="max-width:400px;" onclick="downloadAllAssetsAndShare()">
-         📥 Simpan & Bagikan Hasil Diagnosa
-      </button>
-      <button class="btn btn-white" style="max-width:400px; width:100%;" onclick="restartSurvey()">Coba Lagi</button>
+    <div style="display:flex;gap:12px;margin-top:20px;justify-content:center;">
+      <button class="btn btn-yellow" onclick="shareResult()">Bagikan Hasil 📤</button>
+      <button class="btn btn-white" onclick="restartSurvey()">Coba Lagi</button>
     </div>
   </div>
 </div>
 
 <script>
-// ── STATE VARIABLES (GLOBALLY DECLARED) ──
+// ── STATE VARIABLES ──
 let demogAnswers = {};
 let fcAnswers = {};     
 let fcSubAnswers = {};  
@@ -791,153 +674,38 @@ const demogQuestions = [
 ];
 
 // ── 20 QUESTIONS DATA SOURCE (BASED ON MASTER & SCORING) ──
+// Memetakan T1 (traditionalist), T2 (established), T3 (urbanist), T4 (idealist)
 const questionPool = {
   // 1. PERSONA
-  Q1:  { id: 'Q1',  section: '1. Persona',
-    text: 'Kalau bisa memilih hunian sendiri, apa kesan pertama yang ingin kamu tunjukkan dari tampilan hunianmu?',
-    a: 'Ramah & terbuka; tanpa pagar tinggi, banyak tanaman.',
-    b: 'Aman & privat; pagar kokoh tinggi, eksklusif.',
-    sA: { traditionalist: 1.35, idealist: 1.15 },
-    sB: { established: 1.05, urbanist: 0.75 } },
-
-  Q1a: { id: 'Q1a', section: '1. Persona',
-    text: 'Kalau ada orang asing duduk sebentar di area depan hunianmu, apa reaksimu?',
-    a: 'Santai saja, senang hunian bisa bermanfaat bagi sekitar.',
-    b: 'Agak risih, merasa privasi mulai terganggu.',
-    sA: { traditionalist: 1.35 },
-    sB: { DEFENSIVE: 0.70 } },
-
-  Q1b: { id: 'Q1b', section: '1. Persona',
-    text: 'Kenapa harus ada pagar?',
-    a: 'Untuk keamanan.',
-    b: 'Membangun citra.',
-    sA: { PARANOID: 0.85 },
-    sB: { CONSUMPTIVE: 1.10 } },
-
-  Q2A: { id: 'Q2A', section: '1. Persona',
-    text: 'Mana yang bikin kamu bangga saat cerita soal lokasi hunian ke kolega?',
-    a: '"Pusat kota, ke mana-mana tinggal jalan kaki."',
-    b: '"Cluster eksklusif, tenang dan jauh dari kebisingan."',
-    sA: { urbanist: 0.75 },
-    sB: { established: 1.05 } },
-
-  Q2B: { id: 'Q2B', section: '1. Persona',
-    text: 'Aturan baru! Lahanmu harus dikurangi 2 meter untuk penambahan trotoar layak. Apa responmu?',
-    a: 'Boleh sih, demi kota yang lebih ramah pejalan kaki.',
-    b: 'Keberatan dong, lahan sekarang mahal.',
-    sA: { traditionalist: 1.35, idealist: 1.15 },
-    sB: { DEFENSIVE: 0.70 } },
-
+  Q1: { id: 'Q1', section: '1. Persona', text: 'Kalau bisa memilih rumah sendiri, apa kesan pertama yang ingin kamu tunjukkan dari tampilan rumahmu?', a: 'Ramah & terbuka; tanpa pagar tinggi, banyak tanaman.', b: 'Aman & privat; pagar kokoh, terasa eksklusif.', sA: {traditionalist:1, idealist:1}, sB: {established:1, urbanist:1} },
+  Q1a: { id: 'Q1a', section: '1. Persona', text: 'Kalau ada orang asing duduk sebentar di area depan rumahmu, gimana reaksimu?', a: 'Santai saja, senang rumah bisa bermanfaat bagi sekitar.', b: 'Agak risih, merasa privasi mulai terganggu.', sA: {traditionalist:1}, sB: {DEFENSIVE:1} },
+  Q1b: { id: 'Q1b', section: '1. Persona', text: 'Kenapa harus ada pagar?', a: 'Untuk keamanan.', b: 'Membangun citra.', sA: {PARANOID:1}, sB: {CONSUMPTIVE:1} },
+  Q2A: { id: 'Q2A', section: '1. Persona', text: 'Mana yang bikin kamu bangga saat cerita soal lokasi rumah ke kolega?', a: '"Pusat kota, ke mana-mana tinggal jalan kaki."', b: '"Cluster eksklusif, tenang dan jauh dari kebisingan."', sA: {urbanist:1}, sB: {established:1} },
+  Q2B: { id: 'Q2B', section: '1. Persona', text: 'Aturan baru! Lahanmu harus dikurangi 2 meter untuk penambahan trotoar layak. Apa responmu?', a: 'Boleh sih, demi kota yang lebih ramah pejalan kaki.', b: 'Keberatan, itu lahan pribadi yang dibeli mahal.', sA: {traditionalist:1, idealist:1}, sB: {DEFENSIVE:1} },
+  
   // 2. SHADOW
-  Q3:  { id: 'Q3',  section: '2. Shadow',
-    text: 'Saat bangun pagi, apa pikiran pertamamu soal perjalanan ke kantor?',
-    a: '"Duh, harus berangkat sekarang sebelum macet total!"',
-    b: '"Santai, kantor cuma 15 menit, masih sempat ngopi."',
-    sA: { PARANOID: 0.85 },
-    sB: { DEFENSIVE: 0.70 } },
-
-  Q3a: { id: 'Q3a', section: '2. Shadow',
-    text: 'Berapa lama waktu yang rela kamu tukar di jalan demi punya hunian tapak di pinggiran?',
-    a: 'Maksimal 2 jam, lebih dari itu mental hayati lelah.',
-    b: 'Ya berapa aja gimana nasib, konsekuensi pilihan sendiri.',
-    sA: { CONSUMPTIVE: 1.10 },
-    sB: { SUPERFICIAL: 1.50 } },
-
-  Q3b: { id: 'Q3b', section: '2. Shadow',
-    text: 'Kalau biaya sewa di pusat naik drastis, kamu pilih pindah jauh atau sharing unit (co-living)?',
-    a: 'Sharing unit, waktu terlalu berharga untuk habis di jalan.',
-    b: 'Pindah jauh aja, butuh ruang pribadi meski di pinggiran.',
-    sA: { SUPERFICIAL: 1.50 },
-    sB: { DEFENSIVE: 0.70 } },
-
-  Q4A: { id: 'Q4A', section: '2. Shadow',
-    text: 'Emosi karena apa yang paling sering terbawa pulang ke hunian?',
-    a: 'Lelah fisik akibat macet atau desakan di transportasi umum.',
-    b: 'Kesal lihat banyak gedung kosong di kota, tapi nggak bisa ditinggali.',
-    sA: { CONSUMPTIVE: 1.10 },
-    sB: { PARANOID: 0.85 } },
-
-  Q4B: { id: 'Q4B', section: '2. Shadow',
-    text: 'Mau nggak tinggal di pusat kota dengan harga murah, tapi statusnya "Hak Huni" (bukan hak milik)?',
-    a: 'Mau, fungsi hunian lebih penting dari status sertifikat.',
-    b: 'Nggak, tanpa sertifikat merasa nggak punya jaminan.',
-    sA: { SUPERFICIAL: 1.50 },
-    sB: { CONSUMPTIVE: 1.10 } },
-
+  Q3: { id: 'Q3', section: '2. Shadow', text: 'Saat bangun pagi, apa pikiran utamamu soal perjalanan ke kantor?', a: 'Duh, harus berangkat sekarang sebelum macet total!', b: 'Santai, kantor cuma 15 menit, masih sempat ngopi.', sA: {PARANOID:1}, sB: {DEFENSIVE:1} },
+  Q3a: { id: 'Q3a', section: '2. Shadow', text: 'Berapa lama waktu yang rela kamu tukar di jalan demi punya rumah tapak di pinggiran?', a: 'Maksimal 2 jam, lebih dari itu mental saya nggak sehat.', b: 'Ya sudah nasib; ini harga yang harus dibayar warga Jakarta.', sA: {CONSUMPTIVE:1}, sB: {SUPERFICIAL:1} },
+  Q3b: { id: 'Q3b', section: '2. Shadow', text: 'Kalau biaya sewa di pusat naik drastis, kamu pilih pindah jauh atau sharing unit (co-living)?', a: 'Sharing unit; waktu saya terlalu berharga untuk habis di jalan.', b: 'Pindah jauh; saya butuh ruang pribadi utuh meski di pinggiran.', sA: {SUPERFICIAL:1}, sB: {DEFENSIVE:1} },
+  Q4A: { id: 'Q4A', section: '2. Shadow', text: 'Sampah emosional apa yang paling sering terbawa pulang ke rumah?', a: 'Lelah fisik akibat macet atau desakan di transportasi umum.', b: 'Kesal lihat banyak gedung kosong di pusat, tapi saya harus tinggal jauh.', sA: {CONSUMPTIVE:1}, sB: {PARANOID:1} },
+  Q4B: { id: 'Q4B', section: '2. Shadow', text: 'Mau nggak tinggal di pusat kota dengan harga murah, tapi statusnya Hak Huni (bukan hak milik)?', a: 'Mau, fungsi hunian lebih penting dari status sertifikat.', b: 'Nggak mau, tanpa sertifikat saya merasa nggak punya jaminan.', sA: {SUPERFICIAL:1}, sB: {CONSUMPTIVE:1} },
+  
   // 3. ANIMA/US
-  Q5:  { id: 'Q5',  section: '3. Anima/us',
-    text: 'Kalau hunianmu didominasi tangga, paling banyak mengarah ke mana?',
-    a: 'Ruang bersama, tempat ngobrol.',
-    b: 'Kamar tidur, supaya bisa pulihkan energi.',
-    sA: { traditionalist: 1.35 },
-    sB: { idealist: 1.15 } },
-
-  Q5a: { id: 'Q5a', section: '3. Anima/us',
-    text: 'Nyaman nggak berbagi dapur/ruang tamu dengan penghuni lain demi lokasi strategis?',
-    a: 'Nyaman, asal aturan dan kebersihannya ditaati.',
-    b: 'Nggak, yang namanya hunian adalah privasi.',
-    sA: { traditionalist: 1.35, urbanist: 0.75 },
-    sB: { established: 1.05 } },
-
-  Q5b: { id: 'Q5b', section: '3. Anima/us',
-    text: 'Apa satu hal di area privatmu yang nggak boleh diganti fasilitas publik secanggih apa pun?',
-    a: 'Sudut kerja atau area produktif.',
-    b: 'Kamar mandi pribadi.',
-    sA: { idealist: 1.15 },
-    sB: { DEFENSIVE: 0.70 } },
-
-  Q6A: { id: 'Q6A', section: '3. Anima/us',
-    text: 'Kalau kamu punya area hijau luas dekat hunian, lebih baik jadi milik pribadi atau taman warga?',
-    a: 'Taman warga, biar semua orang punya akses ruang hijau.',
-    b: 'Teras pribadi, ingin udara segar tanpa harus bersinggungan orang lain.',
-    sA: { idealist: 1.15 },
-    sB: { DEFENSIVE: 0.70 } },
-
-  Q6B: { id: 'Q6B', section: '3. Anima/us',
-    text: 'Gimana pendapatmu jika tangga hunianmu terhubung langsung ke cafe atau ruang kreatif di bawah?',
-    a: 'Asik! Hidup jadi lebih praktis, dinamis, dan produktif.',
-    b: 'Khawatir berisik dan masalah keamanan terganggu sih.',
-    sA: { urbanist: 0.75 },
-    sB: { PARANOID: 0.85 } },
-
+  Q5: { id: 'Q5', section: '3. Anima/us', text: 'Jika rumahmu adalah tangga, anak tangganya paling banyak mengarah ke mana?', a: 'Ruang bersama (dapur/meja makan); tempat ngobrol.', b: 'Kamar tidur; tempat saya bisa jadi diri sendiri seutuhnya.', sA: {traditionalist:1}, sB: {idealist:1} },
+  Q5a: { id: 'Q5a', section: '3. Anima/us', text: 'Nyaman nggak berbagi dapur/ruang tamu dengan penghuni lain demi lokasi strategis?', a: 'Nyaman, asal aturan main dan kebersihannya jelas.', b: 'Nggak nyaman; saya ingin kendali penuh atas privasi saya.', sA: {traditionalist:1, urbanist:1}, sB: {established:1} },
+  Q5b: { id: 'Q5b', section: '3. Anima/us', text: 'Apa satu hal di area privatmu yang nggak boleh diganti fasilitas publik secanggih apa pun?', a: 'Sudut kerja atau area hobi yang tenang.', b: 'Kamar mandi pribadi yang luas dan privat.', sA: {idealist:1}, sB: {DEFENSIVE:1} },
+  Q6A: { id: 'Q6A', section: '3. Anima/us', text: 'Menurutmu, teras itu lebih baik jadi milik pribadi atau taman warga yang luas sekalian?', a: 'Taman warga; biar semua orang punya akses ruang hijau.', b: 'Teras pribadi; saya ingin udara segar tanpa harus bertemu orang.', sA: {idealist:1}, sB: {DEFENSIVE:1} },
+  Q6B: { id: 'Q6B', section: '3. Anima/us', text: 'Gimana pendapatmu jika tangga rumahmu terhubung langsung ke cafe atau ruang kreatif di bawah?', a: 'Asik! Hidup jadi lebih praktis, dinamis, dan produktif.', b: 'Khawatir berisik dan masalah keamanan terganggu sih.', sA: {urbanist:1}, sB: {PARANOID:1} },
+  
   // 4. SELF
-  Q7:  { id: 'Q7',  section: '4. Self',
-    text: 'Lihat kotamu di malam hari, seperti apa yang kamu impikan 10 tahun lagi?',
-    a: 'Kota padat yang nyaman untuk pejalan kaki & saling terhubung.',
-    b: 'Kota rapi dengan batas jelas antara area bisnis & hunian.',
-    sA: { urbanist: 0.75 },
-    sB: { established: 1.05 } },
-
-  Q7a: { id: 'Q7a', section: '4. Self',
-    text: 'Kamu mau nggak, terlibat aktif di koperasi warga untuk kelola gedung hunianmu bareng tetangga?',
-    a: 'Yes! Partisipasi warga jadi kunci lingkungan tetap terjaga.',
-    b: 'Nggak deh, kita bayar pengelola profesional aja.',
-    sA: { traditionalist: 1.35 },
-    sB: { SUPERFICIAL: 1.50 } },
-
-  Q7b: { id: 'Q7b', section: '4. Self',
-    text: 'Kalau ada gedung baru menghalangi sinar matahari ke hunianmu, apa yang kamu lakukan?',
-    a: 'Ajak warga nego kompensasi berupa ruang publik hijau.',
-    b: 'Tempuh jalur hukum atau pindah ke area yang lebih aman.',
-    sA: { idealist: 1.15 },
-    sB: { PARANOID: 0.85 } },
-
-  Q8A: { id: 'Q8A', section: '4. Self',
-    text: 'Mana yang lebih darurat bagi kotamu saat ini?',
-    a: 'Ubah ruko/gedung kosong jadi hunian murah di pusat kota.',
-    b: 'Bangun kota mandiri baru di pinggiran Jakarta.',
-    sA: { urbanist: 0.75 },
-    sB: { established: 1.05 } },
-
-  Q8B: { id: 'Q8B', section: '4. Self',
-    text: 'Kalau lampu hunianmu adalah pesan untuk pemerintah, apa yang ingin kamu sampaikan?',
-    a: '"Kami butuh akses hidup di pusat kota, bukan sekadar sertifikat."',
-    b: '"Beri kami perlindungan dan kepastian hukum atas aset yang kami beli."',
-    sA: { urbanist: 0.75 },
-    sB: { established: 1.05 } }
+  Q7: { id: 'Q7', section: '4. Self', text: 'Lihat kotamu di malam hari, seperti apa yang kamu impikan 10 tahun lagi?', a: 'Kota padat yang nyaman untuk pejalan kaki & saling terhubung.', b: 'Kota rapi dengan batas jelas antara area bisnis & perumahan.', sA: {urbanist:1}, sB: {established:1} },
+  Q7a: { id: 'Q7a', section: '4. Self', text: 'Mau terlibat aktif di koperasi warga untuk kelola gedung hunianmu bareng tetangga?', a: 'Yes! Partisipasi warga jadi kunci lingkungan tetap terjaga.', b: 'Nggak deh, kita bayar pengelola profesional aja.', sA: {traditionalist:1}, sB: {SUPERFICIAL:1} },
+  Q7b: { id: 'Q7b', section: '4. Self', text: 'Kalau ada gedung baru menghalangi sinar matahari ke rumahmu, apa yang kamu lakukan?', a: 'Ajak warga nego kompensasi berupa ruang publik hijau.', b: 'Tempuh jalur hukum atau pindah ke area yang lebih aman.', sA: {idealist:1}, sB: {PARANOID:1} },
+  Q8A: { id: 'Q8A', section: '4. Self', text: 'Mana yang lebih darurat bagi kotamu saat ini?', a: 'Ubah ruko/gedung kosong jadi hunian murah di pusat kota.', b: 'Bangun kota mandiri baru di pinggiran Jakarta.', sA: {urbanist:1}, sB: {established:1} },
+  Q8B: { id: 'Q8B', section: '4. Self', text: 'Jika lampu rumahmu adalah pesan untuk pemerintah, apa yang ingin kamu sampaikan?', a: 'Kami butuh akses hidup di pusat kota, bukan sekadar sertifikat.', b: 'Beri kami perlindungan dan kepastian hukum atas aset yang kami beli.', sA: {urbanist:1}, sB: {established:1} }
 };
 
-// ── 16-Step Branching Path Resolver ──
+// 16-Step Branching Path
 function getFCQuestionId(index) {
    switch(index) {
      case 0: return 'Q1';
@@ -976,34 +744,33 @@ function getCategoryLabel(scoreObj) {
     return labels[key] || key;
 }
 
-// ── DEMOGRAFI & BEBAN HUNIAN ──
 const affordQuestions = [
   { id: 'A_anggota', text: 'Jumlah anggota keluarga yang tinggal bersamamu saat ini?', type: 'pill', opts: ['1 (Sendiri)', '2 Orang', '3 Orang', '4 Orang', '5+ Orang'] },
   { id: 'B_provinsi', text: 'Provinsi domisili tempat tinggalmu saat ini?', type: 'pill', opts: ['DKI Jakarta', 'Jawa Barat (Depok/Bogor/Bekasi)', 'Banten (Tangerang/Tangsel)', 'Lainnya'] },
   { id: 'B_kabkota', text: 'Kabupaten/Kota domisili tempat tinggalmu saat ini?', type: 'text', placeholder: 'Ketik nama kota/kabupaten...' },
   { id: 'B_kecamatan', text: 'Kecamatan domisilimu saat ini?', type: 'text', placeholder: 'Ketik kecamatan tempat tinggalmu...' },
   { id: 'C_status_hunian', text: 'Apa status kepemilikan hunianmu saat ini?', type: 'pill', opts: ['Milik Sendiri', 'Sewa / Kontrak', 'Milik Orang Tua / Keluarga', 'Indekos', 'Lainnya'] },
-  { id: 'C_tipe_hunian', text: 'Apa tipe fisik hunianmu saat ini?', type: 'pill', opts: ['Hunian Tapak', 'Apartemen / Rusun', 'Hunian Kampung', 'Lainnya'] },
+  { id: 'C_tipe_hunian', text: 'Apa tipe fisik hunianmu saat ini?', type: 'pill', opts: ['Rumah Tapak', 'Apartemen / Rusun', 'Rumah Kampung', 'Lainnya'] },
   { id: 'C_moda', text: 'Apa moda transportasi komuter utamamu?', type: 'pill', opts: ['Motor Pribadi', 'Mobil Pribadi', 'KRL / MRT / LRT / Busway', 'Ojek Online / Angkutan Umum', 'WFH / Tidak Komuter'] },
   { id: 'C_waktu_komuter', text: 'Berapa waktu tempuh komutermu sekali jalan?', type: 'pill', opts: ['< 15 Menit', '15 - 30 Menit', '31 - 60 Menit', '1 - 2 Jam', '> 2 Jam', 'Tidak Komuter'] },
   { id: 'D_kamar', text: 'Jumlah kamar tidur minimal yang mutlak kamu butuhkan?', type: 'pill', opts: ['Studio (1 Ruang)', '1 Kamar', '2 Kamar', '3 Kamar', '4+ Kamar'] },
   { id: 'D_luas', text: 'Berapa luas bangunan minimal yang kamu rasa layak untuk keluargamu?', type: 'pill', opts: ['< 21 m²', '21 - 36 m²', '37 - 50 m²', '51 - 70 m²', '71 - 100 m²', '> 100 m²'] },
-  { id: 'D_tipe_impian', text: 'Tipe fisik hunian apa yang ingin kamu capai di masa depan?', type: 'pill', opts: ['Hunian Tapak Mandiri', 'Rusun / Apartemen Pusat Kota', 'Townhouse / Cluster Pinggiran', 'Kampung Vertikal Kolektif'] },
-  { id: 'E_tradeoff', text: 'Jika budget terbatas, apa "trade-off" utama yang bersedia kamu korbankan?', type: 'pill', opts: ['Ukuran unit kecil asal lokasi nempel pusat', 'Lokasi sangat jauh di pinggiran asal Hunian tapak luas', 'Sewa jangka panjang saja asal akses transportasi mudah', 'Tidak ingin berkompromi sama sekali'] },
+  { id: 'D_tipe_impian', text: 'Tipe fisik hunian apa yang ingin kamu capai di masa depan?', type: 'pill', opts: ['Rumah Tapak Mandiri', 'Rusun / Apartemen Pusat Kota', 'Townhouse / Cluster Pinggiran', 'Kampung Vertikal Kolektif'] },
+  { id: 'E_tradeoff', text: 'Jika budget terbatas, apa "trade-off" utama yang bersedia kamu korbankan?', type: 'pill', opts: ['Ukuran unit kecil asal lokasi nempel pusat', 'Lokasi sangat jauh di pinggiran asal rumah tapak luas', 'Sewa jangka panjang saja asal akses transportasi mudah', 'Tidak ingin berkompromi sama sekali'] },
   { id: 'E_waktu_maks', text: 'Berapa durasi komuter maksimal sekali jalan yang masih bisa kamu toleransi?', type: 'pill', opts: ['< 30 Menit', '30 - 60 Menit', '1 - 1.5 Jam', '1.5 - 2 Jam', 'Tidak Sanggup Komuter'] },
-  { id: 'G_visual', text: 'Pilih kecenderungan visual hunian impianmu di maket pameran:', type: 'pill', opts: ['Landed House Berhalaman Terbuka', 'Vertical High-Rise Terintegrasi', 'Co-Living Unit Berbagi Fasilitas', 'Hunian Kampung dengan Fasad Ekspresif'] },
+  { id: 'G_visual', text: 'Pilih kecenderungan visual hunian impianmu di maket pameran:', type: 'pill', opts: ['Landed House Berhalaman Terbuka', 'Vertical High-Rise Terintegrasi', 'Co-Living Unit Berbagi Fasilitas', 'Rumah Kampung dengan Fasad Ekspresif'] },
   { id: 'G_rusun', text: 'Apakah kamu bersedia tinggal di hunian vertikal (Rusun/Apartemen) di masa depan?', type: 'pill', opts: ['Sangat Bersedia (Menukar tanah demi efisiensi)', 'Hanya Terpaksa (Jika tidak ada pilihan tapak terjangkau)', 'Hanya untuk Investasi / Disewakan kembali', 'Sama sekali tidak bersedia'] }
 ];
 
 const modelMatrix = {
   traditionalist: {
-    DEFENSIVE: { name: 'Hunian Infill', en: 'Urban Infill', code: 'T1-DEF', desc: 'Membangun persil tunggal vertikal 3-4 lantai secara mandiri di gang sempit. Komprominya adalah menyisakan void udara vertikal (lightwell) selebar 1 meter agar unit tetap mendapat ventilasi alami di tengah kepadatan.' },
-    CONSUMPTIVE: { name: 'Kampung Susun', en: 'Vertical Cluster', code: 'T1-CON', desc: 'Rancangan unit tipe mezator (Mezanin + Kantor) di mana area hunian di loteng terpisah dari lantai dasar usaha keluarga. Koridor dirancang ekstra lebar (3 meter) agar gerobak jualan warga lancar bergerak.' },
+    DEFENSIVE: { name: 'Rumah Infill', en: 'Urban Infill', code: 'T1-DEF', desc: 'Membangun persil tunggal vertikal 3-4 lantai secara mandiri di gang sempit. Komprominya adalah menyisakan void udara vertikal (lightwell) selebar 1 meter agar unit tetap mendapat ventilasi alami di tengah kepadatan.' },
+    CONSUMPTIVE: { name: 'Kampung Susun', en: 'Vertical Cluster', code: 'T1-CON', desc: 'Rancangan unit tipe mezator (Mezanin + Usaha) di mana area hunian di loteng terpisah dari lantai dasar usaha keluarga. Koridor dirancang ekstra lebar (3 meter) agar gerobak jualan warga lancar bergerak.' },
     PARANOID: { name: 'Klaster Tertutup', en: 'Micro Cluster', code: 'T1-PAR', desc: 'Konsolidasi 5-12 KK di ujung gang buntu menggunakan sistem satu gerbang utama (one-gate system) dengan struktur beton tahan api dan courtyard dalam yang membatasi akses eksternal.' },
-    SUPERFICIAL: { name: 'Hunian-Rakit', en: 'Stilt House', code: 'T1-SUP', desc: 'Konstruksi kering menggunakan struktur rangka baja ringan modular yang diselipkan cepat di gang sempit tanpa perlu pengerjaan beton basah yang lama.' }
+    SUPERFICIAL: { name: 'Rumah-Rakit', en: 'Stilt House', code: 'T1-SUP', desc: 'Konstruksi kering menggunakan struktur rangka baja ringan modular yang diselipkan cepat di gang sempit tanpa perlu pengerjaan beton basah yang lama.' }
   },
   established: {
-    DEFENSIVE: { name: 'Hunian Susun Tapak', en: 'Vertical Townhouse', code: 'T2-DEF', desc: 'Unit townhouse vertikal split-level di atas persil mini (30-50m²) tengah kota, memadatkan fungsi hunian secara vertikal untuk menjaga kedaulatan visual tanah individu.' },
+    DEFENSIVE: { name: 'Rumah Susun Tapak', en: 'Vertical Townhouse', code: 'T2-DEF', desc: 'Unit townhouse vertikal split-level di atas persil mini (30-50m²) tengah kota, memadatkan fungsi hunian secara vertikal untuk menjaga gengsi kepemilikan tanah individu.' },
     CONSUMPTIVE: { name: 'Ruko Sewa Bersama', en: 'Co-Sharing Housing', code: 'T2-CON', desc: 'Transformasi ruko mangkrak pusat kota menjadi unit-unit kompak siap pakai dengan area dapur dan cuci bersama demi penghematan operasional bulanan.' },
     PARANOID: { name: 'Apartemen Satu Gerbang', en: 'One-Gate Block', code: 'T2-PAR', desc: 'Apartemen vertikal rendah terkelola dengan perlindungan gerbang pintar (smart-card) dan area bermain internal yang sepenuhnya terisolasi dari bahaya lingkungan luar.' },
     SUPERFICIAL: { name: 'Pod Huni Mandiri', en: 'Pod-Living', code: 'T2-SUP', desc: 'Pod kapsul rakitan yang sudah lengkap dengan perabot lipat pintar (transformer furniture) untuk kemudahan huni instan.' }
@@ -1012,13 +779,13 @@ const modelMatrix = {
     DEFENSIVE: { name: 'Hunian Transit', en: 'Transit Loft', code: 'T3-DEF', desc: 'Gedung ramping (slim building) setinggi 5-7 lantai tepat di dekat stasiun dengan unit loft beratribut jendela kaca raksasa kedap suara.' },
     CONSUMPTIVE: { name: 'Studio Komuter', en: 'Comuter Studio', code: 'T3-CON', desc: 'Unit mikro fungsional 12-15m² yang memangkas luas ruang pribadi demi mengutamakan alamat prestisius tengah kota dan menihilkan area parkir mobil.' },
     PARANOID: { name: 'Apartemen Skybridge', en: 'Sky-Bridge Apartment', code: 'T3-PAR', desc: 'Blok hunian terintegrasi dengan akses jembatan layang (skybridge) langsung ke peron stasiun MRT/LRT untuk keamanan jalur steril komuter.' },
-    SUPERFICIAL: { name: 'Hunian Kapsul Modular', en: 'Plug-in Capsule', code: 'T3-SUP', desc: 'Kapsul tidur modular siap pakai yang ditumpangkan langsung ke dalam struktur baja gedung parkir komersial yang sepi.' }
+    SUPERFICIAL: { name: 'Rumah Kapsul Modular', en: 'Plug-in Capsule', code: 'T3-SUP', desc: 'Kapsul tidur modular siap pakai yang ditumpangkan langsung ke dalam struktur baja gedung parkir komersial yang sepi.' }
   },
   idealist: {
     DEFENSIVE: { name: 'Pod Terapung', en: 'Floating Pod', code: 'T4-DEF', desc: 'Unit kapsul amfibi dengan fondasi ponton styrofoam berlapis semen ringan yang memungkinkannya terapung setinggi 1.5 meter saat rob datang.' },
-    CONSUMPTIVE: { name: 'Hunian Mandiri Energi', en: 'Sirkular Off-Grid', code: 'T4-CON', desc: 'Hunian dengan atap terintegrasi panel surya (BIPV) dan sistem sirkular filter biologis (closed-loop) yang mengolah air hujan menjadi air layak pakai.' },
-    PARANOID: { name: 'Hunian Cangkang', en: 'Climate-Shell House', code: 'T4-PAR', desc: 'Bangunan berselimut fasad ganda (double-skin envelope) dari tanaman rimbun masif yang bertindak sebagai filter polutan industri dan kebisingan.' },
-    SUPERFICIAL: { name: 'Kabin Hijau', en: 'Eco Cabin', code: 'T4-SUP', desc: 'Kabin modular prefab ramah lingkungan terintegrasi yang dipasang cepat di area resapan air hulu tanpa semen basah.' }
+    CONSUMPTIVE: { name: 'Rumah Mandiri Energi', en: 'Sirkular Off-Grid', code: 'T4-CON', desc: 'Rumah dengan atap terintegrasi panel surya (BIPV) dan sistem sirkular filter biologis (closed-loop) yang mengolah air hujan menjadi air layak pakai.' },
+    PARANOID: { name: 'Rumah Cangkang', en: 'Climate-Shell House', code: 'T4-PAR', desc: 'Bangunan berselimut fasad ganda (double-skin envelope) dari tanaman rimbun masif yang bertindak sebagai filter polutan industri dan kebisingan.' },
+    SUPERFICIAL: { name: 'Kabin Hijau', en: 'Eco Cabin', code: 'T4-SUP', desc: 'Kabin modular prefab ramah lingkungan terintegrasi kontrol AI yang dipasang cepat di area resapan air hulu tanpa semen basah.' }
   }
 };
 
@@ -1045,30 +812,30 @@ const alternativeColors = {
     urbanist: {
       DEFENSIVE: { name: 'Steel Grey (T3-DEF)', style: 'background: #64748b; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); color: white;', text: 'Steel Grey' },
       CONSUMPTIVE: { name: 'Bright Gold (T3-CON)', style: 'background: #eab308; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);', text: 'Bright Gold' },
-      PARANOID: { name: 'Midnight Blue (T3-PAR)', style: 'background: #0f172a; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); color: white;', text: 'Midnight Blue' },
+      PARANOID: { name: 'Midnight Blue-Black (T3-PAR)', style: 'background: #0f172a; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); color: white;', text: 'Midnight Blue' },
       SUPERFICIAL: { name: 'Trans-Blue (T3-SUP)', style: 'background: rgba(59, 130, 246, 0.4); border: 3px solid rgba(0,0,0,0.4); box-shadow: 4px 4px 0 var(--ink);', text: 'Trans-Blue' }
     },
     idealist: {
       DEFENSIVE: { name: 'Mirror Chrome (T4-DEF)', style: 'background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #64748b 100%); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);', text: 'Mirror Chrome' },
-      CONSUMPTIVE: { name: 'Rose Gold (T4-CON)', style: 'background: #fda4af; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);', text: 'Rose Gold' },
-      PARANOID: { name: 'Jet Black (T4-PAR)', style: 'background: #030712; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); color: white;', text: 'Jet Black' },
+      CONSUMPTIVE: { name: 'Rose Gold / Metallic Pink (T4-CON)', style: 'background: #fda4af; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);', text: 'Rose Gold' },
+      PARANOID: { name: 'Matte Jet Black (T4-PAR)', style: 'background: #030712; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); color: white;', text: 'Jet Black' },
       SUPERFICIAL: { name: 'Trans-Green (T4-SUP)', style: 'background: rgba(16, 185, 129, 0.4); border: 3px solid rgba(0,0,0,0.4); box-shadow: 4px 4px 0 var(--ink);', text: 'Trans-Green' }
     }
   }
 };
 
 const boundariesText = {
-  DEFENSIVE: 'Wajib Mandiri (No Stack): Balok diletakkan berdiri tegak, dilarang menumpang vertikal di atas milik tetangga.',
-  CONSUMPTIVE: 'Wajib Menjorok (Overhang): Balok diletakkan melintang, dengan bagian ujung wajib menjorok keluar batas grid kavling (overhanging).',
-  PARANOID: 'Wajib Berjarak (Perimeter Steril): Balok diletakkan tidur datar, dilarang menyentuh balok tetangga (sela 1 stud kosong).',
-  SUPERFICIAL: 'Wajib Bersandar (Leaning): Balok harus disandarkan miring pada struktur bangunan kokoh terdekat.'
+  DEFENSIVE: 'Wajib Mandiri (No Stack): Balok diletakkan berdiri tegak, namun dilarang keras menumpang secara vertikal di atas struktur orang lain.',
+  CONSUMPTIVE: 'Wajib Menjorok (Overhang): Balok diletakkan secara melintang, dengan bagian ujung wajib menjorok keluar batas grid kavling (overhanging).',
+  PARANOID: 'Wajib Berjarak (Perimeter Steril): Balok diletakkan tidur, dan dilarang menyentuh balok tetangga mana pun (harus ada sela minimal 1 stud kosong).',
+  SUPERFICIAL: 'Wajib Bersandar (Leaning): Balok tidak boleh diletakkan tegak lurus mandiri; harus disandarkan secara miring pada struktur bangunan kokoh terdekat.'
 };
 
 const zonaMapping = {
-  traditionalist: { id: '1', name: 'ZONA 1: PADAT DAN RENTAN', desc: 'Tambora, Johar Baru, Penjaringan. Wilayah in-situ dengan modal sosial gotong royong tinggi, namun terancam kerentanan fisik/kebakaran. Pemasangan balok wajib berkolaborasi.' },
-  established: { id: '2', name: 'ZONA 2: SPRAWL DAN TRANSPORTASI', desc: 'Bekasi, Depok, Pamulang, Ciputat (Sabuk Komuter). Mengurai ketegangan urban sprawl dengan penyediaan rusunawa hemat biaya yang terstruktur.' },
-  urbanist: { id: '3', name: 'ZONA 3: ISOLASI DAN JARAK', desc: 'Cideng, Harmoni, Simpul TOD. Mengoptimalkan ruko kosong mangkrak di pusat kota menjadi hunian modular aktif hemat ruang.' },
-  idealist: { id: '4', name: 'ZONA 4: EKOLOGIS DAN KRISIS', desc: 'Kamal Muara, Pesisir Utara, Puncak. Garis depan resiliensi iklim. Membutuhkan arsitektur sirkular amfibi otonom yang ramah air.' }
+  traditionalist: { id: '1', name: 'ZONA 1: COLLABORATIVE KAMPUNG', desc: 'Lokasi: Tambora, Tanah Tinggi, Palmerah. Aturan main: Setiap balok yang dipasang harus menempel pada infrastruktur bersama warga.' },
+  established: { id: '2', name: 'ZONA 2: STRATEGIC VERTICAL', desc: 'Lokasi: Bekasi, Depok, Pamulang, Ciputat (Sabuk Komuter). Aturan main: Letakkan balok di zona penyeimbang urban sprawl.' },
+  urbanist: { id: '3', name: 'ZONA 3: ADAPTIVE URBAN CORE', desc: 'Lokasi: Cideng, Harmoni, Simpul TOD. Aturan main: Masukkan balok langsung di atas simpul integrasi stasiun kereta/transit.' },
+  idealist: { id: '4', name: 'ZONA 4: CLIMATE FRONTIER', desc: 'Lokasi: Kamal Muara, Pesisir Utara, Puncak. Aturan main: Pasang balok di area tanggul atau amfibi laut.' }
 };
 
 // ── APP FLOW CONTROL ──
@@ -1184,7 +951,7 @@ function demogPrev() {
   }
 }
 
-// ── STAGE 2: FORCED CHOICE ──
+// ── STAGE 2: FORCED CHOICE (16-STEP RESOLVED TREE) ──
 function renderFC() {
   const qId = getFCQuestionId(fcIdx);
   const q = questionPool[qId];
@@ -1367,40 +1134,44 @@ function switchAlternative(altNum) {
   updateResultLayout();
 }
 
-// ── CALCULATION ENGINE WITH BALANCE / NORMALIZATION ──
+// ── CALCULATION ENGINE ──
 function calculateResults() {
-  // Skor persona & shadow langsung akumulasi nilai desimal
-  // (normalizing factor sudah ter-embed di sA/sB questionPool)
   let scorePersona = { traditionalist: 0, established: 0, urbanist: 0, idealist: 0 };
-  let scoreShadow  = { DEFENSIVE: 0, CONSUMPTIVE: 0, PARANOID: 0, SUPERFICIAL: 0 };
+  let scoreShadow = { DEFENSIVE: 0, CONSUMPTIVE: 0, PARANOID: 0, SUPERFICIAL: 0 };
+  let shadowAnswerCount = 0;
 
   for (let i = 0; i < 16; i++) {
-    const qId  = getFCQuestionId(i);
-    const ans  = fcAnswers[qId];
+    const qId = getFCQuestionId(i);
+    const ans = fcAnswers[qId];
     if (!ans) continue;
-    const qData  = questionPool[qId];
+
+    const qData = questionPool[qId];
     const scores = ans === 'A' ? qData.sA : qData.sB;
+    
     for (const key in scores) {
-      if (scorePersona[key] !== undefined) scorePersona[key] += scores[key];
-      if (scoreShadow[key]  !== undefined) scoreShadow[key]  += scores[key];
+       if (scorePersona[key] !== undefined) {
+         scorePersona[key] += scores[key];
+       }
+       if (scoreShadow[key] !== undefined) {
+         scoreShadow[key] += scores[key];
+         shadowAnswerCount++;
+       }
     }
   }
 
-  // Persona & shadow pemenang berdasarkan skor ternormalisasi
-  const sortedPersona   = Object.entries(scorePersona).sort((a, b) => b[1] - a[1]);
-  const primaryPersona  = sortedPersona[0][0];
+  const sortedPersona = Object.entries(scorePersona).sort((a, b) => b[1] - a[1]);
+  const primaryPersona = sortedPersona[0][0];
   const secondaryPersona = sortedPersona[1][0];
 
-  const sortedShadow   = Object.entries(scoreShadow).sort((a, b) => b[1] - a[1]);
-  const primaryShadow  = sortedShadow[0][1] > 0 ? sortedShadow[0][0] : 'SUPERFICIAL';
+  const sortedShadow = Object.entries(scoreShadow).sort((a, b) => b[1] - a[1]);
+  const primaryShadow = sortedShadow[0][1] > 0 ? sortedShadow[0][0] : 'SUPERFICIAL';
 
-  // Stress Index: proporsi shadow dominan / total shadow ternormalisasi × 110
-  // Menghasilkan distribusi High (≥50%) ~52% dan Stable (~48%)
-  const shadowSum  = Object.values(scoreShadow).reduce((a, b) => a + b, 0) || 1;
-  const stressIndex = Math.min(100, Math.round((scoreShadow[primaryShadow] / shadowSum) * 110));
+  // Stress Index
+  const maxShadowPossible = 8; 
+  const stressIndex = Math.min(100, Math.round((shadowAnswerCount / maxShadowPossible) * 100));
 
-  const isPrinsipil    = stressIndex < 50;
-  const confidenceText = isPrinsipil ? 'Stable Shadow Balance' : 'High Shadow Conflict';
+  const isPrinsipil = (stressIndex < 30 || stressIndex > 70);
+  const confidenceText = isPrinsipil ? 'High Confidence / Prinsipil' : 'Impulsif / Kontradiktif';
 
   computedResult = {
     primaryPersona,
@@ -1409,10 +1180,8 @@ function calculateResults() {
     stressIndex,
     confidenceText,
     isPrinsipil,
-    personaScores:     scorePersona,
-    normPersonaScores: scorePersona,   // alias — UI sudah pakai normPersonaScores
-    shadowScores:      scoreShadow,
-    normShadowScores:  scoreShadow
+    personaScores: scorePersona,
+    shadowScores: scoreShadow
   };
 
   showScreen('result');
@@ -1437,13 +1206,19 @@ function updateResultLayout() {
   document.getElementById('result-persona-title').textContent = primaryLabel.name;
   document.getElementById('result-persona-desc').textContent = primaryLabel.desc;
 
-  const tipeHunianLabels = {
-    traditionalist: { name: 'Hunian Kampung Kota', desc: 'Rancangan hunian yang menjaga kearifan lokal, mengutamakan relasi sosial dan keadilan bermukim.' },
-    established: { name: 'Hunian Layak', desc: 'Hunian vertikal layak huni dengan jaminan dan akses penyeimbang sprawl.' },
-    urbanist: { name: 'Hunian Terhubung', desc: 'Unit apartemen kompak terintegrasi langsung dengan simpul transit TOD.' },
-    idealist: { name: 'Hunian Hijau & Mandiri', desc: 'Sistem hunian berkelanjutan otonom dengan resiliensi iklim tingkat tinggi.' }
+  // Inject avatar karakter di sebelah nama persona
+  const avatarWrap = document.getElementById('result-avatar-wrap');
+  if (avatarWrap && avatarData[res.primaryPersona]) {
+    avatarWrap.innerHTML = avatarData[res.primaryPersona];
+  }
+
+  const tipeRumahLabels = {
+    traditionalist: { name: 'Rumah Kampung Kota', desc: 'Rancangan hunian yang mengutamakan pertahanan ikatan sosial masyarakat dan keadilan in-situ.' },
+    established: { name: 'Rumah Terjangkau', desc: 'Hunian vertikal hemat biaya dengan jaminan kelayakan huni dan akses penyeimbang sprawl.' },
+    urbanist: { name: 'Rumah Terhubung', desc: 'Unit apartemen kompak terintegrasi langsung dengan simpul transit TOD.' },
+    idealist: { name: 'Rumah Hijau & Mandiri', desc: 'Sistem hunian berkelanjutan otonom dengan resiliensi iklim tingkat tinggi.' }
   };
-  const tipeLabel = tipeHunianLabels[res.primaryPersona];
+  const tipeLabel = tipeRumahLabels[res.primaryPersona];
   document.getElementById('result-tipe-nama').textContent = tipeLabel.name;
   document.getElementById('result-tipe-desc').textContent = tipeLabel.desc;
 
@@ -1467,11 +1242,11 @@ function updateResultLayout() {
   const boundaryDesc = boundariesText[res.primaryShadow];
   document.getElementById('result-zona-desc').innerHTML = `
     <strong>Geografis:</strong> ${zonaMeta.desc}<br><br>
-    <strong>Batasan Hunian (Shadow):</strong> <em>${boundaryDesc}</em>
+    <strong>Batasan Boundary Hunian (Shadow):</strong> <em>${boundaryDesc}</em>
   `;
 
   const confBadge = document.getElementById('result-confidence');
-  if (res.stressIndex >= 50) {
+  if (res.stressIndex >= 60) {
     confBadge.textContent = `High Shadow Conflict (${res.stressIndex}% Stress)`;
     confBadge.style.background = '#FF4848';
   } else {
@@ -1479,24 +1254,20 @@ function updateResultLayout() {
     confBadge.style.background = '#00C853';
   }
 
-  // 1. Inject LEGO Avatar into Unified Card 1
-  const avatarFrame = document.getElementById('result-avatar-frame');
-  avatarFrame.innerHTML = getLegoAvatarSVG(res.primaryPersona);
-
-  // 2. Inject Blueprint SVG into Unified Card 2
+  // Render SVG Blueprint dengan penyesuaian ID parametrik yang benar
   const visualFrame = document.getElementById('result-visual-frame');
   visualFrame.innerHTML = getBlueprintSVG(res.primaryPersona, res.primaryShadow);
 
-  // 3. Inject LEGO block build guidelines
+  // Render LEGO block canvas
   const legoCanvas = document.getElementById('result-lego-canvas');
   legoCanvas.innerHTML = getLegoCanvasSVG(res.primaryPersona, res.primaryShadow, legoColorMeta);
 
-  // 4. Render Bar Charts
+  // Render Bar Charts
   const barsEl = document.getElementById('result-bars');
   barsEl.innerHTML = '';
-  const totalNormPersonaPoints = Object.values(res.normPersonaScores).reduce((a, b) => a + b, 0) || 1;
-  Object.entries(res.normPersonaScores).forEach(([key, val]) => {
-    const pct = Math.round((val / totalNormPersonaPoints) * 100);
+  const totalPersonaPoints = Object.values(res.personaScores).reduce((a, b) => a + b, 0) || 1;
+  Object.entries(res.personaScores).forEach(([key, val]) => {
+    const pct = Math.round((val / totalPersonaPoints) * 100);
     const label = personaLabels[key].name;
     const color = key === 'traditionalist' ? 'var(--orange)' : key === 'established' ? 'var(--yellow)' : key === 'urbanist' ? 'var(--blue)' : 'var(--green)';
     barsEl.innerHTML += `
@@ -1526,88 +1297,109 @@ function getPersonaColor(personaId) {
   return 'var(--green)';
 }
 
-// ── GET AVATAR LEGO CUTE CHARACTER (NEW ASSETS) ──
-function getLegoAvatarSVG(persona) {
-  if (persona === 'traditionalist') {
-    return `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="160" height="160" rx="20" fill="#FFE5D9"/>
-      <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
-      <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
-      <path d="M43 55 C50 42 70 38 80 46 C90 38 110 42 117 55 L110 65 L50 65 Z" fill="#8B4513" stroke="#111" stroke-width="2.5"/>
-      <path d="M72 41 L88 41 L80 50 Z" fill="#D2691E" stroke="#111" stroke-width="2"/>
-      <circle cx="65" cy="78" r="7" fill="#111"/>
-      <circle cx="63" cy="76" r="2.5" fill="#FFF"/>
-      <circle cx="95" cy="78" r="7" fill="#111"/>
-      <circle cx="93" cy="76" r="2.5" fill="#FFF"/>
-      <path d="M72 92 Q80 99 88 92" stroke="#111" stroke-width="3" stroke-linecap="round"/>
-      <circle cx="56" cy="85" r="4.5" fill="#FF8C42" opacity="0.6"/>
-      <circle cx="104" cy="85" r="4.5" fill="#FF8C42" opacity="0.6"/>
-      <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#D2691E" stroke="#111" stroke-width="3"/>
-      <path d="M80 110 L80 128" stroke="#111" stroke-width="2.5"/>
-    </svg>`;
-  } else if (persona === 'established') {
-    return `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="160" height="160" rx="20" fill="#FEF9E7"/>
-      <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
-      <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
-      <path d="M43 55 Q55 35 80 40 Q105 35 117 55 Q115 35 80 30 Q45 35 43 55 Z" fill="#DAA520" stroke="#111" stroke-width="2.5"/>
-      <circle cx="63" cy="75" r="11" stroke="#111" stroke-width="2.5" fill="none"/>
-      <circle cx="97" cy="75" r="11" stroke="#111" stroke-width="2.5" fill="none"/>
-      <line x1="74" y1="75" x2="86" y2="75" stroke="#111" stroke-width="2.5"/>
-      <circle cx="61" cy="73" r="2.5" fill="#111"/>
-      <circle cx="95" cy="73" r="2.5" fill="#111"/>
-      <circle cx="63" cy="71" r="1" fill="#FFF"/>
-      <circle cx="97" cy="71" r="1" fill="#FFF"/>
-      <path d="M74 91 Q80 96 86 91" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#2B3E50" stroke="#111" stroke-width="3"/>
-      <path d="M70 110 L80 125 L90 110 Z" fill="#FFF" stroke="#111" stroke-width="2"/>
-      <path d="M77 122 L83 122 L85 140 L75 140 Z" fill="#FF4848"/>
-    </svg>`;
-  } else if (persona === 'urbanist') {
-    return `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="160" height="160" rx="20" fill="#EBF5FB"/>
-      <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
-      <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
-      <path d="M43 55 C43 40 117 40 117 55" stroke="#4A90E2" stroke-width="8" stroke-linecap="round" fill="none"/>
-      <rect x="36" y="55" width="12" height="24" rx="4" fill="#111" stroke="#4A90E2" stroke-width="2"/>
-      <rect x="112" y="55" width="12" height="24" rx="4" fill="#111" stroke="#4A90E2" stroke-width="2"/>
-      <rect x="52" y="68" width="22" height="14" rx="3" fill="#111"/>
-      <rect x="86" y="68" width="22" height="14" rx="3" fill="#111"/>
-      <line x1="74" y1="73" x2="86" y2="73" stroke="#111" stroke-width="3"/>
-      <path d="M55 71 L61 71" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M89 71 L95 71" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M70 94 Q76 96 82 91" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#222" stroke="#111" stroke-width="3"/>
-      <circle cx="80" cy="125" r="8" fill="#4A90E2"/>
-    </svg>`;
-  } else {
-    // idealist
-    return `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="160" height="160" rx="20" fill="#E8F8F5"/>
-      <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
-      <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
-      <path d="M35 52 C35 48 45 42 80 42 C115 42 125 48 125 52 L115 58 L45 58 Z" fill="#228B22" stroke="#111" stroke-width="2.5"/>
-      <path d="M52 42 L108 42 L100 32 L60 32 Z" fill="#1E5D1E" stroke="#111" stroke-width="2"/>
-      <circle cx="65" cy="78" r="7" fill="#111"/>
-      <circle cx="63" cy="75" r="2" fill="#FFF"/>
-      <circle cx="66" cy="79" r="1" fill="#FFF"/>
-      <circle cx="95" cy="78" r="7" fill="#111"/>
-      <circle cx="93" cy="75" r="2" fill="#FFF"/>
-      <circle cx="96" cy="79" r="1" fill="#FFF"/>
-      <circle cx="56" cy="85" r="6" fill="#FF6B9D" opacity="0.5"/>
-      <circle cx="104" cy="85" r="6" fill="#FF6B9D" opacity="0.5"/>
-      <path d="M70 88 Q80 96 90 88" stroke="#111" stroke-width="3" stroke-linecap="round"/>
-      <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#4CAF50" stroke="#111" stroke-width="3"/>
-      <path d="M65 110 L80 125 L95 110" fill="none" stroke="#111" stroke-width="2.5"/>
-    </svg>`;
-  }
-}
+// ── SVG BLUEPRINT GENERATORS (SINKRON DENGAN ID TRADITIONALIST, ESTABLISHED, URBANIST, IDEALIST) ──
+// ── AVATAR DATA (dari assets.html) ──
+const avatarData = {
+  traditionalist: `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="160" height="160" rx="20" fill="#FFE5D9"/>
+    <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
+    <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
+    <path d="M43 55 C50 42 70 38 80 46 C90 38 110 42 117 55 L110 65 L50 65 Z" fill="#8B4513" stroke="#111" stroke-width="2.5"/>
+    <path d="M72 41 L88 41 L80 50 Z" fill="#D2691E" stroke="#111" stroke-width="2"/>
+    <circle cx="65" cy="78" r="7" fill="#111"/>
+    <circle cx="63" cy="76" r="2.5" fill="#FFF"/>
+    <circle cx="95" cy="78" r="7" fill="#111"/>
+    <circle cx="93" cy="76" r="2.5" fill="#FFF"/>
+    <path d="M72 92 Q80 99 88 92" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="56" cy="85" r="4.5" fill="#FF8C42" opacity="0.6"/>
+    <circle cx="104" cy="85" r="4.5" fill="#FF8C42" opacity="0.6"/>
+    <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#D2691E" stroke="#111" stroke-width="3"/>
+    <path d="M80 110 L80 128" stroke="#111" stroke-width="2.5"/>
+  </svg>`,
+  established: `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="160" height="160" rx="20" fill="#FEF9E7"/>
+    <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
+    <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
+    <path d="M43 55 Q55 35 80 40 Q105 35 117 55 Q115 35 80 30 Q45 35 43 55 Z" fill="#DAA520" stroke="#111" stroke-width="2.5"/>
+    <circle cx="63" cy="75" r="11" stroke="#111" stroke-width="2.5" fill="none"/>
+    <circle cx="97" cy="75" r="11" stroke="#111" stroke-width="2.5" fill="none"/>
+    <line x1="74" y1="75" x2="86" y2="75" stroke="#111" stroke-width="2.5"/>
+    <circle cx="61" cy="73" r="2.5" fill="#111"/>
+    <circle cx="95" cy="73" r="2.5" fill="#111"/>
+    <circle cx="63" cy="71" r="1" fill="#FFF"/>
+    <circle cx="97" cy="71" r="1" fill="#FFF"/>
+    <path d="M74 91 Q80 96 86 91" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#2B3E50" stroke="#111" stroke-width="3"/>
+    <path d="M70 110 L80 125 L90 110 Z" fill="#FFF" stroke="#111" stroke-width="2"/>
+    <path d="M77 122 L83 122 L85 140 L75 140 Z" fill="#FF4848"/>
+  </svg>`,
+  urbanist: `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="160" height="160" rx="20" fill="#EBF5FB"/>
+    <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
+    <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
+    <path d="M43 55 C43 40 117 40 117 55" stroke="#4A90E2" stroke-width="8" stroke-linecap="round" fill="none"/>
+    <rect x="36" y="55" width="12" height="24" rx="4" fill="#111" stroke="#4A90E2" stroke-width="2"/>
+    <rect x="112" y="55" width="12" height="24" rx="4" fill="#111" stroke="#4A90E2" stroke-width="2"/>
+    <rect x="52" y="68" width="22" height="14" rx="3" fill="#111"/>
+    <rect x="86" y="68" width="22" height="14" rx="3" fill="#111"/>
+    <line x1="74" y1="73" x2="86" y2="73" stroke="#111" stroke-width="3"/>
+    <path d="M55 71 L61 71" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M89 71 L95 71" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M70 94 Q76 96 82 91" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#222" stroke="#111" stroke-width="3"/>
+    <circle cx="80" cy="125" r="8" fill="#4A90E2"/>
+  </svg>`,
+  idealist: `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="160" height="160" rx="20" fill="#E8F8F5"/>
+    <rect x="45" y="45" width="70" height="65" rx="15" fill="#FFD000" stroke="#111" stroke-width="3"/>
+    <rect x="67" y="33" width="26" height="13" rx="4" fill="#FFD000" stroke="#111" stroke-width="3"/>
+    <path d="M35 52 C35 48 45 42 80 42 C115 42 125 48 125 52 L115 58 L45 58 Z" fill="#228B22" stroke="#111" stroke-width="2.5"/>
+    <path d="M52 42 L108 42 L100 32 L60 32 Z" fill="#1E5D1E" stroke="#111" stroke-width="2"/>
+    <circle cx="65" cy="78" r="7" fill="#111"/>
+    <circle cx="63" cy="75" r="2" fill="#FFF"/>
+    <circle cx="95" cy="78" r="7" fill="#111"/>
+    <circle cx="93" cy="75" r="2" fill="#FFF"/>
+    <circle cx="56" cy="85" r="6" fill="#FF6B9D" opacity="0.5"/>
+    <circle cx="104" cy="85" r="6" fill="#FF6B9D" opacity="0.5"/>
+    <path d="M70 88 Q80 96 90 88" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+    <path d="M55 110 L105 110 L115 140 L45 140 Z" fill="#4CAF50" stroke="#111" stroke-width="3"/>
+    <path d="M65 110 L80 125 L95 110" fill="none" stroke="#111" stroke-width="2.5"/>
+  </svg>`
+};
 
-// ── SVG BLUEPRINT GENERATORS (2D LINEBLUE) ──
+// ── ISOMETRIC LEGO DATA (dari assets.html) ──
+const isoLegoData = {
+  traditionalist: {
+    DEFENSIVE: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40, 10)"><path d="M10 85 L40 70 L70 85 L40 100 Z" fill="rgba(0,0,0,0.1)"/><path d="M20 50 L40 60 L40 90 L20 80 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/><path d="M40 60 L60 50 L60 80 L40 90 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/><path d="M20 50 L40 40 L60 50 L40 60 Z" fill="#CBD5E1" stroke="#111" stroke-width="1.5"/><path d="M42 90 L58 82 L58 87 L42 95 Z" fill="#1E293B" opacity="0.4" stroke="#111" stroke-width="1"/><path d="M35 38 L40 35 L45 38 L40 41 Z" fill="#E2E8F0" stroke="#111" stroke-width="1"/><path d="M35 38 L35 41 L40 44 L40 41 Z" fill="#94A3B8" stroke="#111" stroke-width="1"/><path d="M40 41 L45 38 L45 41 L40 44 Z" fill="#64748B" stroke="#111" stroke-width="1"/></g></svg>`,
+    CONSUMPTIVE: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 15)"><path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.1)"/><path d="M20 55 L50 70 L50 95 L20 80 Z" fill="#D97706" stroke="#111" stroke-width="1.5"/><path d="M50 70 L80 55 L80 80 L50 95 Z" fill="#B45309" stroke="#111" stroke-width="1.5"/><path d="M20 55 L50 40 L80 55 L50 70 Z" fill="#FBBF24" stroke="#111" stroke-width="1.5"/><path d="M25 35 L50 47 L50 65 L25 53 Z" fill="#FBBF24" stroke="#111" stroke-width="1"/><path d="M50 47 L75 35 L75 53 L50 65 Z" fill="#D97706" stroke="#111" stroke-width="1"/><path d="M25 35 L50 23 L75 35 L50 47 Z" fill="#FEF08A" stroke="#111" stroke-width="1"/><path d="M75 53 L95 43 L95 61 L75 71 Z" fill="#F59E0B" stroke="#111" stroke-width="1"/></g></svg>`,
+    PARANOID: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 15)"><path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.15)"/><path d="M15 50 L45 65 L45 90 L15 75 Z" fill="#475569" stroke="#111" stroke-width="1.5"/><path d="M45 65 L75 50 L75 75 L45 90 Z" fill="#334155" stroke="#111" stroke-width="1.5"/><path d="M15 50 L45 35 L75 50 L45 65 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/><path d="M33 51 L45 45 L57 51 L45 57 Z" fill="#0F172A" stroke="#111" stroke-width="1"/></g></svg>`,
+    SUPERFICIAL: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 15)"><line x1="25" y1="55" x2="25" y2="90" stroke="#64748B" stroke-width="2"/><line x1="50" y1="67" x2="50" y2="102" stroke="#64748B" stroke-width="2"/><line x1="75" y1="55" x2="75" y2="90" stroke="#64748B" stroke-width="2"/><path d="M15 95 L50 80 L85 95 L50 110 Z" fill="rgba(0,0,0,0.05)"/><path d="M20 40 L50 55 L50 75 L20 60 Z" fill="rgba(241,245,249,0.8)" stroke="#111" stroke-width="1.5"/><path d="M50 55 L80 40 L80 60 L50 75 Z" fill="rgba(203,213,225,0.8)" stroke="#111" stroke-width="1.5"/><path d="M20 40 L50 25 L80 40 L50 55 Z" fill="rgba(255,255,255,0.9)" stroke="#111" stroke-width="1.5"/></g></svg>`
+  },
+  established: {
+    DEFENSIVE: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(45, 10)"><path d="M5 90 L35 75 L65 90 L35 105 Z" fill="rgba(0,0,0,0.1)"/><path d="M15 65 L35 75 L35 95 L15 85 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/><path d="M35 75 L55 65 L55 85 L35 95 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/><path d="M15 65 L35 55 L55 65 L35 75 Z" fill="#CBD5E1" stroke="#111" stroke-width="1.5"/><g transform="translate(2, -22)"><path d="M15 65 L35 75 L35 95 L15 85 Z" fill="#E2E8F0" stroke="#111" stroke-width="1.5"/><path d="M35 75 L55 65 L55 85 L35 95 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/><path d="M15 65 L35 55 L55 65 L35 75 Z" fill="#FFFFFF" stroke="#111" stroke-width="1.5"/></g></g></svg>`,
+    CONSUMPTIVE: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 20)"><path d="M5 80 L45 60 L105 90 L65 110 Z" fill="rgba(0,0,0,0.1)"/><path d="M10 50 L50 70 L50 95 L10 75 Z" fill="#B45309" stroke="#111" stroke-width="1.5"/><path d="M50 70 L90 50 L90 75 L50 95 Z" fill="#78350F" stroke="#111" stroke-width="1.5"/><path d="M10 50 L50 30 L90 50 L50 70 Z" fill="#D2691E" stroke="#111" stroke-width="1.5"/><rect x="22" y="62" width="10" height="20" fill="#78350F" stroke="#111" stroke-width="1"/><rect x="62" y="58" width="10" height="20" fill="#5C2505" stroke="#111" stroke-width="1"/></g></svg>`,
+    PARANOID: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 15)"><path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.2)"/><path d="M20 50 L50 65 L50 90 L20 75 Z" fill="#1F2937" stroke="#111" stroke-width="1.5"/><path d="M50 65 L80 50 L80 75 L50 90 Z" fill="#111827" stroke="#111" stroke-width="1.5"/><path d="M20 50 L50 35 L80 50 L50 65 Z" fill="#374151" stroke="#111" stroke-width="1.5"/><path d="M42 66 L52 71 L52 82 L42 77 Z" fill="#FFD93D" stroke="#111" stroke-width="1.2"/></g></svg>`,
+    SUPERFICIAL: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 20)"><path d="M15 50 L45 65 L45 85 L15 70 Z" fill="rgba(253,224,71,0.7)" stroke="#111" stroke-width="1.5"/><path d="M45 65 L75 50 L75 70 L45 85 Z" fill="rgba(234,179,8,0.7)" stroke="#111" stroke-width="1.5"/><path d="M15 50 L45 35 L75 50 L45 65 Z" fill="rgba(254,240,138,0.8)" stroke="#111" stroke-width="1.5"/><g transform="translate(10, -20)"><path d="M15 50 L45 65 L45 85 L15 70 Z" fill="rgba(253,224,71,0.9)" stroke="#111" stroke-width="1"/><path d="M45 65 L75 50 L75 70 L45 85 Z" fill="rgba(234,179,8,0.9)" stroke="#111" stroke-width="1"/><path d="M15 50 L45 35 L75 50 L45 65 Z" fill="rgba(255,253,204,0.95)" stroke="#111" stroke-width="1"/></g></g></svg>`
+  },
+  urbanist: {
+    DEFENSIVE: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(45, 10)"><path d="M5 90 L35 75 L65 90 L35 105 Z" fill="rgba(0,0,0,0.1)"/><path d="M15 35 L35 45 L35 95 L15 85 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/><path d="M35 45 L55 35 L55 85 L35 95 Z" fill="#475569" stroke="#111" stroke-width="1.5"/><path d="M15 35 L35 25 L55 35 L35 45 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/><path d="M38 52 L50 46 L50 72 L38 78 Z" fill="#1E293B" stroke="#2E5BFF" stroke-width="1"/></g></svg>`,
+    CONSUMPTIVE: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 20)"><path d="M5 80 L45 60 L105 90 L65 110 Z" fill="rgba(0,0,0,0.1)"/><path d="M15 50 L35 58 L35 83 L15 75 Z" fill="#EAB308" stroke="#111" stroke-width="1.2"/><path d="M35 58 L55 50 L55 75 L35 83 Z" fill="#CA8A04" stroke="#111" stroke-width="1.2"/><path d="M15 50 L35 42 L55 50 L35 58 Z" fill="#FDE047" stroke="#111" stroke-width="1.2"/><g transform="translate(30, -12)"><path d="M15 50 L35 58 L35 83 L15 75 Z" fill="#EAB308" stroke="#111" stroke-width="1.2"/><path d="M35 58 L55 50 L55 75 L35 83 Z" fill="#CA8A04" stroke="#111" stroke-width="1.2"/><path d="M15 50 L35 42 L55 50 L35 58 Z" fill="#FEF08A" stroke="#111" stroke-width="1.2"/></g></g></svg>`,
+    PARANOID: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(25, 10)"><path d="M5 95 L45 75 L115 110 L75 130 Z" fill="rgba(0,0,0,0.2)"/><path d="M10 40 L30 50 L30 90 L10 80 Z" fill="#0F172A" stroke="#111" stroke-width="1.5"/><path d="M30 50 L50 40 L50 80 L30 90 Z" fill="#020617" stroke="#111" stroke-width="1.5"/><path d="M10 40 L30 30 L50 40 L30 50 Z" fill="#1E293B" stroke="#111" stroke-width="1.5"/><g transform="translate(50, 20)"><path d="M10 40 L30 50 L30 90 L10 80 Z" fill="#0F172A" stroke="#111" stroke-width="1.5"/><path d="M30 50 L50 40 L50 80 L30 90 Z" fill="#020617" stroke="#111" stroke-width="1.5"/><path d="M10 40 L30 30 L50 40 L30 50 Z" fill="#1E293B" stroke="#111" stroke-width="1.5"/></g><path d="M35 55 L85 75 L85 83 L35 63 Z" fill="#334155" stroke="#111" stroke-width="1"/></g></svg>`,
+    SUPERFICIAL: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 15)"><path d="M10 40 L45 25 L80 40 L45 55 Z" stroke="#475569" stroke-width="2" fill="none"/><line x1="10" y1="40" x2="10" y2="85" stroke="#475569" stroke-width="2"/><line x1="45" y1="55" x2="45" y2="100" stroke="#475569" stroke-width="2"/><line x1="80" y1="40" x2="80" y2="85" stroke="#475569" stroke-width="2"/><rect x="22" y="52" width="45" height="30" rx="8" fill="rgba(56,189,248,0.6)" stroke="#2E5BFF" stroke-width="1.5"/><circle cx="35" cy="67" r="5" fill="rgba(255,255,255,0.7)"/></g></svg>`
+  },
+  idealist: {
+    DEFENSIVE: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 15)"><line x1="20" y1="20" x2="20" y2="90" stroke="#94A3B8" stroke-width="3"/><line x1="80" y1="20" x2="80" y2="90" stroke="#94A3B8" stroke-width="3"/><path d="M15 65 L50 80 L85 65 L50 50 Z" fill="#E2E8F0" stroke="#111" stroke-width="1.5"/><path d="M22 45 L50 58 L50 72 L22 59 Z" fill="#FFFFFF" stroke="#111" stroke-width="1.5"/><path d="M50 58 L78 45 L78 59 L50 72 Z" fill="#CBD5E1" stroke="#111" stroke-width="1.5"/><path d="M22 45 L50 32 L78 45 L50 58 Z" fill="#E2E8F0" stroke="#111" stroke-width="1.5"/></g></svg>`,
+    CONSUMPTIVE: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 15)"><path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.1)"/><path d="M20 55 L50 70 L50 95 L20 80 Z" fill="#F43F5E" stroke="#111" stroke-width="1.5"/><path d="M50 70 L80 55 L80 80 L50 95 Z" fill="#BE123C" stroke="#111" stroke-width="1.5"/><path d="M20 55 L50 40 L80 55 L50 70 Z" fill="#FDA4AF" stroke="#111" stroke-width="1.5"/><path d="M30 42 L50 32 L70 42 L50 52 Z" fill="#00C853" stroke="#111" stroke-width="1.2"/></g></svg>`,
+    PARANOID: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 15)"><path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.15)"/><path d="M20 50 L50 65 L50 90 L20 75 Z" fill="#0F172A" stroke="#111" stroke-width="2"/><path d="M50 65 L80 50 L80 75 L50 90 Z" fill="#020617" stroke="#111" stroke-width="2"/><path d="M20 50 L50 35 L80 50 L50 65 Z" fill="#1E293B" stroke="#111" stroke-width="2"/><path d="M14 55 Q35 70 44 95" stroke="#00C853" stroke-width="3" fill="none"/><path d="M74 53 Q60 70 53 95" stroke="#00C853" stroke-width="3" fill="none"/></g></svg>`,
+    SUPERFICIAL: `<svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(30, 15)"><path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,198,83,0.2)" stroke="#00C853" stroke-dasharray="2 2" stroke-width="1"/><path d="M20 50 L50 65 L50 85 L20 70 Z" fill="rgba(16,185,129,0.6)" stroke="#00C853" stroke-width="1.5"/><path d="M50 65 L80 50 L80 70 L50 85 Z" fill="rgba(4,120,87,0.6)" stroke="#00C853" stroke-width="1.5"/><path d="M20 50 L50 35 L80 50 L50 65 Z" fill="rgba(52,211,153,0.7)" stroke="#00C853" stroke-width="1.5"/></g></svg>`
+  }
+};
+
 function getBlueprintSVG(persona, shadow) {
   const color = getPersonaColor(persona);
+  
   if (persona === 'traditionalist') {
-    return `<svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+    return `<svg id="blueprint-svg" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="400" height="250" fill="#0A0A0A"/>
       <g stroke="${color}" stroke-width="2" opacity="0.8">
         <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250" stroke-dasharray="3 3" opacity="0.3"/>
@@ -1623,10 +1415,10 @@ function getBlueprintSVG(persona, shadow) {
       <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T1 KAMPUNG KOTA</text>
     </svg>`;
   } else if (persona === 'established') {
-    return `<svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+    return `<svg id="blueprint-svg" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="400" height="250" fill="#0A0A0A"/>
       <g stroke="${color}" stroke-width="2" opacity="0.8">
-        <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250M350 0v250" stroke-dasharray="3 3" opacity="0.3"/>
+        <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250" stroke-dasharray="3 3" opacity="0.3"/>
         <rect x="150" y="40" width="100" height="180" rx="4" fill="#111" stroke="${color}" stroke-width="3"/>
         <line x1="150" y1="80" x2="250" y2="80" />
         <line x1="150" y1="120" x2="250" y2="120" />
@@ -1641,10 +1433,10 @@ function getBlueprintSVG(persona, shadow) {
       <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T2 TERJANGKAU</text>
     </svg>`;
   } else if (persona === 'urbanist') {
-    return `<svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+    return `<svg id="blueprint-svg" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="400" height="250" fill="#0A0A0A"/>
       <g stroke="${color}" stroke-width="2" opacity="0.8">
-        <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250M350 0v250" stroke-dasharray="3 3" opacity="0.3"/>
+        <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250" stroke-dasharray="3 3" opacity="0.3"/>
         <rect x="170" y="30" width="60" height="190" fill="#111" stroke="${color}" stroke-width="3"/>
         <line x1="230" y1="100" x2="350" y2="100" stroke="${color}" stroke-width="2"/>
         <line x1="230" y1="120" x2="350" y2="120" stroke="${color}" stroke-width="2"/>
@@ -1655,10 +1447,11 @@ function getBlueprintSVG(persona, shadow) {
       <text x="20" y="35" fill="white" font-family="'Space Grotesk', sans-serif" font-weight="bold" font-size="16">BLUEPRINT: T3 TRANSIT HUB</text>
     </svg>`;
   } else {
-    return `<svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+    // idealist
+    return `<svg id="blueprint-svg" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="400" height="250" fill="#0A0A0A"/>
       <g stroke="${color}" stroke-width="2" opacity="0.8">
-        <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250M350 0v250" stroke-dasharray="3 3" opacity="0.3"/>
+        <path d="M0 50h400M0 100h400M0 150h400M0 200h400M50 0v250M100 0v250M150 0v250M200 0v250M250 0v250M300 0v250" stroke-dasharray="3 3" opacity="0.3"/>
         <line x1="120" y1="40" x2="120" y2="210" stroke="white" stroke-width="4"/>
         <line x1="280" y1="40" x2="280" y2="210" stroke="white" stroke-width="4"/>
         <rect x="130" y="80" width="140" height="90" rx="10" fill="#111" stroke="${color}" stroke-width="3"/>
@@ -1672,262 +1465,76 @@ function getBlueprintSVG(persona, shadow) {
 }
 
 function getLegoCanvasSVG(persona, shadow, colorMeta) {
+  // Gunakan isometric SVG dari assets.html jika tersedia
+  if (isoLegoData[persona] && isoLegoData[persona][shadow]) {
+    const isoSvg = isoLegoData[persona][shadow];
+    // Wrap with background container matching the shadow color tone
+    let bgColor = '#F8FAFC';
+    if (shadow === 'PARANOID') bgColor = '#0F172A';
+    else if (shadow === 'CONSUMPTIVE') bgColor = '#FEF3C7';
+    else if (shadow === 'DEFENSIVE') bgColor = '#F1F5F9';
+    else if (shadow === 'SUPERFICIAL') bgColor = '#EFF6FF';
+    return `<div style="width:100%;height:100%;background:${bgColor};border-radius:10px;display:flex;align-items:center;justify-content:center;padding:8px;">${isoSvg}</div>`;
+  }
+
+  // Fallback generic
   let fillBg = 'url(#grad)';
   let strokeColor = 'var(--ink)';
   if (colorMeta.text === 'Matte Black' || colorMeta.name.includes('Black') || colorMeta.name.includes('Dark')) {
-    fillBg = '#1E293B';
-    strokeColor = 'white';
+    fillBg = '#1E293B'; strokeColor = 'white';
   } else if (colorMeta.text === 'Clear Glass' || colorMeta.name.includes('Trans')) {
-    fillBg = 'rgba(46,91,255,0.15)';
-    strokeColor = 'rgba(0,0,0,0.4)';
+    fillBg = 'rgba(46,91,255,0.15)'; strokeColor = 'rgba(0,0,0,0.4)';
   }
-
-  // Render specific simulated isometric block styles
-  if (persona === 'traditionalist') {
-    if (shadow === 'DEFENSIVE') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(60, 20)">
-          <path d="M10 85 L40 70 L70 85 L40 100 Z" fill="rgba(0,0,0,0.1)"/>
-          <path d="M20 50 L40 60 L40 90 L20 80 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/>
-          <path d="M40 60 L60 50 L60 80 L40 90 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/>
-          <path d="M20 50 L40 40 L60 50 L40 60 Z" fill="#CBD5E1" stroke="#111" stroke-width="1.5"/>
-          <path d="M42 80 L58 72 L58 77 L42 85 Z" fill="#1E293B" opacity="0.4" stroke="#111" stroke-width="1"/>
-          <rect x="34" y="32" width="12" height="6" rx="2" fill="#E2E8F0" stroke="#111"/>
-        </g>
-      </svg>`;
-    } else if (shadow === 'CONSUMPTIVE') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 15)">
-          <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.1)"/>
-          <path d="M20 55 L50 70 L50 95 L20 80 Z" fill="#D97706" stroke="#111" stroke-width="1.5"/>
-          <path d="M50 70 L80 55 L80 80 L50 95 Z" fill="#B45309" stroke="#111" stroke-width="1.5"/>
-          <path d="M20 55 L50 40 L80 55 L50 70 Z" fill="#FBBF24" stroke="#111" stroke-width="1.5"/>
-          <path d="M25 35 L50 47 L50 65 L25 53 Z" fill="#FBBF24" stroke="#111" stroke-width="1"/>
-          <path d="M50 47 L75 35 L75 53 L50 65 Z" fill="#D97706" stroke="#111" stroke-width="1"/>
-          <path d="M25 35 L50 23 L75 35 L50 47 Z" fill="#FEF08A" stroke="#111" stroke-width="1"/>
-        </g>
-      </svg>`;
-    } else if (shadow === 'PARANOID') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 15)">
-          <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.15)"/>
-          <path d="M15 50 L45 65 L45 90 L15 75 Z" fill="#475569" stroke="#111" stroke-width="1.5"/>
-          <path d="M45 65 L75 50 L75 75 L45 90 Z" fill="#334155" stroke="#111" stroke-width="1.5"/>
-          <path d="M15 50 L45 35 L75 50 L45 65 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/>
-          <path d="M33 51 L45 45 L57 51 L45 57 Z" fill="#0F172A" stroke="#111" stroke-width="1"/>
-        </g>
-      </svg>`;
-    } else {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 15)">
-          <line x1="25" y1="55" x2="25" y2="90" stroke="#64748B" stroke-width="2"/>
-          <line x1="50" y1="67" x2="50" y2="102" stroke="#64748B" stroke-width="2"/>
-          <line x1="75" y1="55" x2="75" y2="90" stroke="#64748B" stroke-width="2"/>
-          <path d="M20 40 L50 55 L50 75 L20 60 Z" fill="rgba(241, 245, 249, 0.8)" stroke="#111" stroke-width="1.5"/>
-          <path d="M50 55 L80 40 L80 60 L50 75 Z" fill="rgba(203, 213, 225, 0.8)" stroke="#111" stroke-width="1.5"/>
-          <path d="M20 40 L50 25 L80 40 L50 55 Z" fill="rgba(255, 255, 255, 0.9)" stroke="#111" stroke-width="1.5"/>
-        </g>
-      </svg>`;
-    }
-  } else if (persona === 'established') {
-    if (shadow === 'DEFENSIVE') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(60, 10)">
-          <path d="M5 90 L35 75 L65 90 L35 105 Z" fill="rgba(0,0,0,0.1)"/>
-          <path d="M15 65 L35 75 L35 95 L15 85 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/>
-          <path d="M35 75 L55 65 L55 85 L35 95 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/>
-          <path d="M15 65 L35 55 L55 65 L35 75 Z" fill="#CBD5E1" stroke="#111" stroke-width="1.5"/>
-          <g transform="translate(2, -22)">
-            <path d="M15 65 L35 75 L35 95 L15 85 Z" fill="#E2E8F0" stroke="#111" stroke-width="1.5"/>
-            <path d="M35 75 L55 65 L55 85 L35 95 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/>
-            <path d="M15 65 L35 55 L55 65 L35 75 Z" fill="#FFFFFF" stroke="#111" stroke-width="1.5"/>
-          </g>
-        </g>
-      </svg>`;
-    } else if (shadow === 'CONSUMPTIVE') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 20)">
-          <path d="M5 80 L45 60 L105 90 L65 110 Z" fill="rgba(0,0,0,0.1)"/>
-          <path d="M10 50 L50 70 L50 95 L10 75 Z" fill="#B45309" stroke="#111" stroke-width="1.5"/>
-          <path d="M50 70 L90 50 L90 75 L50 95 Z" fill="#78350F" stroke="#111" stroke-width="1.5"/>
-          <path d="M10 50 L50 30 L90 50 L50 70 Z" fill="#D2691E" stroke="#111" stroke-width="1.5"/>
-          <rect x="22" y="62" width="10" height="20" fill="#78350F" stroke="#111" stroke-width="1"/>
-          <rect x="62" y="58" width="10" height="20" fill="#5C2505" stroke="#111" stroke-width="1"/>
-        </g>
-      </svg>`;
-    } else if (shadow === 'PARANOID') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 15)">
-          <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.2)"/>
-          <path d="M20 50 L50 65 L50 90 L20 75 Z" fill="#1F2937" stroke="#111" stroke-width="1.5"/>
-          <path d="M50 65 L80 50 L80 75 L50 90 Z" fill="#111827" stroke="#111" stroke-width="1.5"/>
-          <path d="M20 50 L50 35 L80 50 L50 65 Z" fill="#374151" stroke="#111" stroke-width="1.5"/>
-          <path d="M42 66 L52 71 L52 82 L42 77 Z" fill="#FFD93D" stroke="#111" stroke-width="1.2"/>
-        </g>
-      </svg>`;
-    } else {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 20)">
-          <path d="M15 50 L45 65 L45 85 L15 70 Z" fill="rgba(253, 224, 71, 0.7)" stroke="#111" stroke-width="1.5"/>
-          <path d="M45 65 L75 50 L75 70 L45 85 Z" fill="rgba(234, 179, 8, 0.7)" stroke="#111" stroke-width="1.5"/>
-          <path d="M15 50 L45 35 L75 50 L45 65 Z" fill="rgba(254, 240, 138, 0.8)" stroke="#111" stroke-width="1.5"/>
-          <g transform="translate(10, -20)">
-            <path d="M15 50 L45 65 L45 85 L15 70 Z" fill="rgba(253, 224, 71, 0.9)" stroke="#111" stroke-width="1"/>
-            <path d="M45 65 L75 50 L75 70 L45 85 Z" fill="rgba(234, 179, 8, 0.9)" stroke="#111" stroke-width="1"/>
-            <path d="M15 50 L45 35 L75 50 L45 65 Z" fill="rgba(255, 253, 204, 0.95)" stroke="#111" stroke-width="1"/>
-          </g>
-        </g>
-      </svg>`;
-    }
-  } else if (persona === 'urbanist') {
-    if (shadow === 'DEFENSIVE') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(60, 10)">
-          <path d="M5 90 L35 75 L65 90 L35 105 Z" fill="rgba(0,0,0,0.1)"/>
-          <path d="M15 35 L35 45 L35 95 L15 85 Z" fill="#64748B" stroke="#111" stroke-width="1.5"/>
-          <path d="M35 45 L55 35 L55 85 L35 95 Z" fill="#475569" stroke="#111" stroke-width="1.5"/>
-          <path d="M15 35 L35 25 L55 35 L35 45 Z" fill="#94A3B8" stroke="#111" stroke-width="1.5"/>
-          <path d="M38 52 L50 46 L50 72 L38 78 Z" fill="#1E293B" stroke="#2E5BFF" stroke-width="1"/>
-        </g>
-      </svg>`;
-    } else if (shadow === 'CONSUMPTIVE') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 20)">
-          <path d="M5 80 L45 60 L105 90 L65 110 Z" fill="rgba(0,0,0,0.1)"/>
-          <path d="M15 50 L35 58 L35 83 L15 75 Z" fill="#EAB308" stroke="#111" stroke-width="1.2"/>
-          <path d="M35 58 L55 50 L55 75 L35 83 Z" fill="#CA8A04" stroke="#111" stroke-width="1.2"/>
-          <path d="M15 50 L35 42 L55 50 L35 58 Z" fill="#FDE047" stroke="#111" stroke-width="1.2"/>
-          <g transform="translate(30, -12)">
-            <path d="M15 50 L35 58 L35 83 L15 75 Z" fill="#EAB308" stroke="#111" stroke-width="1.2"/>
-            <path d="M35 58 L55 50 L55 75 L35 83 Z" fill="#CA8A04" stroke="#111" stroke-width="1.2"/>
-            <path d="M15 50 L35 42 L55 50 L35 58 Z" fill="#FEF08A" stroke="#111" stroke-width="1.2"/>
-          </g>
-        </g>
-      </svg>`;
-    } else if (shadow === 'PARANOID') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(45, 10)">
-          <path d="M5 95 L45 75 L115 110 L75 130 Z" fill="rgba(0,0,0,0.2)"/>
-          <path d="M10 40 L30 50 L30 90 L10 80 Z" fill="#0F172A" stroke="#111" stroke-width="1.5"/>
-          <path d="M30 50 L50 40 L50 80 L30 90 Z" fill="#020617" stroke="#111" stroke-width="1.5"/>
-          <path d="M10 40 L30 30 L50 40 L30 50 Z" fill="#1E293B" stroke="#111" stroke-width="1.5"/>
-          <g transform="translate(50, 20)">
-            <path d="M10 40 L30 50 L30 90 L10 80 Z" fill="#0F172A" stroke="#111" stroke-width="1.5"/>
-            <path d="M30 50 L50 40 L50 80 L30 90 Z" fill="#020617" stroke="#111" stroke-width="1.5"/>
-            <path d="M10 40 L30 30 L50 40 L30 50 Z" fill="#1E293B" stroke="#111" stroke-width="1.5"/>
-          </g>
-          <path d="M35 55 L85 75 L85 83 L35 63 Z" fill="#334155" stroke="#111" stroke-width="1"/>
-        </g>
-      </svg>`;
-    } else {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 15)">
-          <path d="M10 40 L45 25 L80 40 L45 55 Z" stroke="#475569" stroke-width="2" fill="none"/>
-          <line x1="10" y1="40" x2="10" y2="85" stroke="#475569" stroke-width="2"/>
-          <line x1="45" y1="55" x2="45" y2="100" stroke="#475569" stroke-width="2"/>
-          <line x1="80" y1="40" x2="80" y2="85" stroke="#475569" stroke-width="2"/>
-          <rect x="22" y="52" width="45" height="30" rx="8" fill="rgba(56, 189, 248, 0.6)" stroke="#2E5BFF" stroke-width="1.5"/>
-          <circle cx="35" cy="67" r="5" fill="rgba(255,255,255,0.7)"/>
-        </g>
-      </svg>`;
-    }
-  } else {
-    // idealist
-    if (shadow === 'DEFENSIVE') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 15)">
-          <line x1="20" y1="20" x2="20" y2="90" stroke="#94A3B8" stroke-width="3"/>
-          <line x1="80" y1="20" x2="80" y2="90" stroke="#94A3B8" stroke-width="3"/>
-          <path d="M15 65 L50 80 L85 65 L50 50 Z" fill="#E2E8F0" stroke="#111" stroke-width="1.5"/>
-          <path d="M22 45 L50 58 L50 72 L22 59 Z" fill="#FFFFFF" stroke="#111" stroke-width="1.5"/>
-          <path d="M50 58 L78 45 L78 59 L50 72 Z" fill="#CBD5E1" stroke="#111" stroke-width="1.5"/>
-          <path d="M22 45 L50 32 L78 45 L50 58 Z" fill="#E2E8F0" stroke="#111" stroke-width="1.5"/>
-        </g>
-      </svg>`;
-    } else if (shadow === 'CONSUMPTIVE') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 15)">
-          <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.1)"/>
-          <path d="M20 55 L50 70 L50 95 L20 80 Z" fill="#F43F5E" stroke="#111" stroke-width="1.5"/>
-          <path d="M50 70 L80 55 L80 80 L50 95 Z" fill="#BE123C" stroke="#111" stroke-width="1.5"/>
-          <path d="M20 55 L50 40 L80 55 L50 70 Z" fill="#FDA4AF" stroke="#111" stroke-width="1.5"/>
-          <path d="M30 42 L50 32 L70 42 L50 52 Z" fill="#00C853" stroke="#111" stroke-width="1.2"/>
-        </g>
-      </svg>`;
-    } else if (shadow === 'PARANOID') {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 15)">
-          <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0,0,0,0.15)"/>
-          <path d="M20 50 L50 65 L50 90 L20 75 Z" fill="#0F172A" stroke="#111" stroke-width="2"/>
-          <path d="M50 65 L80 50 L80 75 L50 90 Z" fill="#020617" stroke="#111" stroke-width="2"/>
-          <path d="M20 50 L50 35 L80 50 L50 65 Z" fill="#1E293B" stroke="#111" stroke-width="2"/>
-          <path d="M14 55 Q35 70 44 95" stroke="#00C853" stroke-width="3" fill="none"/>
-        </g>
-      </svg>`;
-    } else {
-      return `<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <g transform="translate(50, 15)">
-          <path d="M10 85 L50 65 L90 85 L50 105 Z" fill="rgba(0, 198, 83, 0.2)" stroke="#00C853" stroke-dasharray="2 2" stroke-width="1"/>
-          <path d="M20 50 L50 65 L50 85 L20 70 Z" fill="rgba(16, 185, 129, 0.6)" stroke="#00C853" stroke-width="1.5"/>
-          <path d="M50 65 L80 50 L80 70 L50 85 Z" fill="rgba(4, 120, 87, 0.6)" stroke="#00C853" stroke-width="1.5"/>
-          <path d="M20 50 L50 35 L80 50 L50 65 Z" fill="rgba(52, 211, 153, 0.7)" stroke="#00C853" stroke-width="1.5"/>
-        </g>
-      </svg>`;
-    }
-  }
+  return `<svg id="lego-svg" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+    <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF"/><stop offset="100%" stop-color="#888"/></linearGradient></defs>
+    <path d="M10 90h180v10H10z" fill="#0A0A0A" stroke="#000" stroke-width="2"/>
+    <g transform="translate(45, 20)">
+      <rect x="25" y="10" width="20" height="10" rx="3" fill="${fillBg}" stroke="${strokeColor}" stroke-width="2"/>
+      <rect x="65" y="10" width="20" height="10" rx="3" fill="${fillBg}" stroke="${strokeColor}" stroke-width="2"/>
+      <rect x="10" y="20" width="90" height="50" rx="6" fill="${fillBg}" stroke="${strokeColor}" stroke-width="2"/>
+      <line x1="10" y1="45" x2="100" y2="45" stroke="${strokeColor}" stroke-width="1.5" stroke-dasharray="2 2"/>
+    </g>
+  </svg>`;
 }
 
-// ── SINGLE CONSOLIDATED DOWNLOAD & SOCIAL SHARE FUNCTION ──
-function downloadAllAssetsAndShare() {
-  if (!computedResult) {
-    alert("Harap selesaikan kuesioner terlebih dahulu!");
-    return;
-  }
-
-  // Compile detailed text results
-  const pLabels = {
-    traditionalist: 'THE TRADITIONALIST',
-    established: 'THE ESTABLISHED',
-    urbanist: 'THE URBANIST',
-    idealist: 'THE IDEALIST'
-  };
-  
-  const rawText = `=== RESUME DIAGNOSA HUNIAN MASA DEPAN ===
-Nama Responden: ${demogAnswers['nama'] || 'Warga'}
-Email: ${demogAnswers['email'] || '-'}
-Arketipe Utama: ${pLabels[computedResult.primaryPersona]}
-Tipe Hunian Ideal: ${document.getElementById('result-tipe-nama').textContent}
-Model Spasial Akhir (Shadow): ${document.getElementById('result-shadow-model-title').textContent}
-Zona Penempatan Maket: ${document.getElementById('result-zona-title').textContent}
-Komponen LEGO: ${document.getElementById('result-brick-color').textContent}
-Aturan Batasan (Boundaries): ${boundariesText[computedResult.primaryShadow]}
-Indeks Konflik Shadow: ${computedResult.stressIndex}% Stress`;
-
-  // Create a blob for text download
-  const blob = new Blob([rawText], { type: 'text/plain;charset=utf-8' });
+// ── UNDUH FILE BLUEPRINT (SVG) ──
+function downloadCurrentBlueprint() {
+  if (!computedResult) return;
+  const svgMarkup = getBlueprintSVG(computedResult.primaryPersona, computedResult.primaryShadow);
+  const blob = new Blob([svgMarkup], { type: 'image/svg+xml' });
   const url = URL.createObjectURL(blob);
   
   const link = document.createElement('a');
   link.href = url;
-  link.download = `Hasil_Diagnosa_JFF2026_${demogAnswers['nama'] || 'Warga'}.txt`;
+  link.download = `Blueprint_JFF2026_${computedResult.primaryPersona}_${computedResult.primaryShadow}.svg`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
+}
 
-  // Trigger Native Share API if supported
-  const shareText = `Hasil kuesioner "Hunian Masa Depan" JFF 2026 saya: ${pLabels[computedResult.primaryPersona]} - ${document.getElementById('result-shadow-model-title').textContent}! Ikuti kuesionernya untuk temukan hunian sesuai dirimu!`;
-  if (navigator.share) {
-    navigator.share({
-      title: 'Hunian Masa Depan — RCUS JFF 2026',
-      text: shareText
-    }).catch(err => console.log(err));
+// ── UNDUH FILE LEGO (SVG) ──
+function downloadCurrentLegoSVG() {
+  if (!computedResult) return;
+  
+  let legoColorMeta;
+  if (activeAlt === 1) {
+    legoColorMeta = alternativeColors.alt1[computedResult.primaryShadow];
   } else {
-    // Fallback copy to clipboard
-    navigator.clipboard.writeText(shareText).then(() => {
-      alert("Hasil ringkasan tersimpan! Rangkuman singkat juga telah disalin ke clipboard untuk Anda bagikan ke media sosial.");
-    });
+    legoColorMeta = alternativeColors.alt2[computedResult.primaryPersona][computedResult.primaryShadow];
   }
+  
+  const svgMarkup = getLegoCanvasSVG(computedResult.primaryPersona, computedResult.primaryShadow, legoColorMeta);
+  const blob = new Blob([svgMarkup], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `LEGO_Struktur_${computedResult.primaryPersona}_${computedResult.primaryShadow}.svg`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
 // ── NAVIGASI MANAGER ──
@@ -1957,6 +1564,18 @@ function launchConfetti() {
   }
 }
 
+// ── SHARE & RESET ──
+function shareResult() {
+  const txt = document.getElementById('result-persona-title').textContent;
+  if (navigator.share) {
+    navigator.share({ title: 'Rumah Masa Depan Saya', text: 'Arketipe hunianku: ' + txt + ' — survei JFF 2026' });
+  } else {
+    navigator.clipboard.writeText('Arketipe hunianku: ' + txt + ' — survei JFF 2026').then(() => {
+      alert('Hasil berhasil disalin ke clipboard!');
+    });
+  }
+}
+
 function restartSurvey() {
   demogAnswers = {};
   fcAnswers = {};
@@ -1976,129 +1595,6 @@ function restartSurvey() {
 window.onload = function() {
   showScreen('start');
 };
-</script>
-
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║  DEV / FREE MENU (FLOATING)  ║ -->
-<!-- ╚══════════════════════════════╝ -->
-<button id="dev-menu-fab" onclick="toggleDevMenu()" title="Dev / Demo Mode" aria-label="Dev Menu">⚡</button>
-
-<div id="dev-menu-panel">
-  <div class="dev-title">⚡ DEV / DEMO MODE</div>
-  <hr class="dev-sep">
-  <div class="dev-note">Lompat ke bagian</div>
-  <button class="dev-btn" onclick="devGoTo('demografi')">📋 Data Diri (awal)</button>
-  <button class="dev-btn" onclick="devGoTo('fc')">🎯 16 Dilema (skip demografi)</button>
-  <button class="dev-btn" onclick="devGoTo('afford')">🏠 Beban Hunian (skip s/d FC)</button>
-  <button class="dev-btn" onclick="devGoTo('result')">✨ Langsung Hasil Diagnosa</button>
-  <hr class="dev-sep">
-  <div class="dev-note">Isi otomatis &amp; lanjut</div>
-  <button class="dev-btn" onclick="devSkipDemog()">⏭ Skip Demografi → FC</button>
-  <button class="dev-btn" onclick="devSkipAfford()">⏭ Skip Beban Hunian → Hasil</button>
-  <button class="dev-btn" onclick="devFillAll()" style="background:rgba(255,211,61,0.15);border-color:var(--yellow);color:var(--yellow);">⚡ Isi Semua → Langsung Hasil</button>
-  <hr class="dev-sep">
-  <button class="dev-btn" style="color:rgba(255,255,255,0.35);font-size:11px;border-color:transparent;" onclick="toggleDevMenu()">✕ Tutup menu</button>
-</div>
-
-<script>
-// ══ DEV MENU ══════════════════════════════════════════════
-(function() {
-  var _open = false;
-
-  window.toggleDevMenu = function() {
-    _open = !_open;
-    document.getElementById('dev-menu-panel').classList.toggle('open', _open);
-    document.getElementById('dev-menu-fab').textContent = _open ? '✕' : '⚡';
-  };
-
-  document.addEventListener('click', function(e) {
-    if (_open &&
-        !e.target.closest('#dev-menu-panel') &&
-        !e.target.closest('#dev-menu-fab')) {
-      _open = false;
-      document.getElementById('dev-menu-panel').classList.remove('open');
-      document.getElementById('dev-menu-fab').textContent = '⚡';
-    }
-  });
-})();
-
-// Dummy data helpers
-function _dummyDemog() {
-  if (typeof demogAnswers === 'undefined') return;
-  demogAnswers = {
-    nama: 'Demo User', email: 'demo@jff2026.id',
-    usia: '26 - 35', pendidikan: 'Sarjana (S1)',
-    gender: 'Tidak ingin menyebutkan',
-    pekerjaan: 'Kreatif / Seni', status_nikah: 'Belum Menikah'
-  };
-  demogIdx = demogQuestions.length;
-}
-
-function _dummyFC() {
-  if (typeof fcAnswers === 'undefined') return;
-  var keys = ['Q1','Q1a','Q2A','Q2B','Q3','Q3a','Q4A','Q4B','Q5','Q5a','Q6A','Q6B','Q7','Q7a','Q8A','Q8B'];
-  keys.forEach(function(id) { fcAnswers[id] = Math.random() > 0.5 ? 'A' : 'B'; });
-  fcIdx = 16;
-}
-
-function _dummyAfford() {
-  if (typeof affordAnswers === 'undefined') return;
-  Object.assign(affordAnswers, {
-    A_anggota:'2 Orang', B_provinsi:'DKI Jakarta', B_kabkota:'Jakarta Pusat',
-    B_kecamatan:'Tidak relevan', C_status_hunian:'Sewa / Kontrak',
-    C_tipe_hunian:'Apartemen / Rusun', C_moda:'KRL / MRT / LRT',
-    C_waktu_komuter:'31 - 60 Menit', D_kamar:'1 Kamar', D_luas:'21 - 36 m²',
-    D_tipe_impian:'Apartemen / Rusun Pusat Kota', E_tradeoff:'Kecil tapi dekat',
-    E_waktu_maks:'31 - 60 Menit', G_visual:'Vertical High-Rise Terintegrasi',
-    G_rusun:'Sangat Bersedia'
-  });
-  affordIdx = affordQuestions.length;
-}
-
-function _closeMenu() {
-  document.getElementById('dev-menu-panel').classList.remove('open');
-  document.getElementById('dev-menu-fab').textContent = '⚡';
-}
-
-function devGoTo(target) {
-  _closeMenu();
-  document.getElementById('top-nav').style.display = 'flex';
-  if (target === 'demografi') {
-    demogIdx = 0; startSurvey();
-  } else if (target === 'fc') {
-    _dummyDemog();
-    showScreen('fc'); renderFC();
-  } else if (target === 'afford') {
-    _dummyDemog(); _dummyFC();
-    showScreen('afford'); renderAffordQ();
-  } else if (target === 'result') {
-    _dummyDemog(); _dummyFC(); _dummyAfford();
-    calculateResults();
-  }
-}
-
-function devSkipDemog() {
-  _closeMenu();
-  document.getElementById('top-nav').style.display = 'flex';
-  _dummyDemog();
-  showScreen('fc'); renderFC();
-}
-
-function devSkipAfford() {
-  _closeMenu();
-  document.getElementById('top-nav').style.display = 'flex';
-  if (demogIdx < demogQuestions.length) _dummyDemog();
-  if (fcIdx < 16) _dummyFC();
-  _dummyAfford();
-  calculateResults();
-}
-
-function devFillAll() {
-  _closeMenu();
-  document.getElementById('top-nav').style.display = 'flex';
-  _dummyDemog(); _dummyFC(); _dummyAfford();
-  calculateResults();
-}
 </script>
 </body>
 </html>
